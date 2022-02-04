@@ -67,7 +67,7 @@ $(OBJS_DIR)%.o:%.c
 
 $(NAME): $(OBJS)
 	${LIBFT}
-	${CC} ${OBJS} -L${LIBS_DIR} -lft -o ${NAME}
+	${CC} ${OBJS} -L${LIBFT_DIR} -lft -o ${NAME}
 	@echo "${OBJS} ${GREEN} ${BOLD}\n\nObjects files are created successfully\n${END}"
 
 #bonus: $(NAME) $(BONUS_OBJS)
