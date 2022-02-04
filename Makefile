@@ -24,7 +24,7 @@ SRCS_DIR 	= srcs/
 #B_SRCS_DIR 	= bonus_srcs/
 OBJS_DIR	= objs/
 INCLUDE_DIR = include/
-LIBFT_DIR 	= libft/
+LIBFT_DIR 	= 42Qc_libft/
 
 SRCS 		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 #B_SRCS 		= $(addprefix $(B_SRCS_DIR), $(B_SRCS_FILES))
