@@ -24,6 +24,7 @@ SRCS_DIR 	= srcs/
 #B_SRCS_DIR 	= bonus_srcs/
 OBJS_DIR	= objs/
 INCLUDE_DIR = include/
+LIBFT_DIR 	= libft/
 
 SRCS 		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 #B_SRCS 		= $(addprefix $(B_SRCS_DIR), $(B_SRCS_FILES))
@@ -36,8 +37,9 @@ CFLAGS 		= -Wall -Werror -Wextra -g
 AR 			= ar -cr
 
 ### Autres Fonctions ###
-RM 			= rm -rf
+RM 			= @rm -rf
 NORMINETTE 	= norminette
+LIBFT		= $(MAKE) bonus -C $(LIBFT_DIR)
 
 ### Colour var ###
 END			= \033[0m
@@ -61,37 +63,36 @@ WHITE		= \033[37m
 all: obj $(NAME)
 
 $(OBJS_DIR)%.o:%.c
-	$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -o $@ -c $<
+	${CC} ${CFLAGS} -I${LIBFT_DIR} -I${INCLUDE_DIR} -o $@ -c $<
 
 $(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS)
-	@echo "${OBJS} ${GREEN} ${BOLD}\n\nObjects files are added to the archive libftprintf.a correctly\n${END}"
+	${LIBFT}
+	${CC} ${OBJS} -L${LIBS_DIR} -lft -o ${NAME}
+	@echo "${OBJS} ${GREEN} ${BOLD}\n\nObjects files are created successfully\n${END}"
 
-bonus: ${NAME} ${BONUS_OBJS}
-	@${ARCHIVE} ${NAME} ${BONUS_OBJS}
-	@echo "${BONUS_OBJS} ${GREEN} ${BOLD}\n\nObjects files And bonus objects files are added to the archive libftprintf.a correctly\n${END}"
-
-exec:
-	${CC} ${CFLAGS} -I${INCLUDE_DIR} -o test ${SRCS} -lm
+#bonus: $(NAME) $(BONUS_OBJS)
+#	@${ARCHIVE} ${NAME} ${BONUS_OBJS}
+#	@echo "${BONUS_OBJS} ${GREEN} ${BOLD}\n\nObjects files And bonus objects files are added to the archive libftprintf.a correctly\n${END}"
 
 obj:
-	@mkdir -p $(OBJS_DIR)
+	@mkdir -p ${OBJS_DIR}
 
 test: norm
-	${CC} ${CFLAGS} -Og -I${INCLUDE_DIR} -o test ${SRCS}
+	${CC} ${CFLAGS} -Og -L${LIBS_DIR} -lft -I${INCLUDE_DIR} -o test ${SRCS}
 	valgrind ./test
 
 norm:
 	$(NORMINETTE)
 
 clean:
-	$(RM) $(OBJS)
+	${RM} ${OBJS}
+	@make -C $(LIBFT_DIR) fclean
+	@echo "${BONUS_OBJS} ${GREEN} ${BOLD}\n\nObjects files, possibly bonus objects files have been deleted correctly\n${END}"
 
 fclean:	clean
-	$(RM) $(NAME) $(OBJS_DIR)
-	@echo "${BONUS_OBJS} ${GREEN} ${BOLD}\n\nObjects files And possibly bonus objects files are deleted to the archive libftprintf.a correctly\n${END}"
-
+	${RM} ${NAME} ${OBJS_DIR}
+	@echo "${GREEN} ${BOLD}\nThe executable file have been deleted too\n${END}"
 
 re:	fclean all
 
-phony: norm comp exec
+phony:all norm test exec clean fclean re bonus

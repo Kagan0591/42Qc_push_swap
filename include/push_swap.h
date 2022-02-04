@@ -7,6 +7,7 @@
 #include <limits.h>
 #include <stdio.h>
 #include <math.h>
+#include "libft.h"
 
 typedef enum
 {
@@ -28,7 +29,6 @@ boolean	checkif_repeated_number(char **argv);
 node	*push_argv_to_stk(int argc, char **argv);
 int		*indexing_stack_to_tab(node *stack_a);
 node	*indexing_stack_to_stack(node *stack_a);
-int		decimal_to_base(int base, int nb);
 
 // Algo functions
 node	*swap_stkvalue_a(node *p_stk);
@@ -66,11 +66,7 @@ node			*ft_stkdelone(node *p_stk);
 node			*ft_stkclear(node *p_stk);
 
 // Utils
-int				ft_atoi(const char *str);
 long long int	ft_atoll(const char *str);
-void			ft_putstr(char *str);
-void			ft_putnbr(int n);
-void			ft_putchar(char c);
-int				ft_isdigit(int c);
+int	decimal_to_base(int base, int nb);
 
 #endif
