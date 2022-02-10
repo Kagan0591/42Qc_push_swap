@@ -6,14 +6,8 @@
 ###-------------------------# VARIABLES ##-------------------------###
 NAME = push_swap
 
-SRCS_FILES 		=	push_swap.c \
-					push_swap_utils.c \
-					push_swap_stack_functions_singly_linked_list.c \
+SRCS_FILES 		=	test.c \
 					push_swap_stack_functions_doubly_linked_list.c \
-					push_swap_sort_functions.c \
-					#push_swap_algo1.c \
-					#radix_sort.c \
-					#quicksort.c \
 
 #B_SRCS_FILES	= 	 \
 
@@ -64,11 +58,11 @@ WHITE		= \033[37m
 all: obj $(NAME)
 
 $(OBJS_DIR)%.o:%.c
-	${CC} ${CFLAGS} -I${LIBFT_DIR} -I${INCLUDE_DIR} -o $@ -c $<
+	${CC} ${CFLAGS} -I${LIBFT_DIR} -I${INCLUDE_DIR} -I. -o $@ -c $<
 
 $(NAME): $(OBJS)
 	${LIBFT}
-	${CC} ${OBJS} -L${LIBFT_DIR} -lft -o ${NAME} -lm
+	${CC} ${CFLAGS} ${OBJS} -L${LIBFT_DIR} -lft -o ${NAME} -lm
 	@echo "${OBJS} ${BLUE} ${BOLD}\n\nAn executable have been created successfully\n${END}"
 
 #bonus: $(NAME) $(BONUS_OBJS)
@@ -79,7 +73,7 @@ obj:
 	@mkdir -p ${OBJS_DIR}
 
 test: norm $(OBJS)
-	${CC} ${OBJS} -L${LIBS_DIR} -lft -o test
+	${CC} ${CFLAGS} ${OBJS} -L${LIBS_DIR} -lft -o test
 	valgrind ./test
 	@echo "${OBJS} ${BLUE} ${BOLD}\n\nAn executable have been created, alse the norminette have been checked and a log of the valgrind result are ready to consult\n${END}"
 

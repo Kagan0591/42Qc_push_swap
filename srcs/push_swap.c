@@ -38,7 +38,7 @@
 
 // radix sort si j arrive pas a faire moi memm un algo, il est performant et facile a implementer
 
-
+/*
 int	main (int argc, char **argv)
 {
 	// (void) argc;
@@ -71,19 +71,47 @@ int	main (int argc, char **argv)
 	}
 	stk_a = push_argv_to_stk(argc, argv);
 	stk_a = indexing_stack_to_stack(stk_a);
-	ft_putstr("\n");
+	ft_putstr("\nPrint stack a after indexiing: ");
 	ft_print_stack_dlink(stk_a);
-	ft_putstr("\n");
+	ft_putstr("\n\n");
 	stk_a = mini_sort(stk_a);
 	ft_print_stack_dlink(stk_a);
 	ft_putstr("\n\nEND OF PROGRAM\n");
 
 	return (1);
 }
+*/
 
-// CHECL FOR 5 NUMBER PROBLEME WHEN MICRO SORT
 
+int	main (int argc, char **argv)
+{
+	node_dlink	*stk_a;
+	int		i;
 
+	i = 1;
+	if (check_for_error(argc - 1, argv) > 0)
+		return (0);
+	if (checkif_is_sort(argv) == true)
+	{
+		while (argv[i])
+		{
+			ft_putstr(argv[i]);
+			i++;
+		}
+		ft_putstr("\n");
+		return (1);
+	}
+	stk_a = push_argv_to_stk(argc, argv);
+	stk_a = indexing_stack_to_stack(stk_a);
+	ft_putstr("\nPrint stack a after indexiing: ");
+	ft_print_stack_dlink(stk_a);
+	ft_putstr("\n\n");
+	stk_a = mini_sort(stk_a);
+//	ft_print_stack_dlink(stk_a);
+	ft_putstr("\n\nEND OF PROGRAM\n");
+
+	return (1);
+}
 
 int	check_for_error(int argc, char **argv)
 {
@@ -98,20 +126,6 @@ int	check_for_error(int argc, char **argv)
 	return (0);
 }
 
-boolean	checkif_is_sort(char **argv)
-{
-	int	i;
-	i = 1;
-	while (argv[i + 1])
-	{
-		if (atoll(argv[i]) > atoll(argv[i + 1]))
-		{
-			return (false);
-		}
-		i++;
-	}
-	return (true);
-}
 
 /* Une fonction pour placer chaques arguments dans une structure
  * en pile
@@ -128,6 +142,21 @@ node_dlink	*push_argv_to_stk(int argc, char **argv)
 		argc--;
 	}
 	return (stack_a);
+}
+
+boolean	checkif_is_sort(char **argv)
+{
+	int	i;
+	i = 1;
+	while (argv[i + 1])
+	{
+		if (atoll(argv[i]) > atoll(argv[i + 1]))
+		{
+			return (false);
+		}
+		i++;
+	}
+	return (true);
 }
 
 /* Une fonction pour vérifier si il s'agit bien d'un chiffre pour

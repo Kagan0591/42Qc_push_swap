@@ -28,13 +28,12 @@ typedef struct node_dlink
 	struct node_dlink	*previous;
 }node_dlink;
 
-// Prog functions
 int				check_for_error(int argc, char **argv);
+node_dlink		*push_argv_to_stk(int argc, char **argv);
 boolean			checkif_isdigit(char **argv);
 boolean			checkif_isint(char **argv);
 boolean			checkif_repeated_number(char **argv);
 boolean			checkif_is_sort(char **argv);
-node_dlink		*push_argv_to_stk(int argc, char **argv);
 
 // Algo functions
 node_dlink		*swap_a(node_dlink *p_stk);
@@ -49,7 +48,6 @@ node_dlink		*reverse_rotate_b(node_dlink *p_stk);
 // Algo
 node_dlink		*micro_sort(node_dlink *stack);
 node_dlink		*mini_sort(node_dlink *stack_a);
-int				find_pos_value(node_dlink *stack, int nb);
 
 
 
@@ -79,8 +77,6 @@ void			ft_print_node(node *p_stk);
 void			ft_print_stack(node *p_stk);
 node			*ft_stkdelone(node *p_stk);
 node			*ft_stkclear(node *p_stk);
-node_dlink		*clone_a_node(node_dlink *src_stack, node_dlink *dest_stack);
-node_dlink		*clone_a_stack(node_dlink *src_stack, node_dlink *dest_stack);
 int				*indexing_stack_to_tab(node *stack_a);
 
 // Doubly linked list stack functions
@@ -93,6 +89,8 @@ void			ft_print_stack_dlink(node_dlink *p_stk);
 node_dlink		*ft_stkdelone_dlink(node_dlink *p_stk);
 node_dlink		*ft_stkclear_dlink(node_dlink *p_stk);
 node_dlink		*return_to_top(node_dlink *stack);
+node_dlink		*clone_a_node(node_dlink *src_stack, node_dlink *dest_stack);
+node_dlink		*clone_a_stack(node_dlink *src_stack, node_dlink *dest_stack);
 node_dlink		*indexing_stack_to_stack(node_dlink *stack_a);
 
 

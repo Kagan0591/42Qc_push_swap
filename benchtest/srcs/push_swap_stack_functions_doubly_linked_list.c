@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "test.h"
 #include <stdio.h>
 
 node_dlink	*ft_stknew_dlink(int nbr)
@@ -112,11 +112,9 @@ node_dlink	*ft_stkclear_dlink(node_dlink *p_stk)
 	tmp = NULL;
 	if(p_stk)
 	{
-		ft_putstr("\nTEST\n");
 		tmp = p_stk;
 		while(tmp)
 			tmp = ft_stkdelone_dlink(tmp);
-			ft_putstr("\nTEST\n");
 		return (tmp);
 	}
 	return (p_stk);
