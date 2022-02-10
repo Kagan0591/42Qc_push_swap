@@ -70,6 +70,7 @@ node_dlink	*mini_sort(node_dlink *stack_a)
 	ft_putstr("\nstack_a after sort\n");
 	ft_print_stack_dlink(stack_a);
 	ft_putstr("\n\n");
+	if (stack_b)
 
 
 
