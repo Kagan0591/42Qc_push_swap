@@ -38,39 +38,52 @@
 
 // radix sort si j arrive pas a faire moi memm un algo, il est performant et facile a implementer
 
+
 int	main (int argc, char **argv)
 {
 	// (void) argc;
 	// (void) argv;
-	node	*stk_a;
-//	stack	*stk_b;
-	int		*args_index;
+	node_dlink	*stk_a;
+//	node_dlink	*indexed_stk_a;
+//	node_dlink	*stk_b;
 //	stk_b = NULL;
-// TEST
 	int		i;
+//	stk_b = NULL;
+//	indexed_stk_a = NULL;
+	i = 1;
 //	Print the nbr of arg(s)
-// ft_printf("Le nombre d'argument passé est de %i incluant le nom du programme\n", argc);
+//	ft_printf("Le nombre d'argument passé est de %i incluant le nom du programme\n", argc);
 	ft_putstr("Le nombre d'argument passé, incluant le nom du programme, est de: ");
 	ft_putnbr(argc);
 	ft_putstr("\n\n");
 //	Add the data from argv to stk_a
 	if (check_for_error(argc - 1, argv) > 0)
 		return (0);
-	stk_a = push_argv_to_stk(argc, argv);
-	ft_print_stack(stk_a);
-	ft_putstr("\n");
-	args_index = indexing_stack_to_tab(stk_a);
-//	Test des arguments indexés
-	i = 0;
-	while (i < 4)
+	if (checkif_is_sort(argv) == true)
 	{
-		ft_putnbr(args_index[i]);
-		i++;
+		while (argv[i])
+		{
+			ft_putstr(argv[i]);
+			i++;
+		}
+		ft_putstr("\n");
+		return (1);
 	}
+	stk_a = push_argv_to_stk(argc, argv);
+	stk_a = indexing_stack_to_stack(stk_a);
+	ft_putstr("\n");
+	ft_print_stack_dlink(stk_a);
+	ft_putstr("\n");
+	stk_a = mini_sort(stk_a);
+	ft_print_stack_dlink(stk_a);
 	ft_putstr("\n\nEND OF PROGRAM\n");
 
 	return (1);
 }
+
+// CHECL FOR 5 NUMBER PROBLEME WHEN MICRO SORT
+
+
 
 int	check_for_error(int argc, char **argv)
 {
@@ -85,29 +98,33 @@ int	check_for_error(int argc, char **argv)
 	return (0);
 }
 
-
-// stack	small_sort(stack stack_b)
-// {
-
-// }
-
-// stack	big_sort(stack stack_a)
-// {
-
-// }
+boolean	checkif_is_sort(char **argv)
+{
+	int	i;
+	i = 1;
+	while (argv[i + 1])
+	{
+		if (atoll(argv[i]) > atoll(argv[i + 1]))
+		{
+			return (false);
+		}
+		i++;
+	}
+	return (true);
+}
 
 /* Une fonction pour placer chaques arguments dans une structure
  * en pile
  */
-node	*push_argv_to_stk(int argc, char **argv)
+node_dlink	*push_argv_to_stk(int argc, char **argv)
 {
-	node	*stack_a;
+	node_dlink	*stack_a;
 	argc = (argc - 1);
-	stack_a = ft_stknew(atoi(argv[argc]));
+	stack_a = ft_stknew_dlink(atoi(argv[argc]));
 	argc--;
 	while (argc > 0)
 	{
-		stack_a = ft_stkadd(stack_a, atoi(argv[argc]));
+		stack_a = ft_stkadd_dlink(stack_a, atoi(argv[argc]));
 		argc--;
 	}
 	return (stack_a);
@@ -138,8 +155,8 @@ boolean	checkif_isdigit(char **argv)
 }
 
 /* Une fonction pour vérifier si il s'agit bien d'un integrer pour
- * chaques arguments vector (argv) */
-
+ * chaques arguments vector (argv)
+ */
 boolean	checkif_isint(char **argv)
 {
 	int	i;
@@ -157,8 +174,8 @@ boolean	checkif_isint(char **argv)
 }
 
 /* Une fonction pour vérifier si il n y a pas de doublon pour
- * chaques arguments vector (argv) */
-
+ * chaques arguments vector (argv)
+ */
 boolean	checkif_repeated_number(char **argv)
 {
 	int	i;

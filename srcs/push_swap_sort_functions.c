@@ -1,11 +1,11 @@
 #include "push_swap.h"
 
-node	*swap_stkvalue_a(node *p_stk)
+node_dlink	*swap_a(node_dlink *p_stk)
 {
-	node	*tmp;
+	node_dlink	*tmp;
 
 	ft_putstr("sa\n");
-	if (ft_stksize(p_stk) >= 2)
+	if (ft_stksize_dlink(p_stk) >= 2)
 	{
 		tmp = p_stk;
 		p_stk = p_stk->next;
@@ -15,12 +15,12 @@ node	*swap_stkvalue_a(node *p_stk)
 	return (p_stk);
 }
 
-node	*swap_stkvalue_b(node *p_stk)
+node_dlink	*swap_b(node_dlink *p_stk)
 {
-	node	*tmp;
+	node_dlink	*tmp;
 
 	ft_putstr("sb\n");
-	if (ft_stksize(p_stk) >= 2)
+	if (ft_stksize_dlink(p_stk) >= 2)
 	{
 		tmp = p_stk;
 		p_stk = p_stk->next;
@@ -30,45 +30,41 @@ node	*swap_stkvalue_b(node *p_stk)
 	return (p_stk);
 }
 
-void	push_to_a(node **origin, node **dest)
+void	push_to_a(node_dlink **origin, node_dlink **dest)
 {
-	node	*tmp_orig;
-	node	*tmp_dest;
-
 	ft_putstr("pa\n");
-	if (origin && dest)
-	{
-		tmp_orig = (*origin)->next;
-		tmp_dest = (*dest);
-		*dest = *origin;
-		(*dest)->next = tmp_dest;
-		(*origin) = tmp_orig;
-	}
+	if ((*origin) == NULL)
+		exit(0);
+	if ((*dest) != NULL)
+		(*dest) = ft_stkadd_dlink((*dest), (*origin)->arg);
+	else
+		(*dest) = ft_stknew_dlink((*origin)->arg);
+	ft_stkdelone_dlink((*origin));
 }
 
-void	push_to_b(node **origin, node **dest)
+void	push_to_b(node_dlink **origin, node_dlink **dest)
 {
-	node	*tmp_orig;
-	node	*tmp_dest;
-
 	ft_putstr("pb\n");
-	if (origin && dest)
+	if ((*origin) == NULL)
 	{
-		tmp_orig = (*origin)->next;
-		tmp_dest = (*dest);
-		*dest = *origin;
-		(*dest)->next = tmp_dest;
-		(*origin) = tmp_orig;
+		exit(0);
 	}
+	if ((*dest) != NULL)
+	{
+		(*dest) = ft_stkadd_dlink((*dest), (*origin)->arg);
+	}
+	else
+		(*dest) = ft_stknew_dlink((*origin)->arg);
+	(*origin) = ft_stkdelone_dlink((*origin));
 }
 
-node	*rotate_a(node *p_stk) // Put the last node to the top
+node_dlink	*rotate_a(node_dlink *p_stk) // Put the last node to the top
 {
-	node	*tmp;
-	node	*tmp_top;
+	node_dlink	*tmp;
+	node_dlink	*tmp_top;
 
 	ft_putstr("ra\n");
-	if (ft_stksize(p_stk) >= 2)
+	if (ft_stksize_dlink(p_stk) >= 2)
 	{
 		tmp_top = p_stk->next;
 		tmp = p_stk;
@@ -82,13 +78,13 @@ node	*rotate_a(node *p_stk) // Put the last node to the top
 		return (p_stk);
 }
 
-node	*rotate_b(node *p_stk) // Put the last node to the top
+node_dlink	*rotate_b(node_dlink *p_stk) // Put the last node to the top
 {
-	node	*tmp;
-	node	*tmp_top;
+	node_dlink	*tmp;
+	node_dlink	*tmp_top;
 
 	ft_putstr("rb\n");
-	if (ft_stksize(p_stk) >= 2)
+	if (ft_stksize_dlink(p_stk) >= 2)
 	{
 		tmp_top = p_stk->next;
 		tmp = p_stk;
@@ -102,16 +98,16 @@ node	*rotate_b(node *p_stk) // Put the last node to the top
 		return (p_stk);
 }
 
-node	*reverse_rotate_a(node *p_stk) // Put the first node to the buttom
+node_dlink	*reverse_rotate_a(node_dlink *p_stk) // Put the first node to the buttom
 {
-	node		*tmp;
-	node		*top_tmp;
-	size_t		pos;
+	node_dlink		*tmp;
+	node_dlink		*top_tmp;
+	size_t			pos;
 
 	ft_putstr("rra\n");
-	if (ft_stksize(p_stk) >= 2)
+	if (ft_stksize_dlink(p_stk) >= 2)
 	{
-		pos = ft_stksize(p_stk);
+		pos = ft_stksize_dlink(p_stk);
 		tmp = p_stk;
 		while (pos > 2)
 		{
@@ -127,16 +123,16 @@ node	*reverse_rotate_a(node *p_stk) // Put the first node to the buttom
 		return (p_stk);
 }
 
-node	*reverse_rotate_b(node *p_stk) // Put the first node to the buttom
+node_dlink	*reverse_rotate_b(node_dlink *p_stk) // Put the first node to the buttom
 {
-	node		*tmp;
-	node		*top_tmp;
-	size_t		pos;
+	node_dlink		*tmp;
+	node_dlink		*top_tmp;
+	size_t			pos;
 
 	ft_putstr("rrb\n");
-	if (ft_stksize(p_stk) >= 2)
+	if (ft_stksize_dlink(p_stk) >= 2)
 	{
-		pos = ft_stksize(p_stk);
+		pos = ft_stksize_dlink(p_stk);
 		tmp = p_stk;
 		while (pos > 2)
 		{

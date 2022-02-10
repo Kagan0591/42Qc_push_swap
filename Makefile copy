@@ -11,8 +11,6 @@ SRCS_FILES 		=	push_swap.c \
 					push_swap_stack_functions_singly_linked_list.c \
 					push_swap_stack_functions_doubly_linked_list.c \
 					push_swap_sort_functions.c \
-					micro-sort.c \
-					mini-sort.c \
 					#push_swap_algo1.c \
 					#radix_sort.c \
 					#quicksort.c \
@@ -66,7 +64,7 @@ WHITE		= \033[37m
 all: obj $(NAME)
 
 $(OBJS_DIR)%.o:%.c
-	${CC} ${CFLAGS} -I${LIBFT_DIR} -I${INCLUDE_DIR} -I. -o $@ -c $<
+	${CC} ${CFLAGS} -I${LIBFT_DIR} -I${INCLUDE_DIR} -o $@ -c $<
 
 $(NAME): $(OBJS)
 	${LIBFT}
