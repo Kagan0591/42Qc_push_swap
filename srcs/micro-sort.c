@@ -42,3 +42,27 @@ node_dlink	*micro_sort(node_dlink *stack)
 	}
 	return (stack);
 }
+
+int	find_max(stack)
+{
+	int	max_value;
+
+	max_value = 0;
+	while (stack != NULL)
+	{
+		if (stack->arg < stack->next->arg)
+			max_value = stack->next->arg;
+		stack = stack->next;
+	}
+	return (max_value);
+}
+
+node_dlink	*micro_sort(node_dlink *stack)
+{
+	int	max;
+
+	max = find_max()
+	if (if_is_sort(stack) == false)
+	{
+
+}
