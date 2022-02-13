@@ -11,7 +11,7 @@ SRCS_FILES 		=	push_swap.c \
 					push_swap_stack_functions_singly_linked_list.c \
 					push_swap_stack_functions_doubly_linked_list.c \
 					push_swap_sort_functions.c \
-					micro-sort.c \
+					micro_sort.c \
 					mini_sort.c \
 					#push_swap_algo1.c \
 					#radix_sort.c \
@@ -41,8 +41,8 @@ AR 			= ar -cr
 
 ### Autres Fonctions ###
 RM 			= @rm -rf
-NORMINETTE 	= norminette $(SRCS_DIR)${SRCS_FILES}
-LIBFT		= $(MAKE) bonus -C $(LIBFT_DIR)
+NORMINETTE 	= norminette
+LIBFT		= @$(MAKE) bonus -C $(LIBFT_DIR)
 
 ### Colour var ###
 END			= \033[0m
@@ -71,7 +71,7 @@ $(OBJS_DIR)%.o:%.c
 $(NAME): $(OBJS)
 	${LIBFT}
 	${CC} ${OBJS} -L${LIBFT_DIR} -lft -o ${NAME} -lm
-	@echo "${OBJS} ${BLUE} ${BOLD}\n\nAn executable have been created successfully\n${END}"
+	@echo "${OBJS} ${BLUE} ${BOLD}\n\nAn executable have been created successfully!\n${END}"
 
 #bonus: $(NAME) $(BONUS_OBJS)
 #	@${ARCHIVE} ${NAME} ${BONUS_OBJS}
@@ -80,13 +80,14 @@ $(NAME): $(OBJS)
 obj:
 	@mkdir -p ${OBJS_DIR}
 
-test: norm $(OBJS)
-	${CC} ${OBJS} -L${LIBS_DIR} -lft -o test
+test: norm obj ${NAME}
+	@echo "${OBJS} ${BLUE} ${BOLD}\n\nAlso the norminette have been checked. If you need to continue with valgrind to look for some leaks type ${VIOLET}make leaks\n${END}"
+
+leaks: re
 	valgrind ./test
-	@echo "${OBJS} ${BLUE} ${BOLD}\n\nAn executable have been created, alse the norminette have been checked and a log of the valgrind result are ready to consult\n${END}"
 
 norm:
-	$(NORMINETTE)
+	$(NORMINETTE) ${SRCS_DIR} ${INCLUDE_DIR}
 
 clean:
 	${RM} ${OBJS}

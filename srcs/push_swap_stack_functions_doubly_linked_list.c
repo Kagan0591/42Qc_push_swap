@@ -26,7 +26,7 @@ node_dlink	*ft_stkadd_dlink(node_dlink *p_stk, int nbr)
 		new_element->arg = nbr;
 		new_element->next = p_stk;
 		new_element->previous = NULL;
-		new_element->next->previous = new_element;
+		p_stk->previous = new_element;
 		return (new_element);
 	}
 	return (NULL);
@@ -34,16 +34,22 @@ node_dlink	*ft_stkadd_dlink(node_dlink *p_stk, int nbr)
 
 node_dlink	*ft_dllst_addback(node_dlink *p_stk, int nbr)
 {
-	node_dlink	*new_element;
+	node_dlink	*new_node;
+
 	if (!p_stk)
 		return (ft_stknew_dlink(nbr));
-	new_element = malloc(sizeof(node_dlink));
-	if (new_element)
+	new_node = malloc(sizeof(node_dlink));
+	if (new_node)
 	{
-		new_element->arg = nbr;
-		new_element->next = NULL;
-		new_element->previous = p_stk;
-		return (new_element);
+		while (p_stk->next != NULL)
+			p_stk = p_stk->next;
+		new_node->arg = nbr;
+		new_node->next = NULL;
+		new_node->previous = p_stk;
+		p_stk->next = new_node;
+		while (p_stk->previous != NULL)
+			p_stk = p_stk->previous;
+		return (p_stk);
 	}
 	return (NULL);
 }
@@ -60,7 +66,7 @@ int	ft_stksize_dlink(node_dlink *p_stk)
 	int	count;
 
 	count = 0;
-	while (p_stk)
+	while (p_stk != NULL)
 	{
 		count++;
 		p_stk = p_stk->next;
@@ -83,43 +89,26 @@ void	ft_print_stack_dlink(node_dlink *p_stk)
 	}
 }
 
-node_dlink	*ft_stkdelone_dlink(node_dlink *p_stk)
+void	ft_stkdelone_dlink(node_dlink *p_stk) // --NEW--
 {
-	node_dlink	*tmp;
-
-	tmp = NULL;
-	if (ft_stksize_dlink(p_stk) > 1)
+	if (p_stk)
 	{
-		if (p_stk->next != NULL)
-			tmp = p_stk->next;
-		if (tmp->previous != NULL)
-			tmp->previous = NULL;
-		free(p_stk);
-		return (tmp);
-	}
-	if (ft_stksize_dlink(p_stk) > 0)
-	{
+		p_stk->arg = 0;
 		free(p_stk);
 	}
-	free(tmp);
-	return (NULL);
 }
 
-node_dlink	*ft_stkclear_dlink(node_dlink *p_stk)
+void	ft_stkclear_dlink(node_dlink *p_stk)
 {
-	node_dlink	*tmp;
-
-	tmp = NULL;
 	if(p_stk)
 	{
-		ft_putstr("\nTEST\n");
-		tmp = p_stk;
-		while(tmp)
-			tmp = ft_stkdelone_dlink(tmp);
-			ft_putstr("\nTEST\n");
-		return (tmp);
+		while(p_stk->next)
+		{
+			p_stk = p_stk->next;
+			ft_stkdelone_dlink(p_stk->previous);
+		}
+		ft_stkdelone_dlink(p_stk);
 	}
-	return (p_stk);
 }
 
 node_dlink	*return_to_top(node_dlink *stack)
@@ -131,8 +120,12 @@ node_dlink	*return_to_top(node_dlink *stack)
 
 node_dlink	*clone_a_node(node_dlink *src_stack, node_dlink *dest_stack)
 {
-	if (!dest_stack)
-		dest_stack = ft_stknew_dlink(src_stack->arg);
+	if (!src_stack)
+		return (NULL);
+	else if (!dest_stack)
+		return (ft_stknew_dlink(src_stack->arg));
+	else if ((dest_stack->next == NULL) && (dest_stack->previous != NULL)) // Pour une raison que j ignore, sa passe pas
+		dest_stack = ft_dllst_addback(src_stack, src_stack->arg);
 	else
 		dest_stack = ft_stkadd_dlink(dest_stack, src_stack->arg);
 	return (dest_stack);
@@ -144,10 +137,11 @@ node_dlink	*clone_a_stack(node_dlink *src_stack, node_dlink *dest_stack)
 	{
 		src_stack = src_stack->next;
 	}
-	while (src_stack != NULL)
+	dest_stack = clone_a_node(src_stack, dest_stack);
+	while (src_stack->previous != NULL)
 	{
-		dest_stack = clone_a_node(src_stack, dest_stack);
 		src_stack = src_stack->previous;
+		dest_stack = clone_a_node(src_stack, dest_stack);
 	}
 	return (dest_stack);
 }
@@ -202,8 +196,8 @@ node_dlink	*indexing_stack_to_stack(node_dlink *stack)
 			stack = stack->next;
 		original_stack = original_stack->next;
 	}
-	free (start_of_stack);
-	free (original_stack);
+	ft_stkclear_dlink(start_of_stack);
+	ft_stkclear_dlink(original_stack);
 	while (stack->previous != NULL)
 		stack = stack->previous;
 	return (stack);

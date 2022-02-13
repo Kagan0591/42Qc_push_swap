@@ -21,18 +21,17 @@ static int	find_smaller_num_pos(node_dlink *stack, int num)
 	return (count);
 }
 
-static node_dlink	*mini_push_to_b_smaller_value(node_dlink **stack_a)
+static void	mini_push_to_b_smaller_value(node_dlink **stack_a, node_dlink **stack_b)
 {
 	int	num_position;
 	int	value_to_find;
-	node_dlink	*stack_b;
 
-	stack_b = NULL;
 	value_to_find = 0;
 	while (ft_stksize_dlink(*stack_a) > 3)
 	{
+		ft_print_stack_dlink((*stack_a));
 		num_position = find_smaller_num_pos(*stack_a, value_to_find);
-		if ((ft_stksize_dlink(*stack_a) / 2) < num_position)
+		if (ft_stksize_dlink(*stack_a) <= ((ft_stksize_dlink(*stack_a) / 2) + num_position))
 			while ((ft_stksize_dlink(*stack_a) - num_position) != 0)
 			{
 				*stack_a = reverse_rotate_a(*stack_a);
@@ -44,10 +43,9 @@ static node_dlink	*mini_push_to_b_smaller_value(node_dlink **stack_a)
 				*stack_a = rotate_a(*stack_a);
 				num_position--;
 			}
-		push_to_b(stack_a, &stack_b);
+		push_to_b(stack_a, stack_b);
 		value_to_find++;
 	}
-	return (stack_b);
 }
 
 node_dlink	*mini_sort(node_dlink *stack_a)
@@ -56,24 +54,15 @@ node_dlink	*mini_sort(node_dlink *stack_a)
 
 	stack_b = NULL;
 
-	stack_b = mini_push_to_b_smaller_value(&stack_a);
-	ft_putstr("\nstack_a\n");
-	ft_print_stack_dlink(stack_a);
-	ft_putstr("\nstack_b\n");
-	ft_print_stack_dlink(stack_b);
-	ft_putstr("\n\n");
-	stack_a = indexing_stack_to_stack(stack_a);
-	ft_putstr("\nstack_a after indexing\n");
-	ft_print_stack_dlink(stack_a);
-	ft_putstr("\n\n");
+	mini_push_to_b_smaller_value(&stack_a, &stack_b);
 	stack_a = micro_sort(stack_a);
-	ft_putstr("\nstack_a after sort\n");
-	ft_print_stack_dlink(stack_a);
-	ft_putstr("\n\n");
 	if (stack_b)
-
-
-
+	{
+		if (stack_b->arg < stack_b->next->arg)
+			swap_b(stack_b);
+		while(stack_b != NULL)
+			push_to_a(&stack_b, &stack_a);
+	}
+	ft_stkclear_dlink(stack_b);
 	return (stack_a);
-
 }

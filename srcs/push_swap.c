@@ -103,13 +103,12 @@ int	main (int argc, char **argv)
 	}
 	stk_a = push_argv_to_stk(argc, argv);
 	stk_a = indexing_stack_to_stack(stk_a);
-	ft_putstr("\nPrint stack a after indexiing: ");
+	ft_putstr("\nPrint stack a after indexing: ");
 	ft_print_stack_dlink(stk_a);
 	ft_putstr("\n\n");
 	stk_a = mini_sort(stk_a);
-//	ft_print_stack_dlink(stk_a);
+	ft_print_stack_dlink(stk_a);
 	ft_putstr("\n\nEND OF PROGRAM\n");
-
 	return (1);
 }
 
