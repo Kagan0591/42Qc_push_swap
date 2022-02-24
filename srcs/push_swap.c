@@ -13,10 +13,7 @@
  *
  * 3. Les éléments sont divisés en deux sous-tableaux (n/2) encore et encore
  * jusqu'à ce qu'il ne reste qu'un seul élément.
- * */
-
-
-
+ */
 
 /* L'algorithme Merge Sort est très éfficace pour le tri de grandes
  * quantités de données. Il est préferé pour les listes chainées.
@@ -34,54 +31,10 @@
  * qu'il peut etre divisé, le tableau sera récursivement divisé.
  *
  * 4. Enfin, tous les sous-tableaux sont fusionnés pour ne faire qu'un
- * tableau de « n » taille d'élément.*/
+ * tableau de « n » taille d'élément.
+ */
 
-// radix sort si j arrive pas a faire moi memm un algo, il est performant et facile a implementer
-
-/*
-int	main (int argc, char **argv)
-{
-	// (void) argc;
-	// (void) argv;
-	node_dlink	*stk_a;
-//	node_dlink	*indexed_stk_a;
-//	node_dlink	*stk_b;
-//	stk_b = NULL;
-	int		i;
-//	stk_b = NULL;
-//	indexed_stk_a = NULL;
-	i = 1;
-//	Print the nbr of arg(s)
-//	ft_printf("Le nombre d'argument passé est de %i incluant le nom du programme\n", argc);
-	ft_putstr("Le nombre d'argument passé, incluant le nom du programme, est de: ");
-	ft_putnbr(argc);
-	ft_putstr("\n\n");
-//	Add the data from argv to stk_a
-	if (check_for_error(argc - 1, argv) > 0)
-		return (0);
-	if (checkif_is_sort(argv) == true)
-	{
-		while (argv[i])
-		{
-			ft_putstr(argv[i]);
-			i++;
-		}
-		ft_putstr("\n");
-		return (1);
-	}
-	stk_a = push_argv_to_stk(argc, argv);
-	stk_a = indexing_stack_to_stack(stk_a);
-	ft_putstr("\nPrint stack a after indexiing: ");
-	ft_print_stack_dlink(stk_a);
-	ft_putstr("\n\n");
-	stk_a = mini_sort(stk_a);
-	ft_print_stack_dlink(stk_a);
-	ft_putstr("\n\nEND OF PROGRAM\n");
-
-	return (1);
-}
-*/
-
+// radix sort si j arrive pas a faire moi meme un algo, il est performant et facile a implementer
 
 int	main (int argc, char **argv)
 {
@@ -112,22 +65,8 @@ int	main (int argc, char **argv)
 	return (1);
 }
 
-int	check_for_error(int argc, char **argv)
-{
-	if (argc == 0)
-		return (1);
-	if (checkif_isint(argv) == false)
-		return (write(2, "Error\n", 6));
-	if (checkif_isdigit(argv) == false)
-		return (write(2, "Error\n", 6));
-	if (checkif_repeated_number(argv) == true)
-		return (write(2, "Error\n", 6));
-	return (0);
-}
-
-
-/* Une fonction pour placer chaques arguments dans une structure
- * en pile
+/* Une fonction pour placer chaques arguments dans un node d'une structure
+ * en pile.
  */
 node_dlink	*push_argv_to_stk(int argc, char **argv)
 {
@@ -158,70 +97,35 @@ boolean	checkif_is_sort(char **argv)
 	return (true);
 }
 
-/* Une fonction pour vérifier si il s'agit bien d'un chiffre pour
- * chaques arguments vector (argv)
- */
-boolean	checkif_isdigit(char **argv)
+node_dlink	*indexing_stack_to_stack(node_dlink *stack)
 {
-	int	i;
-	int j;
+	int			index;
+	node_dlink	*start_of_stack;
+	node_dlink	*original_stack;
+	node_dlink	*stack_tmp;
 
-	i = 1;
-	j = 0;
-	while (argv[i])
+	start_of_stack = NULL;
+	original_stack = NULL;
+	start_of_stack = clone_a_stack(stack, start_of_stack);
+	original_stack = clone_a_stack(stack, original_stack);
+	while (original_stack != NULL)
 	{
-		while (argv[i][j] != '\0')
+		index = 0;
+		stack_tmp = start_of_stack;
+		while (stack_tmp != NULL)
 		{
-			if (ft_isdigit(argv[i][j]) == 0)
-				return (false);
-			j++;
+			if (original_stack->arg > stack_tmp->arg)
+				index++;
+			stack_tmp = stack_tmp->next;
 		}
-		j = 0;
-		i++;
+		stack->arg = index;
+		if (original_stack->next != NULL)
+			stack = stack->next;
+		original_stack = original_stack->next;
 	}
-	return (true);
-}
-
-/* Une fonction pour vérifier si il s'agit bien d'un integrer pour
- * chaques arguments vector (argv)
- */
-boolean	checkif_isint(char **argv)
-{
-	int	i;
-
-	i = 1;
-	while (argv[i])
-	{
-		if (ft_atoll(argv[i]) < -2147483648 || ft_atoll(argv[i]) > 2147483647)
-		{
-			return (false);
-		}
-		i++;
-	}
-	return (true);
-}
-
-/* Une fonction pour vérifier si il n y a pas de doublon pour
- * chaques arguments vector (argv)
- */
-boolean	checkif_repeated_number(char **argv)
-{
-	int	i;
-	int	j;
-
-	i = 1;
-	j = 2;
-
-	while (argv[i])
-	{
-		while (argv[j])
-		{
-			if (ft_atoi(argv [i]) == ft_atoi(argv[j]))
-				return (true);
-			j++;
-		}
-		i++;
-		j = (i + 1);
-	}
-	return (false);
+	ft_stkclear_dlink(start_of_stack);
+	ft_stkclear_dlink(original_stack);
+	while (stack->previous != NULL)
+		stack = stack->previous;
+	return (stack);
 }

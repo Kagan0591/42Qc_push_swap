@@ -92,9 +92,6 @@ node	*ft_stkclear(node *p_stk)
 	return (p_stk);
 }
 
-//node	ft_stkclear_recursive(node stk)
-
-
 int	*indexing_stack_to_tab(node *stack_a)
 {
 	int		count;
