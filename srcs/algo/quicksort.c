@@ -1,5 +1,20 @@
-/*
+/* L'algorithme Quick Sort est le plus éfficace pour le tri de petites
+ * quantités de données. Il est préferé pour les tableaux.
+ *
+ * 1. Le tableau d'éléments est divisé en plusieurs parties jusqu'à ce
+ * qu'il ne soit plus possible de le diviser davantage.
+ *
+ * 2. Il utilise un élément clé (un pivot) pour partitionner les éléments.
+ * Ainsi, Une partition de gauche contient tous les éléments qui sont
+ * plus petits que le pivot et une partition de droite contient tous
+ * les éléments qui sont plus grands que l'élément clé.
+ *
+ * 3. Les éléments sont divisés en deux sous-tableaux (n/2) encore et encore
+ * jusqu'à ce qu'il ne reste qu'un seul élément.
+ */
 
+
+/*
 1. Choisir un pivot (pour ma part le dernier nombre de la liste)
 
 	- positionner un pointeur sur le pivot sélectionné.
@@ -14,7 +29,6 @@
 	- Interchanger ce nombre avec le plus grand trouvé plus tot (pt_high).
 
 4.
-
 */
 #include "push_swap.h"
 
