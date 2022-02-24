@@ -8,14 +8,10 @@ NAME = push_swap
 
 SRCS_FILES 		=	push_swap.c \
 					push_swap_utils.c \
-					push_swap_stack_functions_singly_linked_list.c \
 					push_swap_stack_functions_doubly_linked_list.c \
 					push_swap_sort_functions.c \
 					micro_sort.c \
 					mini_sort.c \
-					#push_swap_algo1.c \
-					#radix_sort.c \
-					#quicksort.c \
 
 #B_SRCS_FILES	= 	 \
 

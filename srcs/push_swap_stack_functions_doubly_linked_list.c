@@ -1,5 +1,4 @@
 #include "push_swap.h"
-#include <stdio.h>
 
 node_dlink	*ft_stknew_dlink(int nbr)
 {
@@ -145,29 +144,6 @@ node_dlink	*clone_a_stack(node_dlink *src_stack, node_dlink *dest_stack)
 	}
 	return (dest_stack);
 }
-
-// node_dlink	reverse_data_links(node_dlink stack)
-// {
-// 	node_dlink	top_node_next_pt;
-// 	node_dlink	top_node_previous_pt;
-// 	node_dlink	top_node_pt;
-// 	node_dlink	bottom_node_previous_pt;
-// 	node_dlink	bottom_node_next_pt;
-
-
-// 	top_node_next_pt = stack->next;
-// 	top_node_pt = stack;
-// 	while (stack->next != NULL)
-// 		stack = stack->next;
-// 	bottom_node_previous_pt = stack->previous;
-// 	stack->previous = NULL;
-// 	stack->next = top_node_next_pt;
-// 	top_node_pt->next = NULL;
-// 	top_node_pt->previous = bottom_node_previous_pt;
-// 	while (bottom_node_previous_pt->previous)
-
-
-// }
 
 // Indexing via list doublement chainé
 node_dlink	*indexing_stack_to_stack(node_dlink *stack)

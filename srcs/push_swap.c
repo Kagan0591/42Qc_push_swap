@@ -1,62 +1,12 @@
 #include "push_swap.h"
 
-/* L'algorithme Quick Sort est le plus éfficace pour le tri de petites
- * quantités de données. Il est préferé pour les tableaux.
- *
- * 1. Le tableau d'éléments est divisé en plusieurs parties jusqu'à ce
- * qu'il ne soit plus possible de le diviser davantage.
- *
- * 2. Il utilise un élément clé (un pivot) pour partitionner les éléments.
- * Ainsi, Une partition de gauche contient tous les éléments qui sont
- * plus petits que le pivot et une partition de droite contient tous
- * les éléments qui sont plus grands que l'élément clé.
- *
- * 3. Les éléments sont divisés en deux sous-tableaux (n/2) encore et encore
- * jusqu'à ce qu'il ne reste qu'un seul élément.
- * */
-
-
-
-
-/* L'algorithme Merge Sort est très éfficace pour le tri de grandes
- * quantités de données. Il est préferé pour les listes chainées.
- *
- * 1. Les éléments sont divisés en deux sous-tableaux (n/2) encore et encore
- * jusqu'à ce qu'il ne reste qu'un seul élément.
- *
- * 2.Le tri par fusion utilise de l espace stockage supplémentaire
- * pour trier les tableaux auxiliaires.
- *
- * 3. Le tri par fusion utilise trois tableaux, où deux sont utilisés
- * pour stocker chaque moitié, et le troisième, externe, est utilisé
- * pour stocker la liste triée finale en fusionnant les deux autres
- * et chaque tableau est ensuite trié de manière récursive. Donc, tant
- * qu'il peut etre divisé, le tableau sera récursivement divisé.
- *
- * 4. Enfin, tous les sous-tableaux sont fusionnés pour ne faire qu'un
- * tableau de « n » taille d'élément.*/
-
-// radix sort si j arrive pas a faire moi memm un algo, il est performant et facile a implementer
-
-/*
 int	main (int argc, char **argv)
 {
-	// (void) argc;
-	// (void) argv;
-	node_dlink	*stk_a;
-//	node_dlink	*indexed_stk_a;
-//	node_dlink	*stk_b;
-//	stk_b = NULL;
+	d_container	*data;
 	int		i;
-//	stk_b = NULL;
-//	indexed_stk_a = NULL;
+
+	data = malloc(sizeof(d_container));
 	i = 1;
-//	Print the nbr of arg(s)
-//	ft_printf("Le nombre d'argument passé est de %i incluant le nom du programme\n", argc);
-	ft_putstr("Le nombre d'argument passé, incluant le nom du programme, est de: ");
-	ft_putnbr(argc);
-	ft_putstr("\n\n");
-//	Add the data from argv to stk_a
 	if (check_for_error(argc - 1, argv) > 0)
 		return (0);
 	if (checkif_is_sort(argv) == true)
@@ -69,47 +19,23 @@ int	main (int argc, char **argv)
 		ft_putstr("\n");
 		return (1);
 	}
-	stk_a = push_argv_to_stk(argc, argv);
-	stk_a = indexing_stack_to_stack(stk_a);
-	ft_putstr("\nPrint stack a after indexiing: ");
-	ft_print_stack_dlink(stk_a);
+	data->stack_a = push_argv_to_stk(argc, argv);
+	data->stack_a = indexing_stack_to_stack(data->stack_a);
+	ft_putstr("\nPrint stack a after indexing: ");
+	ft_print_stack_dlink(data->stack_a);
 	ft_putstr("\n\n");
-	stk_a = mini_sort(stk_a);
-	ft_print_stack_dlink(stk_a);
+	choosing_the_algo(data);
+	ft_print_stack_dlink(data->stack_a);
 	ft_putstr("\n\nEND OF PROGRAM\n");
-
 	return (1);
 }
-*/
 
-
-int	main (int argc, char **argv)
+void	choosing_the_algo(d_container *p_data)
 {
-	node_dlink	*stk_a;
-	int		i;
-
-	i = 1;
-	if (check_for_error(argc - 1, argv) > 0)
-		return (0);
-	if (checkif_is_sort(argv) == true)
-	{
-		while (argv[i])
-		{
-			ft_putstr(argv[i]);
-			i++;
-		}
-		ft_putstr("\n");
-		return (1);
-	}
-	stk_a = push_argv_to_stk(argc, argv);
-	stk_a = indexing_stack_to_stack(stk_a);
-	ft_putstr("\nPrint stack a after indexing: ");
-	ft_print_stack_dlink(stk_a);
-	ft_putstr("\n\n");
-	stk_a = mini_sort(stk_a);
-	ft_print_stack_dlink(stk_a);
-	ft_putstr("\n\nEND OF PROGRAM\n");
-	return (1);
+	if (ft_stksize_dlink(p_data->stack_a) > 5)
+		ft_putstr("BIG SORT\n");
+	else
+		p_data->stack_a = mini_sort(p_data->stack_a);
 }
 
 int	check_for_error(int argc, char **argv)
