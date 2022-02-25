@@ -45,21 +45,6 @@ boolean	checkif_isdigit(char **argv)
 	return (true);
 }
 
-	if (argc == 2)
-	{
-		while (argv[1][i])
-		{
-			if (ft_isdigit(argv[1][i] == 0))
-			{
-				if (argv[1][i] == ' ')
-					i++;
-				else
-					return (write(2, "Error\n", 6));
-			}
-			i++;
-		}
-		return (0);
-	}
 /* Une fonction pour vérifier si il s'agit bien d'un integrer pour
  * chaques arguments vector (argv)
  */
