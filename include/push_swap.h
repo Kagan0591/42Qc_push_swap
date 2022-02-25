@@ -35,7 +35,7 @@ boolean			checkif_isdigit(char **argv);
 boolean			checkif_isint(char **argv);
 boolean			checkif_repeated_number(char **argv);
 boolean			checkif_is_sort(char **argv);
-void	choosing_the_algo(d_container *p_data);
+void			choosing_the_algo(d_container *p_data);
 
 // Doubly linked list stack functions
 node_dlink		*ft_stknew_dlink(int nbr);
@@ -58,8 +58,8 @@ int				decimal_to_base(int base, int nb);
 // Sort moves functions
 node_dlink		*swap_a(node_dlink *p_stk);
 node_dlink		*swap_b(node_dlink*p_stk);
-void			push_to_a(node_dlink **origin, node_dlink **dest);
-void			push_to_b(node_dlink **origin, node_dlink **dest);
+void			push_to_a(d_container *p_data);
+void			push_to_b(d_container *p_data);
 node_dlink		*rotate_a(node_dlink *p_stk);
 node_dlink		*rotate_b(node_dlink *p_stk);
 node_dlink		*reverse_rotate_a(node_dlink *p_stk);
@@ -67,6 +67,6 @@ node_dlink		*reverse_rotate_b(node_dlink *p_stk);
 
 // Sort algo functions
 node_dlink		*micro_sort(node_dlink *stack);
-node_dlink		*mini_sort(node_dlink *stack_a);
+node_dlink		*mini_sort(d_container *p_data);
 
 #endif

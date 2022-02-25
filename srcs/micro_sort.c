@@ -41,10 +41,7 @@ node_dlink	*micro_sort(node_dlink *stack)
 	if (if_is_sort(stack) == false)
 	{
 		if (max == stack->arg)
-		{
 			stack = rotate_a(stack);
-			ft_putnbr(stack->arg);
-		}
 		else if (max == stack->next->arg)
 			stack = reverse_rotate_a(stack);
 		if (if_is_sort(stack) == false)

@@ -6,6 +6,8 @@ int	main (int argc, char **argv)
 	int		i;
 
 	data = malloc(sizeof(d_container));
+	data->stack_a = malloc(sizeof(data->stack_a));
+	data->stack_b = malloc(sizeof(data->stack_b));
 	i = 1;
 	if (check_for_error(argc - 1, argv) > 0)
 		return (0);
@@ -35,7 +37,7 @@ void	choosing_the_algo(d_container *p_data)
 	if (ft_stksize_dlink(p_data->stack_a) > 5)
 		ft_putstr("BIG SORT\n");
 	else
-		p_data->stack_a = mini_sort(p_data->stack_a);
+		p_data->stack_a = mini_sort(p_data);
 }
 
 /* Une fonction pour placer chaques arguments dans un node d'une structure

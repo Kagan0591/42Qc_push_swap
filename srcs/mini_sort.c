@@ -21,48 +21,43 @@ static int	find_smaller_num_pos(node_dlink *stack, int num)
 	return (count);
 }
 
-static void	mini_push_to_b_smaller_value(node_dlink **stack_a, node_dlink **stack_b)
+static void	mini_push_to_b_smaller_value(d_container *p_data)
 {
 	int	num_position;
 	int	value_to_find;
 
 	value_to_find = 0;
-	while (ft_stksize_dlink(*stack_a) > 3)
+	while (ft_stksize_dlink(p_data->stack_a) > 3)
 	{
-		ft_print_stack_dlink((*stack_a));
-		num_position = find_smaller_num_pos(*stack_a, value_to_find);
-		if (ft_stksize_dlink(*stack_a) <= ((ft_stksize_dlink(*stack_a) / 2) + num_position))
-			while ((ft_stksize_dlink(*stack_a) - num_position) != 0)
+		num_position = find_smaller_num_pos(p_data->stack_a, value_to_find);
+		if (ft_stksize_dlink(p_data->stack_a) <= ((ft_stksize_dlink(p_data->stack_a) / 2) + num_position))
+			while ((ft_stksize_dlink(p_data->stack_a) - num_position) != 0)
 			{
-				*stack_a = reverse_rotate_a(*stack_a);
+				p_data->stack_a = reverse_rotate_a(p_data->stack_a);
 				num_position++;
 			}
 		else if (num_position > 0)
 			while (num_position > 0)
 			{
-				*stack_a = rotate_a(*stack_a);
+				p_data->stack_a = rotate_a(p_data->stack_a);
 				num_position--;
 			}
-		push_to_b(stack_a, stack_b);
+		push_to_b(p_data);
 		value_to_find++;
 	}
 }
 
-node_dlink	*mini_sort(node_dlink *stack_a)
+node_dlink	*mini_sort(d_container *p_data)
 {
-	node_dlink *stack_b;
-
-	stack_b = NULL;
-
-	mini_push_to_b_smaller_value(&stack_a, &stack_b);
-	stack_a = micro_sort(stack_a);
-	if (stack_b)
+	mini_push_to_b_smaller_value(p_data);
+	p_data->stack_a = micro_sort(p_data->stack_a);
+	if (p_data->stack_b)
 	{
-		if (stack_b->arg < stack_b->next->arg)
-			swap_b(stack_b);
-		while(stack_b != NULL)
-			push_to_a(&stack_b, &stack_a);
+		if (p_data->stack_b->arg < p_data->stack_b->next->arg)
+			swap_b(p_data->stack_b);
+		while(p_data->stack_b != NULL)
+			push_to_a(p_data);
 	}
-	ft_stkclear_dlink(stack_b);
-	return (stack_a);
+	ft_stkclear_dlink(p_data->stack_b);
+	return (p_data->stack_a);
 }
