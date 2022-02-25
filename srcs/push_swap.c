@@ -8,6 +8,7 @@ int	main (int argc, char **argv)
 	data = malloc(sizeof(d_container));
 	data->stack_a = malloc(sizeof(data->stack_a));
 	data->stack_b = malloc(sizeof(data->stack_b));
+	data->stack_b = NULL;
 	i = 1;
 	if (check_for_error(argc - 1, argv) > 0)
 		return (0);
@@ -27,7 +28,7 @@ int	main (int argc, char **argv)
 	ft_print_stack_dlink(data->stack_a);
 	ft_putstr("\n\n");
 	choosing_the_algo(data);
-//	ft_print_stack_dlink(data->stack_a);
+	ft_print_stack_dlink(data->stack_a);
 	ft_putstr("\n\nEND OF PROGRAM\n");
 	return (1);
 }

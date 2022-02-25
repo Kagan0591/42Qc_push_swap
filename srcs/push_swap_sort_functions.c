@@ -33,17 +33,17 @@ node_dlink	*swap_b(node_dlink *p_stk)
 void	push_to_a(d_container *p_data)
 {
 	ft_putstr("pa\n");
-	if (p_data->stack_a == NULL)
+	if (p_data->stack_b == NULL)
 		exit(0);
-	if (p_data->stack_b != NULL)
-		p_data->stack_b = ft_stkadd_dlink(p_data->stack_b, p_data->stack_a->arg);
-	else
-		p_data->stack_b = ft_stknew_dlink(p_data->stack_a->arg);
-	p_data->stack_a = p_data->stack_a->next;
 	if (p_data->stack_a != NULL)
+		p_data->stack_a = ft_stkadd_dlink(p_data->stack_a, p_data->stack_b->arg);
+	else
+		p_data->stack_a = ft_stknew_dlink(p_data->stack_b->arg);
+	p_data->stack_b = p_data->stack_b->next;
+	if (p_data->stack_b != NULL)
 	{
-		ft_stkdelone_dlink(p_data->stack_a->previous);
-		p_data->stack_a->previous = NULL;
+		ft_stkdelone_dlink(p_data->stack_b->previous);
+		p_data->stack_b->previous = NULL;
 	}
 }
 
@@ -57,8 +57,11 @@ void	push_to_b(d_container *p_data)
 	else
 		p_data->stack_b = ft_stknew_dlink(p_data->stack_a->arg);
 	p_data->stack_a = p_data->stack_a->next;
-	ft_stkdelone_dlink(p_data->stack_a->previous);
-	p_data->stack_a->previous = NULL;
+	if (p_data->stack_a != NULL)
+	{
+		ft_stkdelone_dlink(p_data->stack_a->previous);
+		p_data->stack_a->previous = NULL;
+	}
 }
 
 node_dlink	*rotate_a(node_dlink *p_stk) // Put the top node to bottom
