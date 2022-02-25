@@ -27,7 +27,7 @@ int	main (int argc, char **argv)
 	ft_print_stack_dlink(data->stack_a);
 	ft_putstr("\n\n");
 	choosing_the_algo(data);
-	ft_print_stack_dlink(data->stack_a);
+//	ft_print_stack_dlink(data->stack_a);
 	ft_putstr("\n\nEND OF PROGRAM\n");
 	return (1);
 }

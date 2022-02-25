@@ -40,6 +40,7 @@ void			choosing_the_algo(d_container *p_data);
 // Doubly linked list stack functions
 node_dlink		*ft_stknew_dlink(int nbr);
 node_dlink		*ft_stkadd_dlink(node_dlink *p_stk, int nbr);
+node_dlink		*ft_dllst_addback(node_dlink *p_stk, int nbr);
 boolean 		ft_stk_isempty_dlink(node_dlink *p_stk);
 int				ft_stksize_dlink(node_dlink *p_stk);
 void			ft_print_node_dlink(node_dlink *p_stk);
