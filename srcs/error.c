@@ -2,6 +2,9 @@
 
 int	check_for_error(int argc, char **argv)
 {
+	int		i;
+
+	i = 0;
 	if (argc == 0)
 		return (1);
 	if (checkif_isint(argv) == false)
@@ -25,10 +28,15 @@ boolean	checkif_isdigit(char **argv)
 	j = 0;
 	while (argv[i])
 	{
-		while (argv[i][j] != '\0')
+		while (argv[i][j])
 		{
 			if (ft_isdigit(argv[i][j]) == 0)
-				return (false);
+			{
+				if (argv[1][i] == ' ')
+					i++;
+				else
+					return (false);
+			}
 			j++;
 		}
 		j = 0;
@@ -37,6 +45,21 @@ boolean	checkif_isdigit(char **argv)
 	return (true);
 }
 
+	if (argc == 2)
+	{
+		while (argv[1][i])
+		{
+			if (ft_isdigit(argv[1][i] == 0))
+			{
+				if (argv[1][i] == ' ')
+					i++;
+				else
+					return (write(2, "Error\n", 6));
+			}
+			i++;
+		}
+		return (0);
+	}
 /* Une fonction pour vérifier si il s'agit bien d'un integrer pour
  * chaques arguments vector (argv)
  */

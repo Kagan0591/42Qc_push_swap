@@ -19,6 +19,8 @@ long long int	ft_atoll(const char *str)
 	{
 		numbers = (numbers * 10) + (*str - 48);
 		str++;
+		while (*str == ' ')
+			str++;
 	}
 	return (numbers * negative);
 }

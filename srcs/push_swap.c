@@ -10,6 +10,8 @@ int	main (int argc, char **argv)
 	data->stack_b = malloc(sizeof(data->stack_b));
 	data->stack_b = NULL;
 	i = 1;
+	if (argc == 2)
+		data->stack_a = push_single_arg_to_stack(argv[1]);
 	if (check_for_error(argc - 1, argv) > 0)
 		return (0);
 	if (checkif_is_sort(argv) == true)
@@ -31,6 +33,23 @@ int	main (int argc, char **argv)
 	ft_print_stack_dlink(data->stack_a);
 	ft_putstr("\n\nEND OF PROGRAM\n");
 	return (1);
+}
+
+node_dlink	*push_single_arg_to_stack(char *argv)
+{
+	node_dlink	*stack_a;
+	int			i;
+
+	stack_a = NULL;
+	i = 0;
+	while (argv[i])
+	{
+		if (stack_a == NULL)
+			stack_a = ft_stknew_dlink(atoi(argv[i]));
+		else
+			stack_a = ft_stkadd_dlink(stack_a, atoi(argv[i]));
+		i++;
+	}
 }
 
 void	choosing_the_algo(d_container *p_data)
