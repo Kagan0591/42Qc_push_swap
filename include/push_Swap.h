@@ -58,6 +58,7 @@ node_dlink		*clone_a_stack(node_dlink *src_stack, node_dlink *dest_stack);
 //push_swap.c functions
 int				push_args_to_dlist(char *str, d_container *p_data);
 node_dlink		*indexing_stack_to_stack(node_dlink *stack_a);
+int				bubble_sort_list_indexation(node_dlink *p_dlinklist, node_dlink *p_dlinklist_top);
 // push_swap_utils.c functions
 long long int	ft_atoll(const char *str);
 //push_swap_error.c functions

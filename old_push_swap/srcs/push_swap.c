@@ -143,35 +143,35 @@ boolean	checkif_is_sort(char **argv)
 	return (true);
 }
 
-node_dlink	*indexing_stack_to_stack(node_dlink *stack)
-{
-	int			index;
-	node_dlink	*start_of_stack;
-	node_dlink	*original_stack;
-	node_dlink	*stack_tmp;
+// node_dlink	*indexing_stack_to_stack(node_dlink *stack)
+// {
+// 	int			index;
+// 	node_dlink	*start_of_stack;
+// 	node_dlink	*original_stack;
+// 	node_dlink	*stack_tmp;
 
-	start_of_stack = NULL;
-	original_stack = NULL;
-	start_of_stack = clone_a_stack(stack, start_of_stack);
-	original_stack = clone_a_stack(stack, original_stack);
-	while (original_stack != NULL)
-	{
-		index = 0;
-		stack_tmp = start_of_stack;
-		while (stack_tmp != NULL)
-		{
-			if (original_stack->arg > stack_tmp->arg)
-				index++;
-			stack_tmp = stack_tmp->next;
-		}
-		stack->arg = index;
-		if (original_stack->next != NULL)
-			stack = stack->next;
-		original_stack = original_stack->next;
-	}
-	ft_stkclear_dlink(start_of_stack);
-	ft_stkclear_dlink(original_stack);
-	while (stack->previous != NULL)
-		stack = stack->previous;
-	return (stack);
-}
+// 	start_of_stack = NULL;
+// 	original_stack = NULL;
+// 	start_of_stack = clone_a_stack(stack, start_of_stack);
+// 	original_stack = clone_a_stack(stack, original_stack);
+// 	while (original_stack != NULL)
+// 	{
+// 		index = 0;
+// 		stack_tmp = start_of_stack;
+// 		while (stack_tmp != NULL)
+// 		{
+// 			if (original_stack->arg > stack_tmp->arg)
+// 				index++;
+// 			stack_tmp = stack_tmp->next;
+// 		}
+// 		stack->arg = index;
+// 		if (original_stack->next != NULL)
+// 			stack = stack->next;
+// 		original_stack = original_stack->next;
+// 	}
+// 	ft_stkclear_dlink(start_of_stack);
+// 	ft_stkclear_dlink(original_stack);
+// 	while (stack->previous != NULL)
+// 		stack = stack->previous;
+// 	return (stack);
+// }

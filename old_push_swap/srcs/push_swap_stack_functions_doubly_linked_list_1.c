@@ -56,7 +56,7 @@ node_dlink	*ft_dllst_addback(node_dlink *p_stk, int nbr)
 
 void	ft_stkdelone_dlink(node_dlink *p_stk) // --NEW--
 {
-	if (p_stk)
+	if (p_stk != NULL)
 	{
 		p_stk->arg = 0;
 		free(p_stk);
@@ -65,7 +65,7 @@ void	ft_stkdelone_dlink(node_dlink *p_stk) // --NEW--
 
 void	ft_stkclear_dlink(node_dlink *p_stk)
 {
-	if(p_stk)
+	if(p_stk != NULL)
 	{
 		while(p_stk->next)
 		{

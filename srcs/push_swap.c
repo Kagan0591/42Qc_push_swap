@@ -25,9 +25,14 @@ int	main(int argc, char **argv)
 	{
 		if (isnumber_spaced(argv[i]) == 1)
 			return (write(2, "Error\n", 6));
-		push_args_to_dlist(argv[i], data);
+		if (push_args_to_dlist(argv[i], data) != 0)
+			return (write(2, "Error\n", 6));
 		i++;
 	}
+	ft_putstr("\nNon Indexed Numbers: ");
+	ft_print_stack_dlink(data->stack_a);
+	data->stack_a = indexing_stack_to_stack(data->stack_a);
+	ft_putstr("\nIndexed numbers: ");
 	ft_print_stack_dlink(data->stack_a);
 	//FREE
 	ft_stkclear_dlink(data->stack_a);
@@ -48,11 +53,58 @@ int	push_args_to_dlist(char *str, d_container *p_data)
 	while (number_s[i])
 	{
 		if (ft_isint(ft_atoll(number_s[i])) == 0)
-			return (write(2, "Error\n", 6));
+			return (1);
 		p_data->stack_a = ft_dllst_addback(p_data->stack_a, ft_atoll(number_s[i]));
 		i++;
 	}
 	return (0);
 }
 
+node_dlink	*indexing_stack_to_stack(node_dlink *p_dlinklist)
+{
+	int			index;
+	node_dlink	*start_of_stack;
+	node_dlink	*original_stack;
 
+	original_stack = NULL;
+	start_of_stack = NULL;
+	start_of_stack = clone_a_stack(p_dlinklist, start_of_stack);
+	original_stack = clone_a_stack(p_dlinklist, original_stack);
+	while (original_stack != NULL)
+	{
+		// while (stack_tmp != NULL)
+		// {
+		// 	if (original_stack->arg > stack_tmp->arg)
+		// 		index++;
+		// 	stack_tmp = stack_tmp->next;
+		// }
+		index = bubble_sort_list_indexation(p_dlinklist, start_of_stack);
+		p_dlinklist->arg = index;
+		original_stack = original_stack->next;
+		if (p_dlinklist->next != NULL)
+			p_dlinklist = p_dlinklist->next;
+	}
+	while (p_dlinklist->previous != NULL)
+		p_dlinklist = p_dlinklist->previous;
+	ft_stkclear_dlink(start_of_stack);
+	ft_stkclear_dlink(original_stack);
+	return (p_dlinklist);
+}
+
+int	bubble_sort_list_indexation(node_dlink *p_dlinklist, node_dlink *p_dlinklist_top)
+{
+	// node_dlink	*stack_tmp;
+	int			index;
+
+	// stack_tmp = NULL;
+	index = 0;
+	// stack_tmp = clone_a_stack(p_dlinklist, stack_tmp);
+	// stack_tmp = p_dlinklist_top;
+	while (p_dlinklist_top != NULL)
+	{
+		if (p_dlinklist->arg > p_dlinklist_top->arg)
+			index++;
+		p_dlinklist_top = p_dlinklist_top->next;
+	}
+	return (index);
+}
