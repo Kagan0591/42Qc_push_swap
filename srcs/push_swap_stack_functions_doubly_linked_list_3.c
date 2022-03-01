@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_stack_functions_doubly_linked_lis        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/28 13:35:55 by tchalifo          #+#    #+#             */
+/*   Updated: 2022/02/28 13:35:55 by tchalifo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 node_dlink	*clone_a_node(node_dlink *src_stack, node_dlink *dest_stack)
@@ -6,7 +18,7 @@ node_dlink	*clone_a_node(node_dlink *src_stack, node_dlink *dest_stack)
 		return (NULL);
 	else if (!dest_stack)
 		return (ft_stknew_dlink(src_stack->arg));
-	else if ((dest_stack->next == NULL) && (dest_stack->previous != NULL)) // Pour une raison que j ignore, sa passe pas
+	else if ((dest_stack->next == NULL) && (dest_stack->previous != NULL))
 		dest_stack = ft_dllst_addback(src_stack, src_stack->arg);
 	else
 		dest_stack = ft_stkadd_dlink(dest_stack, src_stack->arg);
@@ -27,26 +39,3 @@ node_dlink	*clone_a_stack(node_dlink *src_stack, node_dlink *dest_stack)
 	}
 	return (dest_stack);
 }
-
-// node_dlink	reverse_data_links(node_dlink stack)
-// {
-// 	node_dlink	top_node_next_pt;
-// 	node_dlink	top_node_previous_pt;
-// 	node_dlink	top_node_pt;
-// 	node_dlink	bottom_node_previous_pt;
-// 	node_dlink	bottom_node_next_pt;
-
-
-// 	top_node_next_pt = stack->next;
-// 	top_node_pt = stack;
-// 	while (stack->next != NULL)
-// 		stack = stack->next;
-// 	bottom_node_previous_pt = stack->previous;
-// 	stack->previous = NULL;
-// 	stack->next = top_node_next_pt;
-// 	top_node_pt->next = NULL;
-// 	top_node_pt->previous = bottom_node_previous_pt;
-// 	while (bottom_node_previous_pt->previous)
-
-
-// }

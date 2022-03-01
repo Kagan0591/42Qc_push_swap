@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_stack_functions_doubly_linked_lis        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/28 13:35:29 by tchalifo          #+#    #+#             */
+/*   Updated: 2022/02/28 13:35:29 by tchalifo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-boolean 	ft_stk_isempty_dlink(node_dlink *p_stk)
+boolean	ft_stk_isempty_dlink(node_dlink *p_stk)
 {
-	if(p_stk == NULL)
+	if (p_stk == NULL)
 		return (true);
 	return (false);
 }

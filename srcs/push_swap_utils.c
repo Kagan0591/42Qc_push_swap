@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/28 15:38:28 by tchalifo          #+#    #+#             */
+/*   Updated: 2022/02/28 15:38:28 by tchalifo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 long long int	ft_atoll(const char *str)
 {
 	long long int	numbers;
-	int			negative;
+	long long int	negative;
 
 	numbers = 0;
 	negative = 1;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
+	while ((*str >= 9 && *str <= 13) || *str == ' ')
 		str++;
-	if (*str == '-' || *str == '+')
+	if (*str == '-')
 	{
 		if (*str == '-')
 			negative = negative * -1;
@@ -19,30 +31,6 @@ long long int	ft_atoll(const char *str)
 	{
 		numbers = (numbers * 10) + (*str - 48);
 		str++;
-		while (*str == ' ')
-			str++;
 	}
 	return (numbers * negative);
-}
-
-int	decimal_to_base(int base, int nb)
-{
-	int	num;
-	int	quotient;
-	int	remainder;
-	int	i;
-
-	num = 0;
-	quotient = nb;
-	remainder = 0;
-	i = 0;
-
-	while (quotient != 0)
-	{
-		remainder = (quotient % base);
-		quotient = (quotient / base);
-		num = ((remainder * pow(10, i)) + num);
-		i++;
-	}
-	return (num);
 }

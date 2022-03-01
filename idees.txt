@@ -1,0 +1,6 @@
+Pour le trie de gros volume de nombres, algo_big
+
+Fonction rotate_n_push(dlinklst origin, dlinklst dest, int bit_selector), pour
+l'action qui cherchera pour chaque numero de bit les zeros pour les push dans
+la stack b. La variable bit_selector sert a determiner quel position du bit sera pris en
+consideration lors de la recherche de zeros.

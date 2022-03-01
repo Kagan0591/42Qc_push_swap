@@ -27,15 +27,17 @@ typedef struct	d_container
 	// Some data
 	node_dlink	*stack_a;
 	node_dlink	*stack_b;
+	int			errors_status;
 }d_container;
 
 int				check_for_error(int argc, char **argv);
 node_dlink		*push_argv_to_stk(int argc, char **argv);
-boolean			checkif_isdigit(char **argv);
-boolean			checkif_isint(char **argv);
-boolean			checkif_repeated_number(char **argv);
-boolean			checkif_is_sort(char **argv);
+void			*push_str_to_dlist(char *str, d_container *p_data);
 void			choosing_the_algo(d_container *p_data);
+boolean			ft_isint(char *str);
+boolean			ft_isnumbers(char *str);
+char			ft_findchar_dlist(node_dlink *d_list, char c);
+
 
 // Doubly linked list stack functions
 node_dlink		*ft_stknew_dlink(int nbr);

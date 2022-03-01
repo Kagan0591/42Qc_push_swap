@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_stack_functions_doubly_linked_lis        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/28 13:34:48 by tchalifo          #+#    #+#             */
+/*   Updated: 2022/02/28 13:34:48 by tchalifo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include <stdio.h>
 
-node_dlink	*ft_stknew_dlink(int nbr)
+node_dlink	*ft_stknew_dlink(long long int nbr)
 {
 	node_dlink	*new_element;
 
@@ -15,9 +27,10 @@ node_dlink	*ft_stknew_dlink(int nbr)
 	return (new_element);
 }
 
-node_dlink	*ft_stkadd_dlink(node_dlink *p_stk, int nbr)
+node_dlink	*ft_stkadd_dlink(node_dlink *p_stk, long long int nbr)
 {
 	node_dlink	*new_element;
+
 	if (!p_stk)
 		return (ft_stknew_dlink(nbr));
 	new_element = malloc(sizeof(node_dlink));
@@ -32,7 +45,7 @@ node_dlink	*ft_stkadd_dlink(node_dlink *p_stk, int nbr)
 	return (NULL);
 }
 
-node_dlink	*ft_dllst_addback(node_dlink *p_stk, int nbr)
+node_dlink	*ft_dllst_addback(node_dlink *p_stk, long long int nbr)
 {
 	node_dlink	*new_node;
 
@@ -54,7 +67,7 @@ node_dlink	*ft_dllst_addback(node_dlink *p_stk, int nbr)
 	return (NULL);
 }
 
-void	ft_stkdelone_dlink(node_dlink *p_stk) // --NEW--
+void	ft_stkdelone_dlink(node_dlink *p_stk)
 {
 	if (p_stk)
 	{
@@ -65,9 +78,9 @@ void	ft_stkdelone_dlink(node_dlink *p_stk) // --NEW--
 
 void	ft_stkclear_dlink(node_dlink *p_stk)
 {
-	if(p_stk)
+	if (p_stk)
 	{
-		while(p_stk->next)
+		while (p_stk->next)
 		{
 			p_stk = p_stk->next;
 			ft_stkdelone_dlink(p_stk->previous);
