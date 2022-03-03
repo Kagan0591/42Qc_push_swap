@@ -30,7 +30,7 @@ typedef struct	node_dlink
 	long long int		arg;
 	struct node_dlink	*next;
 	struct node_dlink	*previous;
-}	node_dlink;
+}				node_dlink;
 
 typedef struct	d_container
 {
@@ -38,7 +38,7 @@ typedef struct	d_container
 	node_dlink	*stack_a;
 	node_dlink	*stack_b;
 	int			errors_status;
-}d_container;
+}				d_container;
 
 // push_swap_stack_functions_doubly_linked_list_1 functions
 node_dlink		*ft_stknew_dlink(long long int nbr);

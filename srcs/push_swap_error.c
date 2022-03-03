@@ -32,3 +32,5 @@ int	ft_isint(long long int nb)
 		return (1);
 	return (0);
 }
+
+int	ft_is
