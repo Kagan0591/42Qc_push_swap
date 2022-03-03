@@ -23,12 +23,16 @@ int	main(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		if (isnumber_spaced(argv[i]) == 1)
+		if (push_args_to_dlist(argv[i], data) == 0)
+		{
+			free(data->stack_a);
+			free(data);
 			return (write(2, "Error\n", 6));
-		if (push_args_to_dlist(argv[i], data) != 0)
-			return (write(2, "Error\n", 6));
+		}
 		i++;
 	}
+	if (nbr_isunique(data->stack_a) == 0)
+		return (write(2, "Error\n", 6));
 	ft_putstr("\nNon Indexed Numbers: ");
 	ft_print_stack_dlink(data->stack_a);
 	data->stack_a = indexing_stack_to_stack(data->stack_a);
@@ -47,17 +51,21 @@ int	push_args_to_dlist(char *str, d_container *p_data)
 {
 	char	**number_s;
 	int		i;
+	int		j;
 
 	number_s = ft_split(str, ' ');
 	i = 0;
+	j = 1;
 	while (number_s[i])
 	{
-		if (ft_isint(ft_atoll(number_s[i])) == 0)
-			return (1);
+		if (str_isnumber(number_s[i]) == 0)
+			return (0);
+		if (nbr_isint(ft_atoll(number_s[i])) == 0)
+			return (0);
 		p_data->stack_a = ft_dllst_addback(p_data->stack_a, ft_atoll(number_s[i]));
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 node_dlink	*indexing_stack_to_stack(node_dlink *p_dlinklist)

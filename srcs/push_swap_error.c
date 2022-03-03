@@ -12,25 +12,62 @@
 
 #include "push_swap.h"
 
-int	isnumber_spaced(char *str) // return 1 si il y a un char qui n est pas un nombre. 0 si tous sont des nombres ou espaces.
+// int	str_isnumber_spaced(char *str) // return 1 si il y a un char qui n est pas un nombre. 0 si tous sont des nombres ou espaces.
+// {
+// 	int		i;
+
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		if (str_isnumber(str) == 0) // Si le char n est pas un nombre ou un espace.
+// 		{
+// 			if (str[i] == '-' && ft_isdigit(str[i + 1] == 0)) // Si le symbole '-' ne suis pas un chiffre .
+// 				return (0);
+// 			else if (str[i] == ' ' && ((ft_isdigit(str[i - 1]) == 1) || (ft_isdigit(str[i + 1]) == 1))) // Si un espace est entre deux nombres.
+// 				return (0);
+// 		}
+// 		i++;
+// 	}
+// 	return (1);
+// }
+
+int	str_isnumber(char *str)
 {
 	int		i;
 
 	i = 0;
+	if (str[i] == '-')
+		i++;
 	while (str[i])
 	{
-		if (ft_isdigit((str[i] != '-' || str[i] != ' ') && str[i] == 0)) // Si le char n est pas un nombre ou un espace.
-			return (1);
+		if (ft_isdigit(str[i]) == 0) // Si le char n est pas un nombre.
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
-int	ft_isint(long long int nb)
+int	nbr_isint(long long int nb)
 {
 	if (nb >= -2147483648 && nb <= 2147483647) // Si le nombre est un int
 		return (1);
 	return (0);
 }
 
-// int	ft_is
+int	nbr_isequal(long long int nb1, long long int nb2)
+{
+	if (nb1 == nb2)
+		return (1);
+	return (0);
+}
+
+int	nbr_isunique(node_dlink *lst)
+{
+	while (lst->next != NULL)
+	{
+		if (lst->arg == lst->next->arg)
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
+}
