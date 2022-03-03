@@ -62,6 +62,8 @@ int				bubble_sort_list_indexation(node_dlink *p_dlinklist, node_dlink *p_dlinkl
 // push_swap_utils.c functions
 long long int	ft_atoll(const char *str);
 //push_swap_error.c functions
-int				isnumber_spaced(char *str);
-int				ft_isint(long long int nb);
+int				str_isnumber(char *str);
+int				nbr_isint(long long int nb);
+int				nbr_isequal(long long int nb1, long long int nb2);
+int				nbr_isunique(node_dlink *lst);
 #endif
