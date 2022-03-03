@@ -51,7 +51,7 @@ boolean 		ft_stk_isempty_dlink(node_dlink *p_stk);
 int				ft_stksize_dlink(node_dlink *p_stk);
 void			ft_print_node_dlink(node_dlink *p_stk);
 void			ft_print_stack_dlink(node_dlink *p_stk);
-node_dlink		*return_to_top(node_dlink *stack);
+void			return_to_top(node_dlink **p_stk);
 // push_swap_stack_functions_doubly_linked_list_3 functions
 node_dlink		*clone_a_node(node_dlink *src_stack, node_dlink *dest_stack);
 node_dlink		*clone_a_stack(node_dlink *src_stack, node_dlink *dest_stack);
@@ -66,4 +66,5 @@ int				str_isnumber(char *str);
 int				nbr_isint(long long int nb);
 int				nbr_isequal(long long int nb1, long long int nb2);
 int				nbr_isunique(node_dlink *lst);
+
 #endif

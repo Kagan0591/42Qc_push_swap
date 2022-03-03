@@ -63,11 +63,25 @@ int	nbr_isequal(long long int nb1, long long int nb2)
 
 int	nbr_isunique(node_dlink *lst)
 {
+	node_dlink	*lst_cpy;
+
+	lst_cpy = lst;
+	// lst_cpy = clone_a_stack(lst, lst_cpy);
 	while (lst->next != NULL)
 	{
-		if (lst->arg == lst->next->arg)
-			return (0);
+		while (lst_cpy->next != NULL)
+		{
+			if (lst->arg == lst_cpy->next->arg)
+			{
+				ft_stkclear_dlink(lst_cpy);
+				return (0);
+			}
+			lst_cpy = lst_cpy->next;
+		}
+		// return_to_top(&lst_cpy);
 		lst = lst->next;
+		lst_cpy = lst;
 	}
+	ft_stkclear_dlink(lst_cpy);
 	return (1);
 }

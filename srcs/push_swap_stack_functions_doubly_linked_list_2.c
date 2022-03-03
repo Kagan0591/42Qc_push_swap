@@ -47,9 +47,8 @@ void	ft_print_stack_dlink(node_dlink *p_stk)
 	}
 }
 
-node_dlink	*return_to_top(node_dlink *stack)
+void	return_to_top(node_dlink **p_stk)
 {
-	while (stack->previous != NULL)
-		stack = stack->previous;
-	return (stack);
+	while ((*p_stk)->previous != NULL)
+		(*p_stk) = (*p_stk)->previous;
 }
