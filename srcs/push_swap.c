@@ -51,11 +51,9 @@ int	push_args_to_dlist(char *str, d_container *p_data)
 {
 	char	**number_s;
 	int		i;
-	int		j;
 
 	number_s = ft_split(str, ' ');
 	i = 0;
-	j = 1;
 	while (number_s[i])
 	{
 		if (str_isnumber(number_s[i]) == 0)
