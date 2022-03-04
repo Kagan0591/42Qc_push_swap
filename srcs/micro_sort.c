@@ -3,7 +3,7 @@
 /* Algo pour 3 arguments
  * Revoir le micro sort pour marcher avec chiffre de 0 a infini
  */
-static boolean	if_is_sort(node_dlink *stack)
+static ft_bool	if_is_sort(node_dlink *stack)
 {
 	while (stack->next != NULL)
 	{

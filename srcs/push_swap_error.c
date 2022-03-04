@@ -12,25 +12,6 @@
 
 #include "push_swap.h"
 
-// int	str_isnumber_spaced(char *str) // return 1 si il y a un char qui n est pas un nombre. 0 si tous sont des nombres ou espaces.
-// {
-// 	int		i;
-
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if (str_isnumber(str) == 0) // Si le char n est pas un nombre ou un espace.
-// 		{
-// 			if (str[i] == '-' && ft_isdigit(str[i + 1] == 0)) // Si le symbole '-' ne suis pas un chiffre .
-// 				return (0);
-// 			else if (str[i] == ' ' && ((ft_isdigit(str[i - 1]) == 1) || (ft_isdigit(str[i + 1]) == 1))) // Si un espace est entre deux nombres.
-// 				return (0);
-// 		}
-// 		i++;
-// 	}
-// 	return (1);
-// }
-
 int	str_isnumber(char *str)
 {
 	int		i;
@@ -61,27 +42,21 @@ int	nbr_isequal(long long int nb1, long long int nb2)
 	return (0);
 }
 
-int	nbr_isunique(node_dlink *lst)
+int	lst_nodevalues_isunique(node_dlink *lst)
 {
 	node_dlink	*lst_cpy;
 
 	lst_cpy = lst;
-	// lst_cpy = clone_a_stack(lst, lst_cpy);
 	while (lst->next != NULL)
 	{
 		while (lst_cpy->next != NULL)
 		{
 			if (lst->arg == lst_cpy->next->arg)
-			{
-				ft_stkclear_dlink(lst_cpy);
 				return (0);
-			}
 			lst_cpy = lst_cpy->next;
 		}
-		// return_to_top(&lst_cpy);
 		lst = lst->next;
 		lst_cpy = lst;
 	}
-	ft_stkclear_dlink(lst_cpy);
 	return (1);
 }

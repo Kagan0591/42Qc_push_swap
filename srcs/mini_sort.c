@@ -54,13 +54,15 @@ node_dlink	*mini_sort(d_container *p_data)
 	ft_putstr("\nTESTy\n");
 	ft_putnbr(p_data->stack_a->arg);
 	ft_putstr("\nTESTy\n");
-	if (p_data->stack_b)
+	if (ft_stksize_dlink(p_data->stack_b) == 2)
 	{
 		if (p_data->stack_b->arg < p_data->stack_b->next->arg)
 			swap_b(p_data->stack_b);
 		while(p_data->stack_b != NULL)
 			push_to_a(p_data);
 	}
+	else if (ft_stksize_dlink(p_data->stack_b) == 1)
+		push_to_a(p_data);
 	ft_stkclear_dlink(p_data->stack_b);
 	return (p_data->stack_a);
 }

@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-boolean	ft_stk_isempty_dlink(node_dlink *p_stk)
+ft_bool	ft_stk_isempty_dlink(node_dlink *p_stk)
 {
 	if (p_stk == NULL)
 		return (true);
@@ -47,8 +47,9 @@ void	ft_print_stack_dlink(node_dlink *p_stk)
 	}
 }
 
-void	return_to_top(node_dlink **p_stk)
+node_dlink	*return_to_top(node_dlink *p_stk)
 {
-	while ((*p_stk)->previous != NULL)
-		(*p_stk) = (*p_stk)->previous;
+	while (p_stk->previous != NULL)
+		p_stk = p_stk->previous;
+	return (p_stk);
 }

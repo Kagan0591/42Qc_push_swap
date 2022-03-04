@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 	data->stack_a = NULL;
 	data->stack_b = NULL;
 	i = 1;
+	//pushing args to d-list
 	while (i < argc)
 	{
 		if (push_args_to_dlist(argv[i], data) == 0)
@@ -31,13 +32,35 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-	if (nbr_isunique(data->stack_a) == 0)
+	if (lst_nodevalues_isunique(data->stack_a) == 0)
 		return (write(2, "Error\n", 6));
 	ft_putstr("\nNon Indexed Numbers: ");
 	ft_print_stack_dlink(data->stack_a);
+	//indexing number 0 to ...
 	data->stack_a = indexing_stack_to_stack(data->stack_a);
 	ft_putstr("\nIndexed numbers: ");
 	ft_print_stack_dlink(data->stack_a);
+	ft_putstr("\n\n");
+	//micro_sort
+	if (ft_stksize_dlink(data->stack_a) == 3)
+	{
+		data->stack_a = micro_sort(data->stack_a);
+		ft_putstr("\nMicro sorted number 3 nombres: ");
+		ft_print_stack_dlink(data->stack_a);
+	}
+	//mini_sort
+	else if (ft_stksize_dlink(data->stack_a) <= 5)
+	{
+		data->stack_a = mini_sort(data);
+		ft_putstr("\nMini sorted number 4 et 5 nombres: ");
+		ft_print_stack_dlink(data->stack_a);
+	}
+	//big_sort
+	// else if (ft_stksize_dlink(data->stack_a) > 5)
+	// {
+
+	// }
+
 	//FREE
 	ft_stkclear_dlink(data->stack_a);
 	ft_stkclear_dlink(data->stack_b);
@@ -60,7 +83,8 @@ int	push_args_to_dlist(char *str, d_container *p_data)
 			return (0);
 		if (nbr_isint(ft_atoll(number_s[i])) == 0)
 			return (0);
-		p_data->stack_a = ft_dllst_addback(p_data->stack_a, ft_atoll(number_s[i]));
+		p_data->stack_a = ft_dllst_addback(p_data->stack_a, \
+			ft_atoll(number_s[i]));
 		i++;
 	}
 	return (1);
@@ -68,49 +92,30 @@ int	push_args_to_dlist(char *str, d_container *p_data)
 
 node_dlink	*indexing_stack_to_stack(node_dlink *p_dlinklist)
 {
-	int			index;
-	node_dlink	*start_of_stack;
-	node_dlink	*original_stack;
+	node_dlink	*top_of_stack;
+	node_dlink	*index;
 
-	original_stack = NULL;
-	start_of_stack = NULL;
-	start_of_stack = clone_a_stack(p_dlinklist, start_of_stack);
-	original_stack = clone_a_stack(p_dlinklist, original_stack);
-	while (original_stack != NULL)
+	index = NULL;
+	top_of_stack = p_dlinklist;
+	while (p_dlinklist != NULL)
 	{
-		// while (stack_tmp != NULL)
-		// {
-		// 	if (original_stack->arg > stack_tmp->arg)
-		// 		index++;
-		// 	stack_tmp = stack_tmp->next;
-		// }
-		index = bubble_sort_list_indexation(p_dlinklist, start_of_stack);
-		p_dlinklist->arg = index;
-		original_stack = original_stack->next;
-		if (p_dlinklist->next != NULL)
-			p_dlinklist = p_dlinklist->next;
+		index = ft_dllst_addback(index, \
+			bubble_sort_lst_indx(p_dlinklist, top_of_stack));
+		p_dlinklist = p_dlinklist->next;
 	}
-	while (p_dlinklist->previous != NULL)
-		p_dlinklist = p_dlinklist->previous;
-	ft_stkclear_dlink(start_of_stack);
-	ft_stkclear_dlink(original_stack);
-	return (p_dlinklist);
+	return (index);
 }
 
-int	bubble_sort_list_indexation(node_dlink *p_dlinklist, node_dlink *p_dlinklist_top)
+int	bubble_sort_lst_indx(node_dlink *p_dlinklist, node_dlink *p_top_of_stack)
 {
-	// node_dlink	*stack_tmp;
 	int			index;
 
-	// stack_tmp = NULL;
 	index = 0;
-	// stack_tmp = clone_a_stack(p_dlinklist, stack_tmp);
-	// stack_tmp = p_dlinklist_top;
-	while (p_dlinklist_top != NULL)
+	while (p_top_of_stack != NULL)
 	{
-		if (p_dlinklist->arg > p_dlinklist_top->arg)
+		if (p_dlinklist->arg > p_top_of_stack->arg)
 			index++;
-		p_dlinklist_top = p_dlinklist_top->next;
+		p_top_of_stack = p_top_of_stack->next;
 	}
 	return (index);
 }
