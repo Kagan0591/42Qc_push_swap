@@ -28,15 +28,16 @@ typedef enum
 typedef struct	node_dlink
 {
 	long long int		arg;
-	int					bit_1;
-	int					bit_2;
-	int					bit_3;
-	int					bit_4;
-	int					bit_5;
-	int					bit_6;
-	int					bit_7;
-	int					bit_8;
-	int					bit_9_most_significant;
+	int					*arg_binary;
+	// int					bit_1;
+	// int					bit_2;
+	// int					bit_3;
+	// int					bit_4;
+	// int					bit_5;
+	// int					bit_6;
+	// int					bit_7;
+	// int					bit_8;
+	// int					bit_9_most_significant;
 	struct node_dlink	*next;
 	struct node_dlink	*previous;
 }				node_dlink;
@@ -50,9 +51,9 @@ typedef struct	d_container
 }				d_container;
 
 //push_swap_stack_functions_doubly_linked_list_1 functions
-node_dlink		*ft_stknew_dlink			(long long int nbr);
-node_dlink		*ft_stkadd_dlink			(node_dlink *p_stk, long long int nbr);
-node_dlink		*ft_dllst_addback			(node_dlink *p_stk, long long int nbr);
+node_dlink		*ft_stknew_dlink			(long long int nbr, int *arg_binary);
+node_dlink		*ft_stkadd_dlink			(node_dlink *p_stk, long long int nbr, int *arg_binary);
+node_dlink		*ft_dllst_addback			(node_dlink *p_stk, long long int nbr, int *arg_binary);
 void			ft_stkdelone_dlink			(node_dlink *p_stk);
 void			ft_stkclear_dlink			(node_dlink *p_stk);
 //push_swap_stack_functions_doubly_linked_list_2 functions
@@ -91,7 +92,6 @@ node_dlink		*micro_sort					(node_dlink *stack);
 node_dlink		*mini_sort					(d_container *p_data);
 //big_sort.c functions
 long long int	average						(node_dlink *stack);
-
-
-int	convert_tobase(unsigned int nb, int base);
+void			args_to_args_binary			(node_dlink *stack);
+node_dlink		*big_sort					(d_container *p_data);
 #endif

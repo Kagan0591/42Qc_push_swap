@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	d_container	*data;
 	int			i;
+	int			j;
 
 	data = malloc(sizeof(data));
 	data->stack_a = NULL;
@@ -45,7 +46,7 @@ int	main(int argc, char **argv)
 	//micro_sort
 	if (ft_stksize_dlink(data->stack_a) == 3)
 	{
-		ft_putstr("\nmicro sort movement:\n");
+		ft_putstr("\nmicro sort movements:\n");
 		data->stack_a = micro_sort(data->stack_a);
 		ft_putstr("\nMicro sorted number 3 nombres: ");
 		ft_print_stack_dlink(data->stack_a);
@@ -53,20 +54,27 @@ int	main(int argc, char **argv)
 	//mini_sort
 	else if (ft_stksize_dlink(data->stack_a) <= 5)
 	{
-		ft_putstr("\nmini sort movement:\n");
+		ft_putstr("\nmini sort movements:\n");
 		data->stack_a = mini_sort(data);
 		ft_putstr("\nMini sorted number 4 et 5 nombres: ");
 		ft_print_stack_dlink(data->stack_a);
 	}
 	//big_sort
-	// else if (ft_stksize_dlink(data->stack_a) > 5)
-	// {
+	else if (ft_stksize_dlink(data->stack_a) > 5)
+	{
+		j = 0;
+		ft_putstr("\nbig sort mouvements:\n");
 
-	// }
+		ft_putstr("\nBig sorted number 4 et 5 nombres: ");
+
+		ft_putstr("\nBinary value of each numbers: \n\n");
+		args_to_args_binary(data->stack_a);
+		ft_print_stack_dlink(data->stack_a);
+		ft_putstr("\n\n");
+		data->stack_a = big_sort(data);
+	}
 
 	//FREE
-	ft_putstr("\n\n");
-	ft_putnbr(convert_tobase(data->stack_a->arg, 2));
 	ft_putstr("\n\n");
 	ft_stkclear_dlink(data->stack_a);
 	ft_stkclear_dlink(data->stack_b);
@@ -90,7 +98,7 @@ int	push_args_to_dlist(char *str, d_container *p_data)
 		if (nbr_isint(ft_atoll(number_s[i])) == 0)
 			return (0);
 		p_data->stack_a = ft_dllst_addback(p_data->stack_a, \
-			ft_atoll(number_s[i]));
+			ft_atoll(number_s[i]), NULL);
 		i++;
 	}
 	return (1);
@@ -106,7 +114,7 @@ node_dlink	*indexing_stack_to_stack(node_dlink *p_dlinklist)
 	while (p_dlinklist != NULL)
 	{
 		index = ft_dllst_addback(index, \
-			bubble_sort_lst_index(p_dlinklist, top_of_stack));
+			bubble_sort_lst_index(p_dlinklist, top_of_stack), NULL);
 		p_dlinklist = p_dlinklist->next;
 	}
 	return (index);

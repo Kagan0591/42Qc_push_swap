@@ -36,9 +36,9 @@ void	push_to_a(d_container *p_data)
 	if (p_data->stack_b == NULL)
 		exit(0);
 	if (p_data->stack_a != NULL)
-		p_data->stack_a = ft_stkadd_dlink(p_data->stack_a, p_data->stack_b->arg);
+		p_data->stack_a = ft_stkadd_dlink(p_data->stack_a, p_data->stack_b->arg, p_data->stack_a->arg_binary);
 	else
-		p_data->stack_a = ft_stknew_dlink(p_data->stack_b->arg);
+		p_data->stack_a = ft_stknew_dlink(p_data->stack_b->arg, p_data->stack_a->arg_binary);
 	p_data->stack_b = p_data->stack_b->next;
 	if (p_data->stack_b != NULL)
 	{
@@ -53,9 +53,9 @@ void	push_to_b(d_container *p_data)
 	if (p_data->stack_a == NULL)
 		exit(0);
 	if (p_data->stack_b != NULL)
-		(p_data->stack_b) = ft_stkadd_dlink(p_data->stack_b, p_data->stack_a->arg);
+		(p_data->stack_b) = ft_stkadd_dlink(p_data->stack_b, p_data->stack_a->arg, p_data->stack_a->arg_binary);
 	else
-		p_data->stack_b = ft_stknew_dlink(p_data->stack_a->arg);
+		p_data->stack_b = ft_stknew_dlink(p_data->stack_a->arg, p_data->stack_a->arg_binary);
 	p_data->stack_a = p_data->stack_a->next;
 	if (p_data->stack_a != NULL)
 	{
