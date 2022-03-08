@@ -12,6 +12,13 @@
 
 #include "push_swap.h"
 
+node_dlink	*return_to_top(node_dlink *p_stk)
+{
+	while (p_stk->previous != NULL)
+		p_stk = p_stk->previous;
+	return (p_stk);
+}
+
 node_dlink	*clone_a_node(node_dlink *src_stack, node_dlink *dest_stack)
 {
 	if (!src_stack)

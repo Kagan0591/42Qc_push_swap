@@ -51,9 +51,6 @@ node_dlink	*mini_sort(d_container *p_data)
 {
 	mini_push_to_b_smaller_value(p_data);
 	p_data->stack_a = micro_sort(p_data->stack_a);
-	ft_putstr("\nTESTy\n");
-	ft_putnbr(p_data->stack_a->arg);
-	ft_putstr("\nTESTy\n");
 	if (ft_stksize_dlink(p_data->stack_b) == 2)
 	{
 		if (p_data->stack_b->arg < p_data->stack_b->next->arg)

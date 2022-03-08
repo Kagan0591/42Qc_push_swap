@@ -71,7 +71,7 @@ void	ft_stkdelone_dlink(node_dlink *p_stk)
 {
 	if (p_stk)
 	{
-		p_stk->arg = 0;
+		secure_del(p_stk);
 		free(p_stk);
 	}
 }

@@ -15,6 +15,7 @@ SRCS_FILES 		=	push_swap.c \
 					push_swap_sort_functions.c \
 					micro_sort.c \
 					mini_sort.c \
+					big_sort.c \
 
 #B_SRCS_FILES	= 	 \
 

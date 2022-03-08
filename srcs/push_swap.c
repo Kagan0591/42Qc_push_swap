@@ -40,10 +40,12 @@ int	main(int argc, char **argv)
 	data->stack_a = indexing_stack_to_stack(data->stack_a);
 	ft_putstr("\nIndexed numbers: ");
 	ft_print_stack_dlink(data->stack_a);
-	ft_putstr("\n\n");
+	ft_putstr("\n");
+	printf("\nLa moyenne de la stack a est de : %lld \n", average(data->stack_a));
 	//micro_sort
 	if (ft_stksize_dlink(data->stack_a) == 3)
 	{
+		ft_putstr("\nmicro sort movement:\n");
 		data->stack_a = micro_sort(data->stack_a);
 		ft_putstr("\nMicro sorted number 3 nombres: ");
 		ft_print_stack_dlink(data->stack_a);
@@ -51,6 +53,7 @@ int	main(int argc, char **argv)
 	//mini_sort
 	else if (ft_stksize_dlink(data->stack_a) <= 5)
 	{
+		ft_putstr("\nmini sort movement:\n");
 		data->stack_a = mini_sort(data);
 		ft_putstr("\nMini sorted number 4 et 5 nombres: ");
 		ft_print_stack_dlink(data->stack_a);
@@ -62,6 +65,9 @@ int	main(int argc, char **argv)
 	// }
 
 	//FREE
+	ft_putstr("\n\n");
+	ft_putnbr(convert_tobase(data->stack_a->arg, 2));
+	ft_putstr("\n\n");
 	ft_stkclear_dlink(data->stack_a);
 	ft_stkclear_dlink(data->stack_b);
 	free(data);
@@ -100,13 +106,13 @@ node_dlink	*indexing_stack_to_stack(node_dlink *p_dlinklist)
 	while (p_dlinklist != NULL)
 	{
 		index = ft_dllst_addback(index, \
-			bubble_sort_lst_indx(p_dlinklist, top_of_stack));
+			bubble_sort_lst_index(p_dlinklist, top_of_stack));
 		p_dlinklist = p_dlinklist->next;
 	}
 	return (index);
 }
 
-int	bubble_sort_lst_indx(node_dlink *p_dlinklist, node_dlink *p_top_of_stack)
+int	bubble_sort_lst_index(node_dlink *p_dlinklist, node_dlink *p_top_of_stack)
 {
 	int			index;
 
