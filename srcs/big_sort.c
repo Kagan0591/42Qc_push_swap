@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   big_sort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchalifo <tchalifo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:37:26 by tchalifo          #+#    #+#             */
-/*   Updated: 2022/03/08 17:00:29 by tchalifo         ###   ########.fr       */
+/*   Updated: 2022/03/08 19:51:17 by tchalifo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,18 @@ node_dlink	*big_sort(d_container *p_data)
 	i = 31;
 	while (i > 22)
 	{
-		while ((p_data->stack_a != NULL) && nbrchr(p_data->stack_a, 0, i) == 1)
+		while (nbrchr(p_data->stack_a, 0, i) == 1)
 		{
+			ft_putstr("\n\nnum position: \n");
+			ft_putstr("\n###--------STACK-A--------###\n");
+			ft_print_stack_dlink(p_data->stack_a);
+			ft_putstr("\n\n###--------STACK-B--------###\n");
+			ft_print_stack_dlink(p_data->stack_b);
 			if (p_data->stack_a->arg_binary[i] == 0)
 				push_to_b(p_data);
 			else
 				p_data->stack_a = rotate_a(p_data->stack_a);
 		}
-		p_data->stack_a = return_to_top(p_data->stack_a);
 		while (p_data->stack_b != NULL)
 			push_to_a(p_data);
 		i--;

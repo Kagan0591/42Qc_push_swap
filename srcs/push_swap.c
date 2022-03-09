@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 {
 	d_container	*data;
 	int			i;
-	int			j;
 
 	data = malloc(sizeof(data));
 	data->stack_a = NULL;
@@ -62,7 +61,6 @@ int	main(int argc, char **argv)
 	//big_sort
 	else if (ft_stksize_dlink(data->stack_a) > 5)
 	{
-		j = 0;
 		ft_putstr("\nbig sort mouvements:\n");
 
 		ft_putstr("\nBig sorted number 4 et 5 nombres: ");
