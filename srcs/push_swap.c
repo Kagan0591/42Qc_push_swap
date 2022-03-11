@@ -28,57 +28,42 @@ int	main(int argc, char **argv)
 		{
 			free(data->stack_a);
 			free(data);
-			return (write(2, "Error\n", 6));
+			return (write(2, "Error\n", 13));
 		}
 		i++;
 	}
 	if (lst_nodevalues_isunique(data->stack_a) == 0)
-		return (write(2, "Error\n", 6));
-	// ft_putstr("\nNon Indexed Numbers: ");
-	// ft_print_stack_dlink(data->stack_a);
+		return (write(2, "Error\n", 13));
+
 	//indexing number 0 to ...
 	data->stack_a = indexing_stack_to_stack(data->stack_a);
-	// ft_putstr("\nIndexed numbers: ");
-	// ft_print_stack_dlink(data->stack_a);
-	// ft_putstr("\n");
-	// printf("\nLa moyenne de la stack a est de : %lld \n", average(data->stack_a));
+
 	//micro_sort
 	if (ft_stksize_dlink(data->stack_a) == 3)
-	{
-		// ft_putstr("\nmicro sort movements:\n");
 		data->stack_a = micro_sort(data->stack_a);
-		// ft_putstr("\nMicro sorted number 3 nombres: ");
-		// ft_print_stack_dlink(data->stack_a);
-	}
+
 	//mini_sort
 	else if (ft_stksize_dlink(data->stack_a) <= 5)
-	{
-		// ft_putstr("\nmini sort movements:\n");
 		data->stack_a = mini_sort(data);
-		// ft_putstr("\nMini sorted number 4 et 5 nombres: ");
-		// ft_print_stack_dlink(data->stack_a);
-	}
+
 	//big_sort
 	else if (ft_stksize_dlink(data->stack_a) > 5)
 	{
-		// ft_putstr("\nbig sort mouvements:\n");
-
-		// ft_putstr("\nBig sorted number 4 et 5 nombres: ");
-
-		// ft_putstr("\nBinary value of each numbers: \n\n");
 		args_to_args_binary(data->stack_a);
 		data->stack_a = big_sort(data);
-		ft_putstr("\n\n");
-		ft_print_stack_dlink(data->stack_a);
 	}
+	// Print the proof of sort
+	// ft_putstr("\n");
+	// ft_print_stack_dlink(data->stack_a);
+	// ft_putstr("\n");
 
-	//FREE
-	ft_putstr("\n\n");
+	//Free
 	ft_stkclear_dlink(data->stack_a);
 	ft_stkclear_dlink(data->stack_b);
 	free(data);
 	data = NULL;
-	ft_putstr("\nEND OF PROGRAM\n");
+
+	//ft_putstr("\nEND OF PROGRAM\n");
 	return (0);
 }
 

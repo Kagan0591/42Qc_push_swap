@@ -40,9 +40,9 @@ CFLAGS 		= -Wall -Werror -Wextra -g
 AR 			= ar -cr
 
 ### Autres Fonctions ###
-RM 			= @rm -rf
+RM 			= rm -rf
 NORMINETTE 	= norminette
-LIBFT		= @$(MAKE) bonus -C $(LIBFT_DIR)
+LIBFT		= $(MAKE) --silent -C $(LIBFT_DIR)
 
 ### Colour var ###
 END			= \033[0m
@@ -66,12 +66,13 @@ WHITE		= \033[37m
 all: obj $(NAME)
 
 $(OBJS_DIR)%.o:%.c
-	${CC} ${CFLAGS} -I${LIBFT_DIR} -I${INCLUDE_DIR} -I. -o $@ -c $<
+	@${CC} ${CFLAGS} -I${LIBFT_DIR} -I${INCLUDE_DIR} -I. -o $@ -c $<
 
 $(NAME): $(OBJS)
-	${LIBFT}
-	${CC} ${OBJS} -L${LIBFT_DIR} -lft -o ${NAME} -lm
-	@echo "${OBJS} ${BLUE} ${BOLD}\n\nAn executable have been created successfully!\n${END}"
+	@${LIBFT}
+	@${CC} ${OBJS} -L${LIBFT_DIR} -lft -o ${NAME} -lm
+	@echo "\n${BLUE}${BOLD}An executable '${BLINK2} push_swap ${END}${BLUE}${BOLD}' have been created successfully!${END}"
+	@sleep 1
 
 #bonus: $(NAME) $(BONUS_OBJS)
 #	@${ARCHIVE} ${NAME} ${BONUS_OBJS}
@@ -80,24 +81,25 @@ $(NAME): $(OBJS)
 obj:
 	@mkdir -p ${OBJS_DIR}
 
-test: norm obj ${NAME}
-	@echo "${OBJS} ${BLUE} ${BOLD}\n\nAlso the norminette have been checked. If you need to continue with valgrind to look for some leaks type ${VIOLET}make leaks\n${END}"
+test: norm ${NAME}
+	@echo "\n${GEIGE}${BOLD}Also the norminette have been checked on the push_swap sources and headers files.${END}\nIf you need to continue with valgrind to look for some leaks retry with ${VIOLET}make leaks${END}"
 
 leaks: re
 	valgrind ./test
 
-norm:
-	$(NORMINETTE) ${SRCS_DIR} ${INCLUDE_DIR}
+norm: fclean
+	@$(NORMINETTE) ${SRCS_DIR} ${INCLUDE_DIR}
 
 clean:
-	${RM} ${OBJS}
-	@make -C $(LIBFT_DIR) fclean
-	@echo "${BONUS_OBJS} ${BLUE} ${BOLD}\n\nObjects files, possibly bonus objects files have been deleted correctly\n${END}"
+	@${RM} ${OBJS}
+	@echo "\n${BOLD}${GREEN}The push_Swap objects files have been ${RED}deleted ${END}${BOLD}${GREEN}correctly.${END}"
+	@sleep 0.5
 
 fclean:	clean
-	${RM} ${NAME} ${OBJS_DIR}
-	@echo "${BLUE} ${BOLD}\nThe executable file have been deleted too\n${END}"
-
+	@${RM} ${NAME} ${OBJS_DIR}
+	@$(LIBFT) fclean
+	@echo "\n${BOLD}${GREEN}The executable file ' ${BLUE}push_swap${GREEN} ' have been ${RED}deleted ${END}${BOLD}${GREEN}too.${END}"
+	@sleep 0.5
 re:	fclean all
 
 phony:all norm test exec clean fclean re bonus

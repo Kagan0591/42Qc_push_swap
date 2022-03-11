@@ -56,9 +56,14 @@ static int	nbrchr(node_dlink *stack, int nb, int pos)
 node_dlink	*big_sort(d_container *p_data)
 {
 	int		i;
+	int		bit_sorting_limit;
 
 	i = 31;
-	while (i > 22)
+	if (ft_stksize_dlink(p_data->stack_a) <= 100)
+		bit_sorting_limit = 24;
+	else
+		bit_sorting_limit = 22;
+	while (i > bit_sorting_limit)
 	{
 		while (nbrchr(p_data->stack_a, 0, i) == 1)
 		{
