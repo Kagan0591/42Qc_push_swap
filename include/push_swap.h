@@ -29,15 +29,6 @@ typedef struct	node_dlink
 {
 	long long int		arg;
 	int					*arg_binary;
-	// int					bit_1;
-	// int					bit_2;
-	// int					bit_3;
-	// int					bit_4;
-	// int					bit_5;
-	// int					bit_6;
-	// int					bit_7;
-	// int					bit_8;
-	// int					bit_9_most_significant;
 	struct node_dlink	*next;
 	struct node_dlink	*previous;
 }				node_dlink;
@@ -47,9 +38,19 @@ typedef struct	d_container
 	// Some data
 	node_dlink	*stack_a;
 	node_dlink	*stack_b;
-	int			errors_status;
 }				d_container;
 
+//mem.c functions
+d_container		*initmem					(void);
+d_container		*clearmem					(d_container *p_data);
+
+//push_swap_utils.c functions
+long long int	ft_atoll					(const char *str);
+//push_swap_error.c functions
+int				str_isnumber				(char *str);
+int				nbr_isint					(long long int nb);
+int				nbr_isequal					(long long int nb1, long long int nb2);
+int				arg_isunique_doublyll		(char *argument, node_dlink *stack);
 //push_swap_stack_functions_doubly_linked_list_1 functions
 node_dlink		*ft_stknew_dlink			(long long int nbr, int *arg_binary);
 node_dlink		*ft_stkadd_dlink			(node_dlink *p_stk, long long int nbr, int *arg_binary);
@@ -66,17 +67,6 @@ void			ft_print_stack_dlink		(node_dlink *p_stk);
 node_dlink		*return_to_top				(node_dlink *p_stk);
 node_dlink		*clone_a_node				(node_dlink *src_stack, node_dlink *dest_stack);
 node_dlink		*clone_a_stack				(node_dlink *src_stack, node_dlink *dest_stack);
-//push_swap.c functions
-int				push_args_to_dlist			(char *str, d_container *p_data);
-node_dlink		*indexing_stack_to_stack	(node_dlink *stack_a);
-int				bubble_sort_lst_index		(node_dlink *p_dlinklist, node_dlink *p_top_of_stack);
-//push_swap_utils.c functions
-long long int	ft_atoll					(const char *str);
-//push_swap_error.c functions
-int				str_isnumber				(char *str);
-int				nbr_isint					(long long int nb);
-int				nbr_isequal					(long long int nb1, long long int nb2);
-int				lst_nodevalues_isunique		(node_dlink *lst);
 //push_swap_sort_function.c functions
 node_dlink		*swap_a						(node_dlink *p_stk);
 node_dlink		*swap_b						(node_dlink*p_stk);
@@ -86,12 +76,12 @@ node_dlink		*rotate_a					(node_dlink *p_stk);
 node_dlink		*rotate_b					(node_dlink *p_stk);
 node_dlink		*reverse_rotate_a			(node_dlink *p_stk);
 node_dlink		*reverse_rotate_b			(node_dlink *p_stk);
+void			reverse_rotate_ab			(d_container *p_data);
+void			rotate_ab					(d_container *p_data);
 //micro_sort.c functions
 node_dlink		*micro_sort					(node_dlink *stack);
 //mini_sort.c functions
 node_dlink		*mini_sort					(d_container *p_data);
 //big_sort.c functions
-long long int	average						(node_dlink *stack);
-void			args_to_args_binary			(node_dlink *stack);
 node_dlink		*big_sort					(d_container *p_data);
 #endif

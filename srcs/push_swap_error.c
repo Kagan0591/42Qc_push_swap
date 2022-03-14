@@ -60,3 +60,14 @@ int	lst_nodevalues_isunique(node_dlink *lst)
 	}
 	return (1);
 }
+
+int	arg_isunique_doublyll(char *argument, node_dlink *stack)
+{
+	while (stack != NULL)
+	{
+		if (stack->arg == ft_atoll(argument))
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}

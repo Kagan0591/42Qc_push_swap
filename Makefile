@@ -7,6 +7,7 @@
 NAME = push_swap
 
 SRCS_FILES 		=	push_swap.c \
+					push_swap_mem.c \
 					push_swap_error.c \
 					push_swap_utils.c \
 					push_swap_stack_functions_doubly_linked_list_1.c \

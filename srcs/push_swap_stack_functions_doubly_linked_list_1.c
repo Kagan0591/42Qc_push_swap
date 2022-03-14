@@ -16,22 +16,14 @@
 node_dlink	*ft_stknew_dlink(long long int nbr, int *arg_binary)
 {
 	node_dlink	*new_node;
-	int			i;
+	(void) arg_binary;
 
 	new_node = malloc(sizeof(node_dlink));
 	if (new_node)
 	{
 		//////--Variable assignement---------->>>>
-		i = 31;
 		new_node->arg = nbr;
-		while ((new_node->arg_binary != NULL) && (i > 22))
-		{
-			if (new_node != NULL)
-			{
-				new_node->arg_binary[i] = arg_binary[i];
-				i--;
-			}
-		}
+		new_node->arg_binary = calloc(sizeof(int), 32);
 		//////--End of virable assignement---->>>>
 		new_node->next = NULL;
 		new_node->previous = NULL;
@@ -42,7 +34,6 @@ node_dlink	*ft_stknew_dlink(long long int nbr, int *arg_binary)
 node_dlink	*ft_stkadd_dlink(node_dlink *p_stk, long long int nbr, int *arg_binary)
 {
 	node_dlink	*new_node;
-	int			i;
 
 	if (!p_stk)
 		return (ft_stknew_dlink(nbr, arg_binary));
@@ -50,13 +41,8 @@ node_dlink	*ft_stkadd_dlink(node_dlink *p_stk, long long int nbr, int *arg_binar
 	if (new_node)
 	{
 		//////--Variable assignement---------->>>>
-		i = 31;
 		new_node->arg = nbr;
-		while ((new_node->arg_binary != NULL) && (i > 22))
-		{
-			new_node->arg_binary[i] = arg_binary[i];
-			i--;
-		}
+		new_node->arg_binary = calloc(sizeof(int), 32);
 		//////--End of virable assignement---->>>>
 		new_node->next = p_stk;
 		new_node->previous = NULL;
@@ -69,7 +55,6 @@ node_dlink	*ft_stkadd_dlink(node_dlink *p_stk, long long int nbr, int *arg_binar
 node_dlink	*ft_dllst_addback(node_dlink *p_stk, long long int nbr, int *arg_binary)
 {
 	node_dlink	*new_node;
-	int			i;
 
 	if (!p_stk)
 		return (ft_stknew_dlink(nbr, arg_binary));
@@ -79,13 +64,8 @@ node_dlink	*ft_dllst_addback(node_dlink *p_stk, long long int nbr, int *arg_bina
 		while (p_stk->next != NULL)
 			p_stk = p_stk->next;
 		//////--Variable assignement---------->>>>
-		i = 31;
 		new_node->arg = nbr;
-		while ((new_node->arg_binary != NULL) && (i > 22))
-		{
-			new_node->arg_binary[i] = arg_binary[i];
-			i--;
-		}
+		new_node->arg_binary = calloc(sizeof(int), 32);
 		//////--End of virable assignement---->>>>
 		new_node->next = NULL;
 		new_node->previous = p_stk;
@@ -102,6 +82,7 @@ void	ft_stkdelone_dlink(node_dlink *p_stk)
 	if (p_stk)
 	{
 		secure_del(p_stk);
+		free (p_stk->arg_binary);
 		free(p_stk);
 	}
 }

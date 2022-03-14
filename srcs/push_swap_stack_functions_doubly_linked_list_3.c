@@ -26,7 +26,7 @@ node_dlink	*clone_a_node(node_dlink *src_stack, node_dlink *dest_stack)
 	else if (!dest_stack)
 		return (ft_stknew_dlink(src_stack->arg, src_stack->arg_binary));
 	else if ((dest_stack->next == NULL) && (dest_stack->previous != NULL))
-		dest_stack = ft_dllst_addback(src_stack, src_stack->arg, src_stack->arg_binary);
+		dest_stack = ft_dllst_addback(dest_stack, src_stack->arg, src_stack->arg_binary);
 	else
 		dest_stack = ft_stkadd_dlink(dest_stack, src_stack->arg, src_stack->arg_binary);
 	return (dest_stack);
