@@ -287,6 +287,19 @@ ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomiz
 echo ""
 echo ""
 
+OS=${uname}
+checker_OS=unknown
+if [[ OS == 'Darwin' ]]; then
+	checker_OS='./checker_Mac'
+elif [[ OS == 'linux' ]]; then
+	checker_OS='./checker_linux'
+fi
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 1 arguments"$(./push_swap $ARGS | ${checker_OS} $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 3 arguments"$(./push_swap $ARGS | ${checker_OS} $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 5 arguments"$(./push_swap $ARGS | ${checker_OS} $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 100 arguments"$(./push_swap $ARGS | ${checker_OS} $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 500 arguments"$(./push_swap $ARGS | ${checker_OS} $ARGS)
+
 echo "${BOLD}Script by Thomas Chalifour ${BLUE}tchalifour91@gmail.com${END}"
 
 echo "Press a enter to quit"
