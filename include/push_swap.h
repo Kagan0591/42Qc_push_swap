@@ -50,6 +50,7 @@ long long int	ft_atoll					(const char *str);
 int				str_isnumber				(char *str);
 int				nbr_isint					(long long int nb);
 int				nbr_isequal					(long long int nb1, long long int nb2);
+int				lst_nodevalues_isunique		(node_dlink *lst);
 int				arg_isunique_doublyll		(char *argument, node_dlink *stack);
 //push_swap_stack_functions_doubly_linked_list_1 functions
 node_dlink		*ft_stknew_dlink			(long long int nbr, int *arg_binary);

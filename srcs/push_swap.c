@@ -88,8 +88,8 @@ int	main(int argc, char **argv)
 		//pushing args to d-list
 		while (i < argc)
 		{
-			if (arg_isunique_doublyll(argv[i], data->stack_a) == 0 \
-				|| push_args_to_dlist(argv[i], data) == 0)
+			if (push_args_to_dlist(argv[i], data) == 0 \
+			|| lst_nodevalues_isunique(data->stack_a) == 0)
 			{
 				data = clearmem(data);
 				return (write(2, "Error\n", 13));
@@ -108,9 +108,9 @@ int	main(int argc, char **argv)
 		else if (ft_stksize_dlink(data->stack_a) > 5)
 			data->stack_a = big_sort(data);
 		//Print the proof of sort
-		// ft_putstr("\n");
-		// ft_print_stack_dlink(data->stack_a);
-		// ft_putstr("\n");
+		ft_putstr("\n");
+		ft_print_stack_dlink(data->stack_a);
+		ft_putstr("\n");
 		//Free
 	data = clearmem(data);
 	}
