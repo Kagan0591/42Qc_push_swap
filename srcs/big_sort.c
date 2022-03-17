@@ -6,7 +6,7 @@
 /*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:37:26 by tchalifo          #+#    #+#             */
-/*   Updated: 2022/03/17 11:50:20 by tchalifo         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:51:42 by tchalifo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,11 @@ node_dlink	*big_sort(d_container *p_data)
 				p_data->stack_a = rotate_a(p_data->stack_a);
 			interation--;
 		}
-		if (interation != 0)
+		while (interation != 0)
+		{
 			p_data->stack_a = rotate_a(p_data->stack_a);
-
+			interation--;
+		}
 		while (p_data->stack_b != NULL)
 			push_to_a(p_data);
 		i--;
