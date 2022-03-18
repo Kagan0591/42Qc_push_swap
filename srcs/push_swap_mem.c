@@ -23,3 +23,23 @@ d_container	*clearmem(d_container *p_data)
 	p_data = NULL;
 	return (p_data);
 }
+
+void	clear_int_tab(int **tab, int size)
+{
+	while (size >= 0)
+	{
+		free (tab[size]);
+		size--;
+	}
+	free (tab);
+}
+
+void	clear_char_tab(char **tab, int size)
+{
+	while (size >= 0)
+	{
+		free (tab[size]);
+		size--;
+	}
+	free (tab);
+}

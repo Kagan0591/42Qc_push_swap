@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Color code
 END="\033[0;0m"
@@ -18,7 +18,7 @@ YELLOW="\033[0;33m"
 BLUE="\033[1;34m"
 VIOLET="\033[0;35m"
 CYAN="\033[0;36m"
-LIGHTGRAY="\033[0;37m"
+LIGHTGRAY="\033[1;38m"
 WITHE="\033[1;37"
 
 # Compiling and program launch
@@ -36,7 +36,7 @@ clear
 echo "${SELECTED}Checking for leaks Test 1 of 4${SELECTEDLINE}"
 sleep 0.8
 valgrind --leak-check=full ./push_swap
-echo "Press a enter to continue"
+echo "${GREEN}Press a enter to continue${END}"
 # read to a dummy variable. Read fonction with sh have not the option
 # like -t -r or -n so it is a very limited option but it's work.
 read dummy_variable
@@ -44,19 +44,19 @@ read dummy_variable
 echo "${SELECTED}Checking for leaks Test 2 of 4${SELECTEDLINE}"
 sleep 0.8
 valgrind --leak-check=full ./push_swap 3 1 2
-echo "Press a enter to continue"
+echo "${GREEN}Press a enter to continue${END}"
 read dummy_variable
 
 echo "${SELECTED}Checking for leaks Test 3 of 4${SELECTEDLINE}"
 sleep 0.8
 valgrind --leak-check=full ./push_swap 3 2 1 5 4
-echo "Press a enter to continue"
+echo "${GREEN}Press a enter to continue${END}"
 read dummy_variable
 
 echo "${SELECTED}Checking for leaks Test 4 of 4${SELECTEDLINE}"
 sleep 0.8
 ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; valgrind --leak-check=full ./push_swap 3 $ARGS
-echo "Press a enter to continue"
+echo "${GREEN}Press a enter to continue${END}"
 read dummy_variable
 clear
 
@@ -78,15 +78,35 @@ clear
 # Tests
 echo "${SELECTED}Script-shell for testing the program push_swap${SELECTEDLINE}"
 echo ""
+
+echo "${BOLD_BLUE}Sorting checker tests${END}"
+echo "${VIOLET}Enter your OS, if is Linux type linux, if is Darwin, type Mac${END}"
+read OS
+clear
+echo "${SELECTED}Script-shell for testing the program push_swap${SELECTEDLINE}"
+echo "${BOLD_BLUE}Sorting test with checker_os provided file${END}"
+echo ""
+# Try the checker file to check if the numbers are sorted
+ARGS=`ruby -e "puts (-1000..-999).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 1 random arguments: " $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..12).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 3 randoms arguments: " $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 5 randoms arguments :" $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 100 randoms arguments: " $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 500 randoms arguments: " $(./push_swap $ARGS | ./checker_$OS $ARGS)
+echo ""
+
 echo "${BOLD_BLUE}Attempt to trigger an error${END}"
 echo ""
 # Attempt to trigger a repeating numbers error
 echo "Attempt to trigger a repeating numbers error (test 1 with 3 nbrs): " && ./push_swap 8 4 8
 echo "Attempt to trigger a repeating numbers error (test 2 with 3 nbrs): " && ./push_swap 4 1 1
 echo "Attempt to trigger a repeating numbers error (test 3 with 3 nbrs (Not supposed to be an error)): " && ./push_swap 4 11 1
+echo "Attempt to trigger a repeating numbers error (test 4 with 3 nbrs including a string of numbers): " && ./push_swap "4 2" 2
+echo "Attempt to trigger a repeating numbers error (test 5 with 3 nbrs including a string of numbers): " && ./push_swap "4 -2" -2
 echo "Attempt to trigger a repeating numbers error (test 1 with 5 nbrs): " && ./push_swap 8 4 1 8 2
 echo "Attempt to trigger a repeating numbers error (test 2 with 5 nbrs): " && ./push_swap 8 8 4 1 8
 echo "Attempt to trigger a repeating numbers error (test 3 with 5 nbrs (Not supposed to be an error)): " && ./push_swap 4 11 1 3 2
+echo "Attempt to trigger a repeating numbers error (test 4 with 5 nbrs including a string of numbers): " && ./push_swap "4 11 1" 1 2
+echo "Attempt to trigger a repeating numbers error (test 5 with 5 nbrs including a string of numbers): " && ./push_swap "4 11 -1" -1 2
 ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 1 with 100 nbrs): " && ./push_swap 50 $ARGS
 ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 2 with 100 nbrs): " && ./push_swap 50 $ARGS 40
 ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 3 with 100 nbrs): " && ./push_swap 50 50 $ARGS
@@ -133,7 +153,7 @@ ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (
 ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (52..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not an int error (test 6 with 500 nbrs including INT_MAX + 1): " && ./push_swap $ARGS_1 2147483648 $ARGS_2
 ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (52..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not an int error (test 7 with 500 nbrs including INT_MIN - 10): " && ./push_swap $ARGS_1 -2147483658 $ARGS_2
 ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (52..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not an int error (test 8 with 500 nbrs including INT_MAX + 10): " && ./push_swap $ARGS_1 2147483657 $ARGS_2
-
+echo ""
 echo ""
 
 echo "${BOLD_BLUE}Test with 1 argument${END}"
@@ -286,24 +306,8 @@ ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized
 ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
 echo ""
 echo ""
-
-OS=${uname}
-checker_OS=unknown
-if [[ OS == 'Darwin' ]]; then
-	checker_OS='./checker_Mac'
-elif [[ OS == 'linux' ]]; then
-	checker_OS='./checker_linux'
-fi
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 1 arguments"$(./push_swap $ARGS | ${checker_OS} $ARGS)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 3 arguments"$(./push_swap $ARGS | ${checker_OS} $ARGS)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 5 arguments"$(./push_swap $ARGS | ${checker_OS} $ARGS)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 100 arguments"$(./push_swap $ARGS | ${checker_OS} $ARGS)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 500 arguments"$(./push_swap $ARGS | ${checker_OS} $ARGS)
-
 echo "${BOLD}Script by Thomas Chalifour ${BLUE}tchalifour91@gmail.com${END}"
-
-echo "Press a enter to quit"
-# read to a dummy variable. Read fonction with sh have not the option
-# like -t -r or -n so it is a very limited option but it's work.
+echo ""
+echo "Somewere between the last lines of code, Press a enter to quit"
 read dummy_variable
 clear

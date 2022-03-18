@@ -49,14 +49,13 @@ int	lst_nodevalues_isunique(node_dlink *lst)
 	while (lst->next != NULL)
 	{
 		lst_cpy = lst->next;
-		while (lst_cpy->next != NULL)
+		while (lst_cpy != NULL)
 		{
-			if (lst->arg == lst_cpy->next->arg)
+			if (lst->arg == lst_cpy->arg)
 				return (0);
 			lst_cpy = lst_cpy->next;
 		}
 		lst = lst->next;
-		lst_cpy = lst;
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:37:26 by tchalifo          #+#    #+#             */
-/*   Updated: 2022/03/17 14:51:42 by tchalifo         ###   ########.fr       */
+/*   Updated: 2022/03/18 11:48:01 by tchalifo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ node_dlink	*big_sort(d_container *p_data)
 	iter = ft_stksize_dlink(p_data->stack_a);
 	args_to_args_binary(p_data->stack_a);
 	if (ft_stksize_dlink(p_data->stack_a) <= 100)
-	{
 		bit_sorting_limit = 24;
-	}
 	else
 		bit_sorting_limit = 22;
 	while (i > bit_sorting_limit)

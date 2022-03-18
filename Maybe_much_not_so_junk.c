@@ -20,6 +20,9 @@ void			secure_del(slinklst *p_stack);
 slinklst		*ft_stkdelone(slinklst *p_stack);
 slinklst		*ft_stkclear(slinklst *p_stack);
 
+//Stack in doubly linked list
+dlinklst	*clone_a_node(dlinklst *src_stack, dlinklst *dest_stack);
+dlinklst	*clone_a_stack(dlinklst *src_stack, dlinklst *dest_stack);
 
 /* From my project push_swap at 42
 */
@@ -250,4 +253,41 @@ slinklst	*ft_stkclear(slinklst *p_stack)
 		return (p_stack);
 	}
 	return (p_stack);
+}
+
+/* Stack functions singly linked list
+*/
+typedef struct		dlinklst
+{
+	int				nbr;
+	struct dlinklst	*next;
+	struct dlinklst *previous;
+}dlinklst;
+
+dlinklst	*clone_a_node(dlinklst *src_stack, dlinklst *dest_stack)
+{
+	if (!src_stack)
+		return (NULL);
+	else if (!dest_stack)
+		return (ft_stknew_dlink(src_stack->arg, src_stack->arg_binary));
+	else if ((dest_stack->next == NULL) && (dest_stack->previous != NULL))
+		dest_stack = ft_dllst_addback(dest_stack, src_stack->arg, src_stack->arg_binary);
+	else
+		dest_stack = ft_stkadd_dlink(dest_stack, src_stack->arg, src_stack->arg_binary);
+	return (dest_stack);
+}
+
+dlinklst	*clone_a_stack(dlinklst *src_stack, dlinklst *dest_stack)
+{
+	while (src_stack->next != NULL)
+	{
+		src_stack = src_stack->next;
+	}
+	dest_stack = clone_a_node(src_stack, dest_stack);
+	while (src_stack->previous != NULL)
+	{
+		src_stack = src_stack->previous;
+		dest_stack = clone_a_node(src_stack, dest_stack);
+	}
+	return (dest_stack);
 }

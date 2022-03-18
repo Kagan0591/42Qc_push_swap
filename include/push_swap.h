@@ -43,6 +43,8 @@ typedef struct	d_container
 //mem.c functions
 d_container		*initmem					(void);
 d_container		*clearmem					(d_container *p_data);
+void			clear_int_tab				(int **tab, int size);
+void			clear_char_tab				(char **tab, int size);
 
 //push_swap_utils.c functions
 long long int	ft_atoll					(const char *str);

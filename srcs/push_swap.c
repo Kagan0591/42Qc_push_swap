@@ -12,40 +12,30 @@
 
 #include "push_swap.h"
 
-
 static int	push_args_to_dlist(char *str, d_container *p_data)
 {
-	char	**number_s;
+	char	**split_args;
 	int		i;
 
-	number_s = ft_split(str, ' ');
+	split_args = ft_split(str, ' ');
 	i = 0;
-	while (number_s[i])
+	while (split_args[i])
 	{
-		if (str_isnumber(number_s[i]) == 0 || nbr_isint(ft_atoll(number_s[i])) == 0)
+		if (str_isnumber(split_args[i]) == 0 \
+			|| nbr_isint(ft_atoll(split_args[i])) == 0)
 		{
-			while (i >= 0)
-			{
-				free (number_s[i]);
-				i--;
-			}
-			free (number_s);
+			clear_char_tab(split_args, i);
 			return (0);
 		}
 		p_data->stack_a = ft_dllst_addback(p_data->stack_a, \
-			ft_atoll(number_s[i]), NULL);
+			ft_atoll(split_args[i]), NULL);
 		i++;
 	}
-	while (i >= 0)
-	{
-		free (number_s[i]);
-		i--;
-	}
-	free (number_s);
+	clear_char_tab(split_args, i);
 	return (1);
 }
 
-static int	bubble_sort_lst_index(node_dlink *p_dlinklist, node_dlink *p_top_of_stack)
+static int	bbl_sort_index(node_dlink *p_dlinklist, node_dlink *p_top_of_stack)
 {
 	int			index;
 
@@ -69,49 +59,47 @@ static node_dlink	*indexing_stack_to_stack(node_dlink *p_stack)
 	while (p_stack != NULL)
 	{
 		index = ft_dllst_addback(index, \
-			bubble_sort_lst_index(p_stack, top_of_stack), NULL);
+			bbl_sort_index(p_stack, top_of_stack), NULL);
 		p_stack = p_stack->next;
 	}
 	ft_stkclear_dlink(top_of_stack);
 	return (index);
 }
 
+static int	initstack(d_container *p_data, int argc, char **argv)
+{
+	int		i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (push_args_to_dlist(argv[i], p_data) == 0 \
+				|| lst_nodevalues_isunique(p_data->stack_a) == 0)
+		{
+			p_data = clearmem(p_data);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	d_container	*data;
-	int			i;
 
 	if (argc > 1)
 	{
 		data = initmem();
-		i = 1;
-		//pushing args to d-list
-		while (i < argc)
-		{
-			if (push_args_to_dlist(argv[i], data) == 0 \
-			|| lst_nodevalues_isunique(data->stack_a) == 0)
-			{
-				data = clearmem(data);
-				return (write(2, "Error\n", 6));
-			}
-			i++;
-		}
-		//indexing number 0 to ...
+		if (initstack(data, argc, argv) == 0)
+			return (write(2, "Error\n", 6));
 		data->stack_a = indexing_stack_to_stack(data->stack_a);
-		//micro_sort
 		if (ft_stksize_dlink(data->stack_a) == 3)
 			data->stack_a = micro_sort(data->stack_a);
-		//mini_sort
 		else if (ft_stksize_dlink(data->stack_a) <= 5)
 			data->stack_a = mini_sort(data);
-		//big_sort
 		else if (ft_stksize_dlink(data->stack_a) > 5)
 			data->stack_a = big_sort(data);
-		//Print the proof of sort
-		// ft_putstr("\n");
-		// ft_print_stack_dlink(data->stack_a);
-		// ft_putstr("\n");
-		//Free
 	data = clearmem(data);
 	}
 	return (0);
