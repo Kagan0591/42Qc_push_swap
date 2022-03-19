@@ -13,7 +13,8 @@ SRCS_FILES 		=	push_swap.c \
 					push_swap_stack_functions_doubly_linked_list_1.c \
 					push_swap_stack_functions_doubly_linked_list_2.c \
 					push_swap_stack_functions_doubly_linked_list_3.c \
-					push_swap_sort_functions.c \
+					push_swap_sort_functions_1.c \
+					push_swap_sort_functions_2.c \
 					micro_sort.c \
 					mini_sort.c \
 					big_sort.c \

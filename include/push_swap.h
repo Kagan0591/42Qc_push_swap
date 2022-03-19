@@ -38,6 +38,7 @@ typedef struct	d_container
 	// Some data
 	node_dlink	*stack_a;
 	node_dlink	*stack_b;
+	int			dualmouv_flag;
 }				d_container;
 
 //mem.c functions
@@ -75,10 +76,10 @@ node_dlink		*swap_a						(node_dlink *p_stk);
 node_dlink		*swap_b						(node_dlink*p_stk);
 void			push_to_a					(d_container *p_data);
 void			push_to_b					(d_container *p_data);
-node_dlink		*rotate_a					(node_dlink *p_stk);
-node_dlink		*rotate_b					(node_dlink *p_stk);
-node_dlink		*reverse_rotate_a			(node_dlink *p_stk);
-node_dlink		*reverse_rotate_b			(node_dlink *p_stk);
+node_dlink		*rotate_a					(node_dlink *p_stk, int flag);
+node_dlink		*rotate_b					(node_dlink *p_stk, int flag);
+node_dlink		*reverse_rotate_a			(node_dlink *p_stk, int flag);
+node_dlink		*reverse_rotate_b			(node_dlink *p_stk, int flag);
 void			reverse_rotate_ab			(d_container *p_data);
 void			rotate_ab					(d_container *p_data);
 //micro_sort.c functions

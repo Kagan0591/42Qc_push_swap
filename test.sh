@@ -99,12 +99,12 @@ echo ""
 # Attempt to trigger a repeating numbers error
 echo "Attempt to trigger a repeating numbers error (test 1 with 3 nbrs): " && ./push_swap 8 4 8
 echo "Attempt to trigger a repeating numbers error (test 2 with 3 nbrs): " && ./push_swap 4 1 1
-echo "Attempt to trigger a repeating numbers error (test 3 with 3 nbrs (Not supposed to be an error)): " && ./push_swap 4 11 1
+echo "Attempt to trigger a repeating numbers error (test 3 with 3 nbrs (${GREEN}Not supposed to be an error${END})): " && ./push_swap 4 11 1
 echo "Attempt to trigger a repeating numbers error (test 4 with 3 nbrs including a string of numbers): " && ./push_swap "4 2" 2
 echo "Attempt to trigger a repeating numbers error (test 5 with 3 nbrs including a string of numbers): " && ./push_swap "4 -2" -2
 echo "Attempt to trigger a repeating numbers error (test 1 with 5 nbrs): " && ./push_swap 8 4 1 8 2
 echo "Attempt to trigger a repeating numbers error (test 2 with 5 nbrs): " && ./push_swap 8 8 4 1 8
-echo "Attempt to trigger a repeating numbers error (test 3 with 5 nbrs (Not supposed to be an error)): " && ./push_swap 4 11 1 3 2
+echo "Attempt to trigger a repeating numbers error (test 3 with 5 nbrs (${GREEN}Not supposed to be an error${END})): " && ./push_swap 4 11 1 3 2
 echo "Attempt to trigger a repeating numbers error (test 4 with 5 nbrs including a string of numbers): " && ./push_swap "4 11 1" 1 2
 echo "Attempt to trigger a repeating numbers error (test 5 with 5 nbrs including a string of numbers): " && ./push_swap "4 11 -1" -1 2
 ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 1 with 100 nbrs): " && ./push_swap 50 $ARGS

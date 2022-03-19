@@ -5,6 +5,7 @@ d_container	*initmem(void)
 	d_container *data;
 
 	data = malloc(sizeof(d_container));
+	data->dualmouv_flag = 0;
 	data->stack_a = NULL;
 	data->stack_b = NULL;
 	return (data);

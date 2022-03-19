@@ -49,13 +49,12 @@ void	ft_print_node_dlink(node_dlink *p_stk)
 {
 	int		i;
 
-	i = 23; // Pour commencer a la position du 9 ieme bit
+	i = 23;
 	if (p_stk != NULL)
 	{
 		ft_putstr("\nArgument en valeur décimal = ");
 		ft_putnbr(p_stk->arg);
 		ft_putstr("\nArgument en valeur binaire = ");
-
 		while ((p_stk ->arg_binary != NULL) && (i < 32))
 		{
 			ft_putnbr(p_stk->arg_binary[i]);

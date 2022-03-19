@@ -1,8 +1,21 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   micro_sort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/18 12:52:33 by tchalifo          #+#    #+#             */
+/*   Updated: 2022/03/18 12:57:27 by tchalifo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 /* Algo pour 3 arguments
- * Revoir le micro sort pour marcher avec chiffre de 0 a infini
+ * Le micro sort recherche le plus grand nombre et
  */
+
+#include "push_swap.h"
+
 static ft_bool	if_is_sort(node_dlink *stack)
 {
 	while (stack->next != NULL)
@@ -41,9 +54,9 @@ node_dlink	*micro_sort(node_dlink *stack)
 	if (if_is_sort(stack) == false)
 	{
 		if (max == stack->arg)
-			stack = rotate_a(stack);
+			stack = rotate_a(stack, 0);
 		else if (max == stack->next->arg)
-			stack = reverse_rotate_a(stack);
+			stack = reverse_rotate_a(stack, 0);
 		if (if_is_sort(stack) == false)
 			stack = swap_a(stack);
 	}
