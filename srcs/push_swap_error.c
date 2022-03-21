@@ -35,13 +35,6 @@ int	nbr_isint(long long int nb)
 	return (0);
 }
 
-int	nbr_isequal(long long int nb1, long long int nb2)
-{
-	if (nb1 == nb2)
-		return (1);
-	return (0);
-}
-
 int	lst_nodevalues_isunique(t_dlinklst *lst)
 {
 	t_dlinklst	*lst_cpy;
@@ -56,17 +49,6 @@ int	lst_nodevalues_isunique(t_dlinklst *lst)
 			lst_cpy = lst_cpy->next;
 		}
 		lst = lst->next;
-	}
-	return (1);
-}
-
-int	arg_isunique_doublyll(char *argument, t_dlinklst *stack)
-{
-	while (stack != NULL)
-	{
-		if (stack->arg == ft_atoll(argument))
-			return (0);
-		stack = stack->next;
 	}
 	return (1);
 }

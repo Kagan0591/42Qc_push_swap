@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 t_dlinklst	*ft_stknew_dlink(long long int nbr, int *arg_binary)
 {
