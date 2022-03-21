@@ -33,7 +33,8 @@ make --silent
 sleep 1
 clear
 
-echo "${SELECTED}Checking for leaks Test 1 of 4${SELECTEDLINE}"
+echo "${BOLD}${UNDERLINE}Script-shell for testing the program push_swap${END}"
+echo "${SELECTED}Checking for leaks Test 1 of 5${SELECTEDLINE}"
 sleep 0.8
 valgrind --leak-check=full ./push_swap
 echo "${GREEN}Press a enter to continue${END}"
@@ -41,21 +42,28 @@ echo "${GREEN}Press a enter to continue${END}"
 # like -t -r or -n so it is a very limited option but it's work.
 read dummy_variable
 
-echo "${SELECTED}Checking for leaks Test 2 of 4${SELECTEDLINE}"
+echo "${SELECTED}Checking for leaks Test 2 of 5${SELECTEDLINE}"
 sleep 0.8
 valgrind --leak-check=full ./push_swap 3 1 2
 echo "${GREEN}Press a enter to continue${END}"
 read dummy_variable
 
-echo "${SELECTED}Checking for leaks Test 3 of 4${SELECTEDLINE}"
+echo "${SELECTED}Checking for leaks Test 3 of 5${SELECTEDLINE}"
 sleep 0.8
 valgrind --leak-check=full ./push_swap 3 2 1 5 4
 echo "${GREEN}Press a enter to continue${END}"
 read dummy_variable
 
-echo "${SELECTED}Checking for leaks Test 4 of 4${SELECTEDLINE}"
+echo "${SELECTED}Checking for leaks Test 4 of 5${SELECTEDLINE}"
 sleep 0.8
-ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; valgrind --leak-check=full ./push_swap 3 $ARGS
+SILENTCMD='/dev/null'
+ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; valgrind --leak-check=full ./push_swap $ARGS > $SILENTCMD
+echo "${GREEN}Press a enter to continue${END}"
+read dummy_variable
+
+echo "${SELECTED}Checking for leaks Test 5 of 5${SELECTEDLINE}"
+sleep 0.8
+ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; valgrind --leak-check=full ./push_swap 3 $ARGS > $SILENTCMD
 echo "${GREEN}Press a enter to continue${END}"
 read dummy_variable
 clear
@@ -83,17 +91,8 @@ echo "${BOLD_BLUE}Sorting checker tests${END}"
 echo "${VIOLET}Enter your OS, if is Linux type linux, if is Darwin, type Mac${END}"
 read OS
 clear
-echo "${SELECTED}Script-shell for testing the program push_swap${SELECTEDLINE}"
-echo "${BOLD_BLUE}Sorting test with checker_os provided file${END}"
-echo ""
-# Try the checker file to check if the numbers are sorted
-ARGS=`ruby -e "puts (-1000..-999).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 1 random arguments: " $(./push_swap $ARGS | ./checker_$OS $ARGS)
-ARGS=`ruby -e "puts (10..12).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 3 randoms arguments: " $(./push_swap $ARGS | ./checker_$OS $ARGS)
-ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 5 randoms arguments :" $(./push_swap $ARGS | ./checker_$OS $ARGS)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 100 randoms arguments: " $(./push_swap $ARGS | ./checker_$OS $ARGS)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "Check if your push_swap sort the numbers with 500 randoms arguments: " $(./push_swap $ARGS | ./checker_$OS $ARGS)
-echo ""
 
+echo "${SELECTED}Script-shell for testing the program push_swap${SELECTEDLINE}"
 echo "${BOLD_BLUE}Attempt to trigger an error${END}"
 echo ""
 # Attempt to trigger a repeating numbers error
@@ -158,152 +157,152 @@ echo ""
 
 echo "${BOLD_BLUE}Test with 1 argument${END}"
 echo ""
-echo "1 Arg INT MIN: "$(./push_swap -2147483648)
-echo "1 Arg INT MAX: "$(./push_swap 2147483647)
-echo "1 Arg 65353: "$(./push_swap 65353)
+echo "1 Arg INT MIN: "$(./push_swap -2147483648) $(./push_swap -2147483648 | ./checker_$OS -2147483648)
+echo "1 Arg INT MAX: "$(./push_swap 2147483647) $(./push_swap -2147483648 | ./checker_$OS -2147483648)
+echo "1 Arg 65353: "$(./push_swap 65353) $(./push_swap 65353 | ./checker_$OS 65353)
 echo ""
 echo ""
 
 echo "${BOLD_BLUE}Test with 3 arguments${END}"
 echo ""
-echo "3 arg including INT MIN: "$(./push_swap -2147483648 10 5 | wc -l)
-echo "3 arg including INT MAX: "$(./push_swap 2147483647 10 5 | wc -l)
-echo "3 arg 3 2 1: "$(./push_swap 3 2 1 | wc -l)
-echo "3 arg 3 1 2: "$(./push_swap 3 1 2 | wc -l)
-echo "3 arg 2 1 3: "$(./push_swap 2 1 3 | wc -l)
-echo "3 arg 2 3 1: "$(./push_swap 2 3 1 | wc -l)
-echo "3 arg 1 3 2: "$(./push_swap 1 3 2 | wc -l)
-echo "3 arg 1 2 3: "$(./push_swap 1 2 3 | wc -l)
+echo "3 arg including INT MIN: "$(./push_swap -2147483648 10 5 | wc -l) $(./push_swap -2147483648 10 5 | ./checker_$OS -2147483648 10 5)
+echo "3 arg including INT MAX: "$(./push_swap 2147483647 10 5 | wc -l) $(./push_swap 2147483647 10 5 | ./checker_$OS 2147483647 10 5)
+echo "3 arg 3 2 1: "$(./push_swap 3 2 1 | wc -l) $(./push_swap 3 2 1 | ./checker_$OS 3 2 1)
+echo "3 arg 3 1 2: "$(./push_swap 3 1 2 | wc -l) $(./push_swap 3 1 2 | ./checker_$OS 3 1 2)
+echo "3 arg 2 1 3: "$(./push_swap 2 1 3 | wc -l) $(./push_swap 2 1 3 | ./checker_$OS 2 1 3)
+echo "3 arg 2 3 1: "$(./push_swap 2 3 1 | wc -l) $(./push_swap 2 3 1 | ./checker_$OS 2 3 1)
+echo "3 arg 1 3 2: "$(./push_swap 1 3 2 | wc -l) $(./push_swap 1 3 2 | ./checker_$OS 1 3 2)
+echo "3 arg 1 2 3: "$(./push_swap 1 2 3 | wc -l) $(./push_swap 1 2 3 | ./checker_$OS 1 2 3)
 echo ""
 echo ""
 
 echo "${BOLD_BLUE}Test with 5 arguments${END}"
 echo ""
-echo "5 arg including INT MIN: "$(./push_swap 16 2 -2147483648 10 5 | wc -l)
-echo "5 arg including INT MAX: "$(./push_swap 16 2 2147483647 10 5 | wc -l)
+echo "5 arg including INT MIN: "$(./push_swap 16 2 -2147483648 10 5 | wc -l) $(./push_swap 16 2 -2147483648 10 5 | ./checker_$OS 16 2 -2147483648 10 5)
+echo "5 arg including INT MAX: "$(./push_swap 16 2 2147483647 10 5 | wc -l) $(./push_swap 16 2 2147483647 10 5 | ./checker_$OS 16 2 2147483647 10 5)
 echo "${ITALIC_CYAN}10 test with 5 random generated numbers${END}"
-ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-14..-10).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-14..-10).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-14..-10).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l)
+ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-14..-10).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-14..-10).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-14..-10).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
 echo ""
 echo ""
 
 echo "${BOLD_BLUE}Test with 100 arguments${END}"
 echo ""
 echo "${ITALIC_CYAN}50 test with 100 random generated numbers${END}"
-ARGS=`ruby -e "puts (10..108).to_a.shuffle.join(' ')"`; echo "100 arg randomized including one INT MIN: "$(./push_swap -2147483648 $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..108).to_a.shuffle.join(' ')"`; echo "100 arg randomized including one INT MAX: "$(./push_swap 2147483647 $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l)
+ARGS=`ruby -e "puts (10..108).to_a.shuffle.join(' ')"`; echo "100 arg randomized including one INT MIN: "$(./push_swap -2147483648 $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..108).to_a.shuffle.join(' ')"`; echo "100 arg randomized including one INT MAX: "$(./push_swap 2147483647 $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
 echo ""
 echo ""
 
 echo "${BOLD_BLUE}Test with 500 arguments${END}"
 echo ""
 echo "${ITALIC_CYAN}50 test with 100 random generated numbers${END}"
-ARGS=`ruby -e "puts (10..508).to_a.shuffle.join(' ')"`; echo "500 arg randomized including one INT MIN: "$(./push_swap -2147483648 $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..508).to_a.shuffle.join(' ')"`; echo "500 arg randomized including one INT MAX: "$(./push_swap 2147483647 $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
-ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l)
+ARGS=`ruby -e "puts (10..508).to_a.shuffle.join(' ')"`; echo "500 arg randomized including one INT MIN: "$(./push_swap -2147483648 $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..508).to_a.shuffle.join(' ')"`; echo "500 arg randomized including one INT MAX: "$(./push_swap 2147483647 $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
+ARGS=`ruby -e "puts (-508..-10).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
 echo ""
 echo ""
 echo "${BOLD}Script by Thomas Chalifour ${BLUE}tchalifour91@gmail.com${END}"
