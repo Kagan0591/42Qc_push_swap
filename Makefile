@@ -98,7 +98,7 @@ clean:
 	@sleep 0.5
 
 fclean:	clean
-	@${RM} ${NAME} ${OBJS_DIR}
+	@${RM} ${NAME} ${NAME}.dSYM ${OBJS_DIR}
 	@$(LIBFT) fclean
 	@echo "\n${BOLD}${GREEN}The executable file ' ${BLUE}push_swap${GREEN} ' have been ${RED}deleted ${END}${BOLD}${GREEN}too.${END}"
 	@sleep 0.5

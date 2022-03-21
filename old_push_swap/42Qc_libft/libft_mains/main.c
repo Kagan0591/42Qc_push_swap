@@ -1,3 +1,0 @@
-/*----------------- MAINMAINMAINMAINMAINMAINMAINMAINMAINMAINMAINMAINMAIN -----------------*/
-
-/*----------------- FUNCTION
