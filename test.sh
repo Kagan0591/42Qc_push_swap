@@ -152,6 +152,11 @@ ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (
 ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (52..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not an int error (test 6 with 500 nbrs including INT_MAX + 1): " && ./push_swap $ARGS_1 2147483648 $ARGS_2
 ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (52..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not an int error (test 7 with 500 nbrs including INT_MIN - 10): " && ./push_swap $ARGS_1 -2147483658 $ARGS_2
 ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (52..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not an int error (test 8 with 500 nbrs including INT_MAX + 10): " && ./push_swap $ARGS_1 2147483657 $ARGS_2
+echo "${ITALIC_CYAN}À partir d'ici, les erreurs ne devrait plus être visible, la sortie d'erreur standard est redirigé vers un fichier${END}"
+echo "Attempt to trigger a repeating numbers error (test 1 with 3 nbrs): " && ./push_swap 8 4 8 2> '/dev/null'
+echo "Attempt to trigger a repeating numbers error (test 2 with 3 nbrs): " && ./push_swap 4 1 1 2> '/dev/null'
+echo "Attempt to trigger a repeating numbers error (test 1 with 5 nbrs): " && ./push_swap 8 4 1 8 2 2> '/dev/null'
+echo "Attempt to trigger a repeating numbers error (test 2 with 5 nbrs): " && ./push_swap 8 8 4 1 8 2> '/dev/null'
 echo ""
 echo ""
 
@@ -252,7 +257,7 @@ echo ""
 
 echo "${BOLD_BLUE}Test with 500 arguments${END}"
 echo ""
-echo "${ITALIC_CYAN}50 test with 100 random generated numbers${END}"
+echo "${ITALIC_CYAN}50 test with 500 random generated numbers${END}"
 ARGS=`ruby -e "puts (10..508).to_a.shuffle.join(' ')"`; echo "500 arg randomized including one INT MIN: "$(./push_swap -2147483648 $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
 ARGS=`ruby -e "puts (10..508).to_a.shuffle.join(' ')"`; echo "500 arg randomized including one INT MAX: "$(./push_swap 2147483647 $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
 ARGS=`ruby -e "puts (10..509).to_a.shuffle.join(' ')"`; echo "500 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
