@@ -36,7 +36,8 @@ clear
 echo "${BOLD}${UNDERLINE}Script-shell for testing the program push_swap${END}"
 echo "${SELECTED}Checking for leaks Test 1 of 5${SELECTEDLINE}"
 sleep 0.8
-valgrind --leak-check=full ./push_swap
+SILENTCMD='/dev/null'
+valgrind --leak-check=full ./push_swap > $SILENTCMD
 echo "${GREEN}Press a enter to continue${END}"
 # read to a dummy variable. Read fonction with sh have not the option
 # like -t -r or -n so it is a very limited option but it's work.
@@ -44,19 +45,18 @@ read dummy_variable
 
 echo "${SELECTED}Checking for leaks Test 2 of 5${SELECTEDLINE}"
 sleep 0.8
-valgrind --leak-check=full ./push_swap 3 1 2
+valgrind --leak-check=full ./push_swap 3 1 2 > $SILENTCMD
 echo "${GREEN}Press a enter to continue${END}"
 read dummy_variable
 
 echo "${SELECTED}Checking for leaks Test 3 of 5${SELECTEDLINE}"
 sleep 0.8
-valgrind --leak-check=full ./push_swap 3 2 1 5 4
+valgrind --leak-check=full ./push_swap 3 2 1 5 4 > $SILENTCMD
 echo "${GREEN}Press a enter to continue${END}"
 read dummy_variable
 
 echo "${SELECTED}Checking for leaks Test 4 of 5${SELECTEDLINE}"
 sleep 0.8
-SILENTCMD='/dev/null'
 ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; valgrind --leak-check=full ./push_swap $ARGS > $SILENTCMD
 echo "${GREEN}Press a enter to continue${END}"
 read dummy_variable
