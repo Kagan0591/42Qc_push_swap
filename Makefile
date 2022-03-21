@@ -1,9 +1,9 @@
 ###_*_*_*_*_*_*_*_*_*_*_*_*_Makefile_ft_printf_*_*_*_*_*_*_*_*_*_*_*_*_###
-## Pour compiler les bonus, si il y a en a, décommenter les lignes B_SRCS_FILES,
-## B_SRCS_DIR, B_SRCS et dans les instructions de la ligne OBJS_FILES,
-## décommenter $(B_SRCS_FILES:.c=.o)
+## Pour compiler les bonus, si il y a en a, décommenter les lignes		##
+## B_SRCS_FILES, B_SRCS_DIR, B_SRCS et dans les instructions de la ligne##
+## OBJS_FILES, décommenter $(B_SRCS_FILES:.c=.o)						##
 
-###-------------------------# VARIABLES ##-------------------------###
+###---------------------------# VARIABLES ##---------------------------###
 NAME = push_swap
 
 SRCS_FILES 		=	push_swap.c \
@@ -22,9 +22,9 @@ SRCS_FILES 		=	push_swap.c \
 #B_SRCS_FILES	= 	 \
 
 ## Nommer les fichiers objets
-OBJS_FILES 	= $(SRCS_FILES:.c=.o) #$(B_SRCS_FILES:.c=.o) # Utilise les noms de fichier de la variable SRCS_FILES et interprète le suffix .c en .o
+OBJS_FILES 	= $(SRCS_FILES:.c=.o) #$(B_SRCS_FILES:.c=.o)
 
-### Repertoires ###
+## Repertoires ##
 SRCS_DIR 	= srcs/
 #B_SRCS_DIR 	= bonus_srcs/
 OBJS_DIR	= objs/
@@ -36,17 +36,17 @@ SRCS 		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS 		= $(addprefix $(OBJS_DIR), $(OBJS_FILES))
 VPATH 		= $(SRCS_DIR) $(B_SRCS_DIR)
 
-### Compilations et archivage ###
+## Compilations et archivage
 CC 			= gcc
 CFLAGS 		= -Wall -Werror -Wextra -g
 AR 			= ar -cr
 
-### Autres Fonctions ###
+## Autres Fonctions
 RM 			= rm -rf
 NORMINETTE 	= norminette
 LIBFT		= $(MAKE) --silent -C $(LIBFT_DIR)
 
-### Colour var ###
+## Colors code
 END			= \033[0m
 BOLD		= \033[1m
 ITALIC		= \033[3m
@@ -64,7 +64,7 @@ VIOLET		= \033[35m
 BEIGE		= \033[36m
 WHITE		= \033[37m
 
-###--------------------------## REGLES ##--------------------------###
+###----------------------------## REGLES ##----------------------------###
 all: obj $(NAME)
 
 $(OBJS_DIR)%.o:%.c
@@ -104,4 +104,4 @@ fclean:	clean
 	@sleep 0.5
 re:	fclean all
 
-phony:all norm test exec clean fclean re bonus
+phony: all obj test norm leaks clean fclean re bonus
