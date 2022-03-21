@@ -21,7 +21,7 @@ int	str_isnumber(char *str)
 		i++;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]) == 0) // Si le char n est pas un nombre.
+		if (ft_isdigit(str[i]) == 0)
 			return (0);
 		i++;
 	}
@@ -30,7 +30,7 @@ int	str_isnumber(char *str)
 
 int	nbr_isint(long long int nb)
 {
-	if (nb >= -2147483648 && nb <= 2147483647) // Si le nombre est un int
+	if (nb >= -2147483648 && nb <= 2147483647)
 		return (1);
 	return (0);
 }
@@ -42,9 +42,9 @@ int	nbr_isequal(long long int nb1, long long int nb2)
 	return (0);
 }
 
-int	lst_nodevalues_isunique(node_dlink *lst)
+int	lst_nodevalues_isunique(t_dlinklst *lst)
 {
-	node_dlink	*lst_cpy;
+	t_dlinklst	*lst_cpy;
 
 	while (lst->next != NULL)
 	{
@@ -60,7 +60,7 @@ int	lst_nodevalues_isunique(node_dlink *lst)
 	return (1);
 }
 
-int	arg_isunique_doublyll(char *argument, node_dlink *stack)
+int	arg_isunique_doublyll(char *argument, t_dlinklst *stack)
 {
 	while (stack != NULL)
 	{

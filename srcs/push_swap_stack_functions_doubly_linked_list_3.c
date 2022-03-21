@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-node_dlink	*return_to_top(node_dlink *p_stk)
+t_dlinklst	*return_to_top(t_dlinklst *p_stk)
 {
 	while (p_stk->previous != NULL)
 		p_stk = p_stk->previous;

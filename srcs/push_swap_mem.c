@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_mem.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/20 16:41:12 by tchalifo          #+#    #+#             */
+/*   Updated: 2022/03/20 17:51:17 by tchalifo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-d_container	*initmem(void)
+t_container	*initmem(void)
 {
-	d_container *data;
+	t_container	*data;
 
-	data = malloc(sizeof(d_container));
+	data = malloc(sizeof(t_container));
 	data->dualmouv_flag = 0;
 	data->stack_a = NULL;
 	data->stack_b = NULL;
 	return (data);
 }
 
-d_container	*clearmem(d_container *p_data)
+t_container	*clearmem(t_container *p_data)
 {
 	if (p_data)
 	{

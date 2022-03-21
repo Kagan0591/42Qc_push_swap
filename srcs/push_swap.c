@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static int	push_args_to_dlist(char *str, d_container *p_data)
+static int	push_args_to_dlist(char *str, t_container *p_data)
 {
 	char	**split_args;
 	int		i;
@@ -27,7 +27,7 @@ static int	push_args_to_dlist(char *str, d_container *p_data)
 			clear_char_tab(split_args, i);
 			return (0);
 		}
-		p_data->stack_a = ft_dllst_addback(p_data->stack_a, \
+		p_data->stack_a = stkadd_b(p_data->stack_a, \
 			ft_atoll(split_args[i]), NULL);
 		i++;
 	}
@@ -35,7 +35,7 @@ static int	push_args_to_dlist(char *str, d_container *p_data)
 	return (1);
 }
 
-static int	bbl_sort_index(node_dlink *p_dlinklist, node_dlink *p_top_of_stack)
+static int	bbl_sort_index(t_dlinklst *p_dlinklist, t_dlinklst *p_top_of_stack)
 {
 	int			index;
 
@@ -49,16 +49,16 @@ static int	bbl_sort_index(node_dlink *p_dlinklist, node_dlink *p_top_of_stack)
 	return (index);
 }
 
-static node_dlink	*indexing_stack_to_stack(node_dlink *p_stack)
+static t_dlinklst	*indexing_stack_to_stack(t_dlinklst *p_stack)
 {
-	node_dlink	*top_of_stack;
-	node_dlink	*index;
+	t_dlinklst	*top_of_stack;
+	t_dlinklst	*index;
 
 	index = NULL;
 	top_of_stack = p_stack;
 	while (p_stack != NULL)
 	{
-		index = ft_dllst_addback(index, \
+		index = stkadd_b(index, \
 			bbl_sort_index(p_stack, top_of_stack), NULL);
 		p_stack = p_stack->next;
 	}
@@ -66,7 +66,7 @@ static node_dlink	*indexing_stack_to_stack(node_dlink *p_stack)
 	return (index);
 }
 
-static int	initstack(d_container *p_data, int argc, char **argv)
+static int	initstack(t_container *p_data, int argc, char **argv)
 {
 	int		i;
 
@@ -86,7 +86,7 @@ static int	initstack(d_container *p_data, int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	d_container	*data;
+	t_container	*data;
 
 	if (argc > 1)
 	{

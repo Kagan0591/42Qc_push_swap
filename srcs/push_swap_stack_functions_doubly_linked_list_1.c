@@ -13,37 +13,33 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-node_dlink	*ft_stknew_dlink(long long int nbr, int *arg_binary)
+t_dlinklst	*ft_stknew_dlink(long long int nbr, int *arg_binary)
 {
-	node_dlink	*new_node;
-	(void) arg_binary;
+	t_dlinklst	*new_node;
 
-	new_node = malloc(sizeof(node_dlink));
+	(void) arg_binary;
+	new_node = malloc(sizeof(t_dlinklst));
 	if (new_node)
 	{
-		//////--Variable assignement---------->>>>
 		new_node->arg = nbr;
 		new_node->arg_binary = calloc(sizeof(int), 32);
-		//////--End of virable assignement---->>>>
 		new_node->next = NULL;
 		new_node->previous = NULL;
 	}
 	return (new_node);
 }
 
-node_dlink	*ft_stkadd_dlink(node_dlink *p_stk, long long int nbr, int *arg_binary)
+t_dlinklst	*stkadd(t_dlinklst *p_stk, long long int nbr, int *arg_bin)
 {
-	node_dlink	*new_node;
+	t_dlinklst	*new_node;
 
 	if (!p_stk)
-		return (ft_stknew_dlink(nbr, arg_binary));
-	new_node = malloc(sizeof(node_dlink));
+		return (ft_stknew_dlink(nbr, arg_bin));
+	new_node = malloc(sizeof(t_dlinklst));
 	if (new_node)
 	{
-		//////--Variable assignement---------->>>>
 		new_node->arg = nbr;
 		new_node->arg_binary = calloc(sizeof(int), 32);
-		//////--End of virable assignement---->>>>
 		new_node->next = p_stk;
 		new_node->previous = NULL;
 		p_stk->previous = new_node;
@@ -52,21 +48,19 @@ node_dlink	*ft_stkadd_dlink(node_dlink *p_stk, long long int nbr, int *arg_binar
 	return (NULL);
 }
 
-node_dlink	*ft_dllst_addback(node_dlink *p_stk, long long int nbr, int *arg_binary)
+t_dlinklst	*stkadd_b(t_dlinklst *p_stk, long long int nbr, int *arg_bin)
 {
-	node_dlink	*new_node;
+	t_dlinklst	*new_node;
 
 	if (!p_stk)
-		return (ft_stknew_dlink(nbr, arg_binary));
-	new_node = malloc(sizeof(node_dlink));
+		return (ft_stknew_dlink(nbr, arg_bin));
+	new_node = malloc(sizeof(t_dlinklst));
 	if (new_node)
 	{
 		while (p_stk->next != NULL)
 			p_stk = p_stk->next;
-		//////--Variable assignement---------->>>>
 		new_node->arg = nbr;
 		new_node->arg_binary = calloc(sizeof(int), 32);
-		//////--End of virable assignement---->>>>
 		new_node->next = NULL;
 		new_node->previous = p_stk;
 		p_stk->next = new_node;
@@ -77,7 +71,7 @@ node_dlink	*ft_dllst_addback(node_dlink *p_stk, long long int nbr, int *arg_bina
 	return (NULL);
 }
 
-void	ft_stkdelone_dlink(node_dlink *p_stk)
+void	ft_stkdelone_dlink(t_dlinklst *p_stk)
 {
 	if (p_stk)
 	{
@@ -87,9 +81,9 @@ void	ft_stkdelone_dlink(node_dlink *p_stk)
 	}
 }
 
-void	ft_stkclear_dlink(node_dlink *p_stk)
+void	ft_stkclear_dlink(t_dlinklst *p_stk)
 {
-	node_dlink	*tmp;
+	t_dlinklst	*tmp;
 
 	tmp = NULL;
 	while (p_stk != NULL)

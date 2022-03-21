@@ -6,7 +6,7 @@
 /*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:52:33 by tchalifo          #+#    #+#             */
-/*   Updated: 2022/03/18 12:57:27 by tchalifo         ###   ########.fr       */
+/*   Updated: 2022/03/20 20:02:19 by tchalifo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "push_swap.h"
 
-static ft_bool	if_is_sort(node_dlink *stack)
+static t_bool	if_is_sort(t_dlinklst *stack)
 {
 	while (stack->next != NULL)
 	{
@@ -27,7 +27,7 @@ static ft_bool	if_is_sort(node_dlink *stack)
 	return (true);
 }
 
-static int	find_max(node_dlink *stack)
+static int	find_max(t_dlinklst *stack)
 {
 	int	max_value;
 
@@ -46,7 +46,7 @@ static int	find_max(node_dlink *stack)
 	return (max_value);
 }
 
-node_dlink	*micro_sort(node_dlink *stack)
+t_dlinklst	*micro_sort(t_dlinklst *stack)
 {
 	int	max;
 

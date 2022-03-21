@@ -6,13 +6,13 @@
 /*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:37:26 by tchalifo          #+#    #+#             */
-/*   Updated: 2022/03/18 12:48:55 by tchalifo         ###   ########.fr       */
+/*   Updated: 2022/03/20 18:00:58 by tchalifo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	convert_tobin(node_dlink *stack_node, unsigned int nb)
+static void	convert_tobin(t_dlinklst *stack_node, unsigned int nb)
 {
 	int		i;
 
@@ -26,7 +26,7 @@ static void	convert_tobin(node_dlink *stack_node, unsigned int nb)
 	stack_node->arg_binary[i] = (nb % 2);
 }
 
-static void	args_to_args_binary(node_dlink *stack)
+static void	args_to_args_binary(t_dlinklst *stack)
 {
 	while (stack != NULL)
 	{
@@ -35,7 +35,7 @@ static void	args_to_args_binary(node_dlink *stack)
 	}
 }
 
-static int	nbrchr_doublyll(node_dlink *stack, int nb, int pos)
+static int	nbrchr_doublyll(t_dlinklst *stack, int nb, int pos)
 {
 	while (stack != NULL)
 	{
@@ -46,7 +46,7 @@ static int	nbrchr_doublyll(node_dlink *stack, int nb, int pos)
 	return (0);
 }
 
-static void	binary_sorting(d_container *p_data, int total_mouv, int bit_limit)
+static void	binary_sorting(t_container *p_data, int total_mouv, int bit_limit)
 {
 	int		i;
 	int		mouvemenents;
@@ -74,7 +74,7 @@ static void	binary_sorting(d_container *p_data, int total_mouv, int bit_limit)
 	}
 }
 
-node_dlink	*big_sort(d_container *p_data)
+t_dlinklst	*big_sort(t_container *p_data)
 {
 	int		bit_limit;
 	int		original_stack_size;

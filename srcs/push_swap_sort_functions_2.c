@@ -6,16 +6,16 @@
 /*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 13:04:12 by tchalifo          #+#    #+#             */
-/*   Updated: 2022/03/18 13:05:00 by tchalifo         ###   ########.fr       */
+/*   Updated: 2022/03/20 18:00:22 by tchalifo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-node_dlink	*rotate_b(node_dlink *p_stk, int flag)
+t_dlinklst	*rotate_b(t_dlinklst *p_stk, int flag)
 
 {
-	node_dlink	*isolated_top;
+	t_dlinklst	*isolated_top;
 
 	if (flag == 0)
 		ft_putstr("rb\n");
@@ -34,9 +34,9 @@ node_dlink	*rotate_b(node_dlink *p_stk, int flag)
 	return (p_stk);
 }
 
-node_dlink	*reverse_rotate_a(node_dlink *p_stk, int flag)
+t_dlinklst	*reverse_rotate_a(t_dlinklst *p_stk, int flag)
 {
-	node_dlink		*new_top;
+	t_dlinklst		*new_top;
 
 	if (flag == 0)
 		ft_putstr("rra\n");
@@ -56,9 +56,9 @@ node_dlink	*reverse_rotate_a(node_dlink *p_stk, int flag)
 	return (p_stk);
 }
 
-node_dlink	*reverse_rotate_b(node_dlink *p_stk, int flag)
+t_dlinklst	*reverse_rotate_b(t_dlinklst *p_stk, int flag)
 {
-	node_dlink		*new_top;
+	t_dlinklst		*new_top;
 
 	if (flag == 0)
 		ft_putstr("rrb\n");
@@ -78,7 +78,7 @@ node_dlink	*reverse_rotate_b(node_dlink *p_stk, int flag)
 	return (p_stk);
 }
 
-void	rotate_ab(d_container *p_data)
+void	rotate_ab(t_container *p_data)
 {
 	p_data->dualmouv_flag = 1;
 	if (ft_stksize_dlink(p_data->stack_a) > 1 \
@@ -91,7 +91,7 @@ void	rotate_ab(d_container *p_data)
 	}
 }
 
-void	reverse_rotate_ab(d_container *p_data)
+void	reverse_rotate_ab(t_container *p_data)
 {
 	p_data->dualmouv_flag = 1;
 	if (ft_stksize_dlink(p_data->stack_a) > 1 \

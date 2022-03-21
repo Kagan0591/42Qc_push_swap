@@ -12,9 +12,9 @@
 
 #include "push_swap.h"
 
-node_dlink	*swap_a(node_dlink *p_stk)
+t_dlinklst	*swap_a(t_dlinklst *p_stk)
 {
-	node_dlink	*tmp;
+	t_dlinklst	*tmp;
 
 	ft_putstr("sa\n");
 	if (ft_stksize_dlink(p_stk) > 1)
@@ -27,9 +27,9 @@ node_dlink	*swap_a(node_dlink *p_stk)
 	return (p_stk);
 }
 
-node_dlink	*swap_b(node_dlink *p_stk)
+t_dlinklst	*swap_b(t_dlinklst *p_stk)
 {
-	node_dlink	*tmp;
+	t_dlinklst	*tmp;
 
 	ft_putstr("sb\n");
 	if (ft_stksize_dlink(p_stk) > 1)
@@ -42,9 +42,9 @@ node_dlink	*swap_b(node_dlink *p_stk)
 	return (p_stk);
 }
 
-void	push_to_a(d_container *p_data)
+void	push_to_a(t_container *p_data)
 {
-	node_dlink	*isolated_top_b;
+	t_dlinklst	*isolated_top_b;
 
 	ft_putstr("pa\n");
 	if (p_data->stack_b == NULL)
@@ -70,9 +70,9 @@ void	push_to_a(d_container *p_data)
 	}
 }
 
-void	push_to_b(d_container *p_data)
+void	push_to_b(t_container *p_data)
 {
-	node_dlink	*isolated_top_a;
+	t_dlinklst	*isolated_top_a;
 
 	ft_putstr("pb\n");
 	if (p_data->stack_a == NULL)
@@ -98,9 +98,9 @@ void	push_to_b(d_container *p_data)
 	}
 }
 
-node_dlink	*rotate_a(node_dlink *p_stk, int flag)
+t_dlinklst	*rotate_a(t_dlinklst *p_stk, int flag)
 {
-	node_dlink	*isolated_top;
+	t_dlinklst	*isolated_top;
 
 	if (flag == 0)
 		ft_putstr("ra\n");

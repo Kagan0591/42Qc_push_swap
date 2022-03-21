@@ -129,165 +129,378 @@ long long int	average(node_dlink *stack)
 	return ((float)sum_of_args / size_of_stack + 0.5f); //j aurais besoin d utiliser des float pour considerer les virgules
 }
 
-/* Stack functions singly linked list
+/* Singly linked list functions
 */
 typedef struct		slinklst
 {
-	int				nbr;
+	int				int_nbr;
+	int				*int_nbrs_tab
 	struct slinklst	*next;
 }slinklst;
 
-slinklst	*ft_stknew(int nbr)
-{
-	slinklst	*new;
-
-	new = malloc(sizeof(slinklst));
-	if (new)
-	{
-		//////--Variable assignement---------->>>>
-		/* Exemple
-		new_node->arg = nbr;
-		*/
-		//////--End of virable assignement---->>>>
-		new->next = NULL;
-		return (new);
-	}
-	return (NULL);
-}
-
-slinklst	*ft_stkadd(slinklst *p_stack, int nbr)
+slinklst	*ft_lstnew(int nbr, int *nbr_tab)
 {
 	slinklst	*new_node;
+	int			i;
 
-	if (!p_stack)
-		return (ft_stknew(nbr));
 	new_node = malloc(sizeof(slinklst));
 	if (new_node)
 	{
 		//////--Variable assignement---------->>>>
-		/* Exemple
-		new_node->arg = nbr;
-		*/
+		new_node->int_nbr = nbr;
+		new_node->int_nbrs_tab = malloc(sizeof(int) * 10);
+		if (new_node->int_nbrs_tab)
+		{
+			i = 0;
+			while (i > 0)
+			{
+				new_node->int_nbrs_tab[i] = nbr_tab[i];
+				i--;
+			}
+		}
 		//////--End of virable assignement---->>>>
-		new_node->next = p_stack;
+		new_node->next = NULL;
 		return (new_node);
 	}
 	return (NULL);
 }
 
-boolean 	ft_stk_isempty(slinklst *p_stack)
+slinklst	*ft_lstadd(slinklst *p_slist, int nbr, int *nbr_tab)
 {
-	if(p_stack == NULL)
+	slinklst	*new_node;
+	int			i;
+
+	if (!p_slist)
+		return (ft_lstnew(nbr, nbr_tab));
+	new_node = malloc(sizeof(slinklst));
+	if (new_node)
+	{
+		//////--Variable assignement---------->>>>
+		new_node->int_nbr = nbr;
+		new_node->int_nbrs_tab = malloc(sizeof(int) * 10);
+		if (new_node->int_nbrs_tab)
+		{
+			i = 0;
+			while (i > 0)
+			{
+				new_node->int_nbrs_tab[i] = nbr_tab[i];
+				i--;
+			}
+		}
+		//////--End of virable assignement---->>>>
+		new_node->next = p_slist;
+		return (new_node);
+	}
+	return (NULL);
+}
+
+boolean 	ft_lstisempty(slinklst *p_slist)
+{
+	if(p_slist == NULL)
 		return (true);
 	return (false);
 }
 
-int	ft_stksize(slinklst *p_stack)
+int	ft_lstsize(slinklst *p_slist)
 {
 	int	count;
 
 	count = 0;
-	while (p_stack)
+	while (p_slist)
 	{
 		count++;
-		p_stack = p_stack->next;
+		p_slist = p_slist->next;
 	}
 	return (count);
 }
 
-void	ft_print_node(slinklst *p_stack)
+void	ft_print_node(slinklst *p_slist)
 {
-	if (p_stack != NULL)
+	if (p_slist != NULL)
 	{
-		ft_putnbr(p_stack->arg);
-		ft_print_stack(p_stack->next);
+		ft_putstr("\nArgument en valeur décimal = ");
+		ft_putnbr(p_slist->nbr);
+		ft_putstr("\nArgument en valeur binaire = ");
+		i = 9
+		while (i > 0)
+		{
+			ft_putnbr(p_slist->int_nbrs_tab[i]);
+			ft_putstr("\n");
+			i--;
+		}
 	}
 }
 
-void	ft_print_stack(slinklst *p_stack)
+void	ft_printlst(slinklst *p_slist)
 {
-	while (p_stack->next != NULL)
+	while (p_slist->next != NULL)
 	{
-		ft_print_node(p_stack);
-		p_stack = p_stack->next;
+		ft_print_node(p_slist);
+		p_slist = p_slist->next;
 	}
 }
 
-void	secure_del(slinklst *p_stack)
+void	secure_del(slinklst *p_slist)
 {
 	//////--Variables to reset to zero---------->>>>
-	/* Exemple
-	int		i;
+	// int		i;
 
-	i = 0;
-	p_stack->arg = 0;
-	while ((p_stack->arg_binary != NULL) && (i < 32))
-	{
-		p_stack->arg_binary[i] = 0;
-		i++;
-	}
-	*/
+	// p_stk->arg = 0;
+	// i = 9;
+	// while (i >= 0)
+	// {
+	// p_stk->int_nbrs_tab[i] = 0;
+	// i--;
+	// }
 	//////--End of Variables reset-------------->>>>
 }
 
-slinklst	*ft_stkdelone(slinklst *p_stack)
+slinklst	*ft_lstdelone(slinklst *p_slist)
 {
 	slinklst	*new_top;
 
-	if (p_stack)
+	if (p_slist)
 	{
-		new_top = p_stack->next;
-		secure_del(p_stack);
-		free(p_stack);
+		new_top = p_slist->next;
+		secure_del(p_slist);
+		free(p_slist);
 		return (new_top);
 	}
 	return (NULL);
 }
 
-slinklst	*ft_stkclear(slinklst *p_stack)
+slinklst	*ft_lstclear(slinklst *p_slist)
 {
-	if(p_stack)
+	if(p_slist)
 	{
-		while(p_stack)
-			p_stack = ft_stkdelone(p_stack);
-		return (p_stack);
+		while(p_slist)
+			p_slist = ft_lstdelone(p_slist);
+		return (p_slist);
 	}
-	return (p_stack);
+	return (p_slist);
 }
 
-/* Stack functions singly linked list
+/* Stack functions doubly linked list
 */
 typedef struct		dlinklst
 {
-	int				nbr;
+	int				int_nbr;
+	int				*int_nbrs_tab;
 	struct dlinklst	*next;
 	struct dlinklst *previous;
 }dlinklst;
 
-dlinklst	*clone_a_node(dlinklst *src_stack, dlinklst *dest_stack)
+dlinklst	*ft_dlst_new(long long int nbr, int *nbr_tab)
 {
-	if (!src_stack)
-		return (NULL);
-	else if (!dest_stack)
-		return (ft_stknew_dlink(src_stack->arg, src_stack->arg_binary));
-	else if ((dest_stack->next == NULL) && (dest_stack->previous != NULL))
-		dest_stack = ft_dllst_addback(dest_stack, src_stack->arg, src_stack->arg_binary);
-	else
-		dest_stack = ft_stkadd_dlink(dest_stack, src_stack->arg, src_stack->arg_binary);
-	return (dest_stack);
+	dlinklst	*new_node;
+	int			i;
+
+	new_node = malloc(sizeof(dlinklst));
+	if (new_node)
+	{
+		//////--Variable assignement---------->>>>
+		new_node->int_nbr = nbr;
+		new_node->int_nbrs_tab = malloc(sizeof(int) * 10);
+		if (new_node->int_nbrs_tab)
+		{
+			i = 0;
+			while (i > 0)
+			{
+				new_node->int_nbrs_tab[i] = nbr_tab[i];
+				i--;
+			}
+		}
+		//////--End of virable assignement---->>>>
+		new_node->next = NULL;
+		new_node->previous = NULL;
+	}
+	return (new_node);
 }
 
-dlinklst	*clone_a_stack(dlinklst *src_stack, dlinklst *dest_stack)
+dlinklst	*ft_dlst_addfront(dlinklst *p_dlist, long long int nbr, int *nbr_tab)
 {
-	while (src_stack->next != NULL)
+	dlinklst	*new_node;
+	int			i;
+
+	if (!p_dlist)
+		return (ft_dlst_new(nbr, nbr_tab));
+	new_node = malloc(sizeof(dlinklst));
+	if (new_node)
 	{
-		src_stack = src_stack->next;
+		//////--Variable assignement---------->>>>
+		new_node->int_nbr = nbr;
+		new_node->int_nbrs_tab = malloc(sizeof(int) * 10);
+		if (new_node->int_nbrs_tab)
+		{
+			i = 0;
+			while (i > 0)
+			{
+				new_node->int_nbrs_tab[i] = nbr_tab[i];
+				i--;
+			}
+		}
+		//////--End of virable assignement---->>>>
+		new_node->next = p_dlist;
+		new_node->previous = NULL;
+		p_dlist->previous = new_node;
+		return (new_node);
 	}
-	dest_stack = clone_a_node(src_stack, dest_stack);
-	while (src_stack->previous != NULL)
+	return (NULL);
+}
+
+dlinklst	*ft_dlst_addback(dlinklst *p_dlist, long long int nbr, int *nbr_tab)
+{
+	dlinklst	*new_node;
+	int			i;
+
+	if (!p_dlist)
+		return (ft_dlst_new(nbr, nbr_tab));
+	new_node = malloc(sizeof(dlinklst));
+	if (new_node)
 	{
-		src_stack = src_stack->previous;
-		dest_stack = clone_a_node(src_stack, dest_stack);
+		while (p_dlist->next != NULL)
+			p_dlist = p_dlist->next;
+		//////--Variable assignement---------->>>>
+		new_node->int_nbr = nbr;
+		new_node->int_nbrs_tab = malloc(sizeof(int) * 10);
+		if (new_node->int_nbrs_tab)
+		{
+			i = 0;
+			while (i > 0)
+			{
+				new_node->int_nbrs_tab[i] = nbr_tab[i];
+				i--;
+			}
+		}
+		//////--End of virable assignement---->>>>
+		new_node->next = NULL;
+		new_node->previous = p_dlist;
+		p_dlist->next = new_node;
+		while (p_dlist->previous != NULL)
+			p_dlist = p_dlist->previous;
+		return (p_dlist);
 	}
-	return (dest_stack);
+	return (NULL);
+}
+
+void	ft_lstdelone(dlinklst *p_dlist)
+{
+	if (p_dlist)
+	{
+		secure_del(p_dlist);
+		free (p_dlist->int_nbrs_tab);
+		free(p_dlist);
+	}
+}
+
+void	ft_stkclear_dlink(dlinklst *p_dlist)
+{
+	dlinklst	*tmp;
+
+	tmp = NULL;
+	while (p_dlist != NULL)
+	{
+		tmp = p_dlist->next;
+		ft_lstdelone(p_dlist);
+		p_dlist = tmp;
+	}
+}
+
+void	secure_del(dlinklst *p_dlist)
+{
+	//////--Variables to reset to zero---------->>>>
+	// int		i;
+
+	// p_dlist->arg = 0;
+	// i = 9;
+	// while (i >= 0)
+	// {
+	// p_dlist->int_nbrs_tab[i] = 0;
+	// i--;
+	// }
+	//////--End of Variables reset-------------->>>>
+
+}
+
+ft_bool	ft_dlstisempty(dlinklst *p_dlist)
+{
+	if (p_dlist == NULL)
+		return (true);
+	return (false);
+}
+
+int	ft_dlstsize(dlinklst *p_dlist)
+{
+	int	count;
+
+	count = 0;
+	while (p_dlist != NULL)
+	{
+		count++;
+		p_dlist = p_dlist->next;
+	}
+	return (count);
+}
+
+void	ft_dlstprint_singlenode(dlinklst *p_dlist)
+{
+	int		i;
+
+	if (p_dlist != NULL)
+	{
+		ft_putstr("\nArgument en valeur décimal = ");
+		ft_putnbr(p_dlist->nbr);
+		ft_putstr("\nArgument en valeur binaire = ");
+		i = 9
+		while (i > 0)
+		{
+			ft_putnbr(p_dlist->int_nbrs_tab[i]);
+			ft_putstr("\n");
+			i--;
+		}
+	}
+}
+
+void	ft_dlstprint(dlinklst *p_dlist)
+{
+	while (p_dlist != NULL)
+	{
+		ft_dlstprint_singlenode(p_dlist);
+		p_dlist = p_dlist->next;
+	}
+}
+
+dlinklst	*return_to_top(dlinklst *p_dlist)
+{
+	while (p_dlist->previous != NULL)
+		p_dlist = p_dlist->previous;
+	return (p_dlist);
+}
+
+dlinklst	*clone_a_dlst_node(dlinklst *p_src_dlist, dlinklst *p_dest_dlist)
+{
+	if (!p_src_dlist)
+		return (NULL);
+	else if (!p_dest_dlist)
+		return (ft_stknew_dlink(p_src_dlist->int_nbr, p_src_dlist->int_nbr_tab));
+	else if ((p_dest_dlist->next == NULL) && (p_dest_dlist->previous != NULL))
+		p_dest_dlist = ft_dllst_addback(p_dest_dlist, p_src_dlist->int_nbr, p_src_dlist->int_nbr_tab);
+	else
+		p_dest_dlist = ft_stkadd_dlink(p_dest_dlist, p_src_dlist->int_nbr, p_src_dlist->int_nbr_tab);
+	return (p_dest_dlist);
+}
+
+dlinklst	*clone_a_dlst(dlinklst *p_src_dlist, dlinklst *p_dest_dlist)
+{
+	while (p_src_dlist->next != NULL)
+	{
+		p_src_dlist = p_src_dlist->next;
+	}
+	p_dest_dlist = clone_a_dlst_node(p_src_dlist, p_dest_dlist);
+	while (p_src_dlist->previous != NULL)
+	{
+		p_src_dlist = p_src_dlist->previous;
+		p_dest_dlist = clone_a_dlst_node(p_src_dlist, p_dest_dlist);
+	}
+	return (p_dest_dlist);
 }

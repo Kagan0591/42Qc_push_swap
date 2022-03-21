@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	secure_del(node_dlink *p_stk)
+void	secure_del(t_dlinklst *p_stk)
 {
 	int		i;
 
@@ -25,14 +25,14 @@ void	secure_del(node_dlink *p_stk)
 	}
 }
 
-ft_bool	ft_stk_isempty_dlink(node_dlink *p_stk)
+t_bool	ft_stk_isempty_dlink(t_dlinklst *p_stk)
 {
 	if (p_stk == NULL)
 		return (true);
 	return (false);
 }
 
-int	ft_stksize_dlink(node_dlink *p_stk)
+int	ft_stksize_dlink(t_dlinklst *p_stk)
 {
 	int	count;
 
@@ -45,7 +45,7 @@ int	ft_stksize_dlink(node_dlink *p_stk)
 	return (count);
 }
 
-void	ft_print_node_dlink(node_dlink *p_stk)
+void	ft_print_node_dlink(t_dlinklst *p_stk)
 {
 	int		i;
 
@@ -64,7 +64,7 @@ void	ft_print_node_dlink(node_dlink *p_stk)
 	}
 }
 
-void	ft_print_stack_dlink(node_dlink *p_stk)
+void	ft_print_stack_dlink(t_dlinklst *p_stk)
 {
 	while (p_stk != NULL)
 	{
