@@ -18,13 +18,18 @@ static int	push_args_to_dlist(char *str, t_container *p_data)
 	int		i;
 
 	split_args = ft_split(str, ' ');
+	if (*split_args == NULL)
+	{
+		clear_char_tab(split_args, ft_strlen(*split_args));
+		return (0);
+	}
 	i = 0;
 	while (split_args[i])
 	{
 		if (str_isnumber(split_args[i]) == 0 \
 			|| nbr_isint(ft_atoll(split_args[i])) == 0)
 		{
-			clear_char_tab(split_args, i);
+			clear_char_tab(split_args, ft_strlen(*split_args));
 			return (0);
 		}
 		p_data->stack_a = stkadd_b(p_data->stack_a, \
