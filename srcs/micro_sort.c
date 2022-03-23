@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   micro_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: tchalifo <tchalifo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:52:33 by tchalifo          #+#    #+#             */
-/*   Updated: 2022/03/20 20:02:19 by tchalifo         ###   ########.fr       */
+/*   Updated: 2022/03/23 09:56:47 by tchalifo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 
 #include "push_swap.h"
 
-static t_bool	if_is_sort(t_dlinklst *stack)
-{
-	while (stack->next != NULL)
-	{
-		if (stack->arg > stack->next->arg)
-			return (false);
-		stack = stack->next;
-	}
-	return (true);
-}
+// static t_bool	if_is_sort(t_dlinklst *stack)
+// {
+// 	while (stack->next != NULL)
+// 	{
+// 		if (stack->arg > stack->next->arg)
+// 			return (false);
+// 		stack = stack->next;
+// 	}
+// 	return (true);
+// }
 
 static int	find_max(t_dlinklst *stack)
 {

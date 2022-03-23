@@ -52,3 +52,18 @@ int	lst_nodevalues_isunique(t_dlinklst *lst)
 	}
 	return (1);
 }
+
+t_bool	if_is_sort(t_dlinklst *stack)
+{
+	if (ft_stksize_dlink(stack) < 2)
+	{
+		return (false);
+	}
+	while (stack->next != NULL)
+	{
+		if (stack->arg > stack->next->arg)
+			return (false);
+		stack = stack->next;
+	}
+	return (true);
+}

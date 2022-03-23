@@ -18,7 +18,7 @@ static int	push_args_to_dlist(char *str, t_container *p_data)
 	int		i;
 
 	split_args = ft_split(str, ' ');
-	if (*split_args == NULL || ft_strlen_doubletab(split_args) < 11)
+	if (*split_args == NULL || ft_strlen_doubletab(split_args) > 11)
 	{
 		clear_char_tab(split_args, ft_strlen_doubletab(split_args));
 		return (0);
@@ -86,6 +86,11 @@ static int	initstack(t_container *p_data, int argc, char **argv)
 		}
 		i++;
 	}
+	if (if_is_sort(p_data->stack_a) == true)
+	{
+		p_data = clearmem(p_data);
+		return (0);
+	}
 	return (1);
 }
 
@@ -99,7 +104,12 @@ int	main(int argc, char **argv)
 		if (initstack(data, argc, argv) == 0)
 			return (write(2, "Error\n", 6));
 		data->stack_a = indexing_stack_to_stack(data->stack_a);
-		if (ft_stksize_dlink(data->stack_a) == 3)
+		if (ft_stksize_dlink(data->stack_a) == 1)
+		{
+			data = clearmem(data);
+			return (0);
+		}
+		else if (ft_stksize_dlink(data->stack_a) == 3)
 			data->stack_a = micro_sort(data->stack_a);
 		else if (ft_stksize_dlink(data->stack_a) <= 5)
 			data->stack_a = mini_sort(data);
