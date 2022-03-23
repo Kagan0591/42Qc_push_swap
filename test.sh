@@ -68,17 +68,14 @@ echo "${GREEN}Press a enter to continue${END}"
 read dummy_variable
 clear
 
-echo "${BOLD}${UNDERLINE}Script-shell for testing the program push_swap${END}"
 echo "${SELECTED}Executing the test ......${SELECTEDLINE}"
 sleep 0.9
 clear
 
-echo "${BOLD}${UNDERLINE}Script-shell for testing the program push_swap${END}"
 echo "${SELECTED}Executing the test ....${SELECTEDLINE}"
 sleep 0.9
 clear
 
-echo "${BOLD}${UNDERLINE}Script-shell for testing the program push_swap${END}"
 echo "${SELECTED}Executing the test ..${SELECTEDLINE}"
 sleep 1.5
 clear
@@ -93,49 +90,63 @@ read OS
 clear
 
 echo "${SELECTED}Script-shell for testing the program push_swap${SELECTEDLINE}"
-echo "${BOLD_BLUE}Attempt to trigger an error${END}"
 echo ""
-# Attempt to trigger a repeating numbers error
+echo ""
+echo "${GREEN}--------------------=--===---=====-----==========###+${BOLD_BLUE}Attempt to trigger an error${GREEN}+###==========-----=====---===--=--------------------- ${END}"
+sleep 2
+echo ""
+echo "${ITALIC_CYAN}Test with 1 numbers${END}"
+sleep 0.8
+echo ""
+echo ""
+echo "${ITALIC_CYAN}Test with 3 numbers${END}"
+sleep 0.8
 echo "Attempt to trigger a repeating numbers error (test 1 with 3 nbrs): " && ./push_swap 8 4 8
 echo "Attempt to trigger a repeating numbers error (test 2 with 3 nbrs): " && ./push_swap 4 1 1
 echo "Attempt to trigger a repeating numbers error (test 3 with 3 nbrs (${GREEN}Not supposed to be an error${END})): " && ./push_swap 4 11 1
 echo "Attempt to trigger a repeating numbers error (test 4 with 3 nbrs including a string of numbers): " && ./push_swap "4 2" 2
 echo "Attempt to trigger a repeating numbers error (test 5 with 3 nbrs including a string of numbers): " && ./push_swap "4 -2" -2
-echo "Attempt to trigger a repeating numbers error (test 1 with 5 nbrs): " && ./push_swap 8 4 1 8 2
-echo "Attempt to trigger a repeating numbers error (test 2 with 5 nbrs): " && ./push_swap 8 8 4 1 8
-echo "Attempt to trigger a repeating numbers error (test 3 with 5 nbrs (${GREEN}Not supposed to be an error${END})): " && ./push_swap 4 11 1 3 2
-echo "Attempt to trigger a repeating numbers error (test 4 with 5 nbrs including a string of numbers): " && ./push_swap "4 11 1" 1 2
-echo "Attempt to trigger a repeating numbers error (test 5 with 5 nbrs including a string of numbers): " && ./push_swap "4 11 -1" -1 2
-ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 1 with 100 nbrs): " && ./push_swap 50 $ARGS
-ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 2 with 100 nbrs): " && ./push_swap 50 $ARGS 40
-ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 3 with 100 nbrs): " && ./push_swap 50 50 $ARGS
-ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 1 with 500 nbrs): " && ./push_swap 250 $ARGS
-ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 2 with 500 nbrs): " && ./push_swap 250 $ARGS 140
-ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 3 with 500 nbrs): " && ./push_swap 250 250 $ARGS
-# Attempt to trigger a not a number error
 echo "Attempt to trigger a not a number error (test 1 with 3 nbrs): " && ./push_swap a 4 1
 echo "Attempt to trigger a not a number error (test 2 with 3 nbrs): " && ./push_swap -19 - 8
-echo "Attempt to trigger a not a number error (test 1 with 5 nbrs): " && ./push_swap a 4 1 8 z
-echo "Attempt to trigger a not a number error (test 2 with 5 nbrs): " && ./push_swap -19 4 - 8 z
-ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not a number error (test 1 with 100 nbrs): " && ./push_swap - $ARGS
-ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not a number error (test 2 with 100 nbrs): " && ./push_swap $ARGS a
-ARGS_1=`ruby -e "puts (1..50).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (52..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not a number error (test 3 with 100 nbrs): " && ./push_swap $ARGS_1 a $ARGS_2
-ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not a number error (test 1 with 500 nbrs): " && ./push_swap - $ARGS
-ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not a number error (test 2 with 500 nbrs): " && ./push_swap $ARGS z
-ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (252..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not a number error (test 3 with 500 nbrs): " && ./push_swap $ARGS_1 - $ARGS_2
-# Attempt to trigger a not an int error
 echo "Attempt to trigger a not an int error (test 1 with 3 nbrs including INT_MIN - 1): " && ./push_swap -2147483649 4 1
 echo "Attempt to trigger a not an int error (test 2 with 3 nbrs including INT_MIN - 1): " && ./push_swap 4 -2147483649 1
 echo "Attempt to trigger a not an int error (test 3 with 3 nbrs including INT_MAX + 1): " && ./push_swap 2147483648 4 1
 echo "Attempt to trigger a not an int error (test 4 with 3 nbrs including INT_MAX + 1): " && ./push_swap 4 2147483648 1
 echo "Attempt to trigger a not an int error (test 5 with 3 nbrs including INT_MAX + 10): " && ./push_swap 4 2147483657 1
 echo "Attempt to trigger a not an int error (test 6 with 3 nbrs including INT_MIN - 10): " && ./push_swap -2147483658 4 1
+echo ""
+echo ""
+echo "${ITALIC_CYAN}Test with 5 numbers${END}"
+sleep 0.8
+echo "Attempt to trigger a repeating numbers error (test 1 with 5 nbrs): " && ./push_swap 8 4 1 8 2
+echo "Attempt to trigger a repeating numbers error (test 2 with 5 nbrs): " && ./push_swap 8 8 4 1 8
+echo "Attempt to trigger a repeating numbers error (test 3 with 5 nbrs (${GREEN}Not supposed to be an error${END})): " && ./push_swap 4 11 1 3 2
+echo "Attempt to trigger a repeating numbers error (test 4 with 5 nbrs including a string of numbers): " && ./push_swap "4 11 1" 1 2
+echo "Attempt to trigger a repeating numbers error (test 5 with 5 nbrs including a string of numbers): " && ./push_swap "4 11 -1" -1 2
+echo "Attempt to trigger a not a number error (test 1 with 5 nbrs): " && ./push_swap a 4 1 8 z
+echo "Attempt to trigger a not a number error (test 2 with 5 nbrs): " && ./push_swap -19 4 - 8 z
 echo "Attempt to trigger a not an int error (test 1 with 5 nbrs including INT_MIN - 1): " && ./push_swap -2147483649 4 1 8 0
 echo "Attempt to trigger a not an int error (test 2 with 5 nbrs including INT_MIN - 1): " && ./push_swap 4 -2147483649 1 8 0
 echo "Attempt to trigger a not an int error (test 3 with 5 nbrs including INT_MAX + 1): " && ./push_swap 2147483648 4 1 8 0
 echo "Attempt to trigger a not an int error (test 4 with 5 nbrs including INT_MAX + 1): " && ./push_swap 4 2147483648 1 8 0
 echo "Attempt to trigger a not an int error (test 5 with 5 nbrs including INT_MAX + 10): " && ./push_swap 4 2147483657 1 8 0
 echo "Attempt to trigger a not an int error (test 6 with 5 nbrs including INT_MIN - 10): " && ./push_swap -2147483658 4 1 8 0
+echo ""
+echo ""
+echo "${ITALIC_CYAN}Test with 100 & 500 numbers${END}"
+sleep 0.8
+ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 1 with 100 nbrs): " && ./push_swap 50 $ARGS
+ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 2 with 100 nbrs): " && ./push_swap 50 $ARGS 40
+ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 3 with 100 nbrs): " && ./push_swap 50 50 $ARGS
+ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 1 with 500 nbrs): " && ./push_swap 250 $ARGS
+ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 2 with 500 nbrs): " && ./push_swap 250 $ARGS 140
+ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a repeating numbers error (test 3 with 500 nbrs): " && ./push_swap 250 250 $ARGS
+ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not a number error (test 1 with 100 nbrs): " && ./push_swap - $ARGS
+ARGS=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not a number error (test 2 with 100 nbrs): " && ./push_swap $ARGS a
+ARGS_1=`ruby -e "puts (1..50).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (52..100).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not a number error (test 3 with 100 nbrs): " && ./push_swap $ARGS_1 a $ARGS_2
+ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not a number error (test 1 with 500 nbrs): " && ./push_swap - $ARGS
+ARGS=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not a number error (test 2 with 500 nbrs): " && ./push_swap $ARGS z
+ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (252..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not a number error (test 3 with 500 nbrs): " && ./push_swap $ARGS_1 - $ARGS_2
 ARGS=`ruby -e "puts (1..99).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not an int error (test 1 with 100 nbrs including INT_MIN - 1): " && ./push_swap -2147483649 $ARGS
 ARGS=`ruby -e "puts (1..99).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not an int error (test 2 with 100 nbrs including INT_MAX + 1): " && ./push_swap 2147483648 $ARGS
 ARGS=`ruby -e "puts (1..99).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not an int error (test 3 with 100 nbrs including INT_MIN - 10): " && ./push_swap -2147483658 $ARGS
@@ -152,23 +163,30 @@ ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (
 ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (52..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not an int error (test 6 with 500 nbrs including INT_MAX + 1): " && ./push_swap $ARGS_1 2147483648 $ARGS_2
 ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (52..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not an int error (test 7 with 500 nbrs including INT_MIN - 10): " && ./push_swap $ARGS_1 -2147483658 $ARGS_2
 ARGS_1=`ruby -e "puts (1..250).to_a.shuffle.join(' ')"`; ARGS_2=`ruby -e "puts (52..500).to_a.shuffle.join(' ')"`; echo "Attempt to trigger a not an int error (test 8 with 500 nbrs including INT_MAX + 10): " && ./push_swap $ARGS_1 2147483657 $ARGS_2
-echo "${ITALIC_CYAN}À partir d'ici, les erreurs ne devrait plus être visible, la sortie d'erreur standard est redirigé vers un fichier${END}"
+echo ""
+echo ""
+echo "${ITALIC_CYAN}À partir d'ici, les erreurs ne devrait plus être visible, puisque la sortie d'erreur standard est redirigé vers un fichier${END}"
+sleep 0.8
 echo "Attempt to trigger a repeating numbers error (test 1 with 3 nbrs): " && ./push_swap 8 4 8 2> '/dev/null'
 echo "Attempt to trigger a repeating numbers error (test 2 with 3 nbrs): " && ./push_swap 4 1 1 2> '/dev/null'
 echo "Attempt to trigger a repeating numbers error (test 1 with 5 nbrs): " && ./push_swap 8 4 1 8 2 2> '/dev/null'
 echo "Attempt to trigger a repeating numbers error (test 2 with 5 nbrs): " && ./push_swap 8 8 4 1 8 2> '/dev/null'
 echo ""
 echo ""
-
+echo ""
+echo "${GREEN}----------------------------=--===---=====-----==========###+${BOLD_BLUE}Sorting tests${GREEN}+###==========-----=====---===--=----------------------------- ${END}"
+sleep 2
+echo ""
 echo "${BOLD_BLUE}Test with 1 argument${END}"
+sleep 0.8
 echo ""
 echo "1 Arg INT MIN: "$(./push_swap -2147483648) $(./push_swap -2147483648 | ./checker_$OS -2147483648)
 echo "1 Arg INT MAX: "$(./push_swap 2147483647) $(./push_swap -2147483648 | ./checker_$OS -2147483648)
 echo "1 Arg 65353: "$(./push_swap 65353) $(./push_swap 65353 | ./checker_$OS 65353)
 echo ""
 echo ""
-
 echo "${BOLD_BLUE}Test with 3 arguments${END}"
+sleep 0.8
 echo ""
 echo "3 arg including INT MIN: "$(./push_swap -2147483648 10 5 | wc -l) $(./push_swap -2147483648 10 5 | ./checker_$OS -2147483648 10 5)
 echo "3 arg including INT MAX: "$(./push_swap 2147483647 10 5 | wc -l) $(./push_swap 2147483647 10 5 | ./checker_$OS 2147483647 10 5)
@@ -180,8 +198,8 @@ echo "3 arg 1 3 2: "$(./push_swap 1 3 2 | wc -l) $(./push_swap 1 3 2 | ./checker
 echo "3 arg 1 2 3: "$(./push_swap 1 2 3 | wc -l) $(./push_swap 1 2 3 | ./checker_$OS 1 2 3)
 echo ""
 echo ""
-
 echo "${BOLD_BLUE}Test with 5 arguments${END}"
+sleep 0.8
 echo ""
 echo "5 arg including INT MIN: "$(./push_swap 16 2 -2147483648 10 5 | wc -l) $(./push_swap 16 2 -2147483648 10 5 | ./checker_$OS 16 2 -2147483648 10 5)
 echo "5 arg including INT MAX: "$(./push_swap 16 2 2147483647 10 5 | wc -l) $(./push_swap 16 2 2147483647 10 5 | ./checker_$OS 16 2 2147483647 10 5)
@@ -198,8 +216,8 @@ ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "
 ARGS=`ruby -e "puts (10..14).to_a.shuffle.join(' ')"`; echo "5 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
 echo ""
 echo ""
-
 echo "${BOLD_BLUE}Test with 100 arguments${END}"
+sleep 0.8
 echo ""
 echo "${ITALIC_CYAN}50 test with 100 random generated numbers${END}"
 ARGS=`ruby -e "puts (10..108).to_a.shuffle.join(' ')"`; echo "100 arg randomized including one INT MIN: "$(./push_swap -2147483648 $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
@@ -254,8 +272,8 @@ ARGS=`ruby -e "puts (10..109).to_a.shuffle.join(' ')"`; echo "100 arg randomized
 ARGS=`ruby -e "puts (-108..-10).to_a.shuffle.join(' ')"`; echo "100 arg randomized: "$(./push_swap $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)
 echo ""
 echo ""
-
 echo "${BOLD_BLUE}Test with 500 arguments${END}"
+sleep 0.8
 echo ""
 echo "${ITALIC_CYAN}50 test with 500 random generated numbers${END}"
 ARGS=`ruby -e "puts (10..508).to_a.shuffle.join(' ')"`; echo "500 arg randomized including one INT MIN: "$(./push_swap -2147483648 $ARGS | wc -l) $(./push_swap $ARGS | ./checker_$OS $ARGS)

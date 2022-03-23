@@ -83,8 +83,10 @@ $(NAME): $(OBJS)
 obj:
 	@mkdir -p ${OBJS_DIR}
 
-test: norm ${NAME}
+test: norm all
 	@echo "\n${GEIGE}${BOLD}Also the norminette have been checked on the push_swap sources and headers files.${END}\nIf you need to continue with valgrind to look for some leaks retry with ${VIOLET}make leaks${END}"
+	sleep 8
+	sh ./test.sh
 
 leaks: re
 	valgrind --leaks-check=full --show-leak-kinds=all -s ./test
