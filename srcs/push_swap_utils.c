@@ -34,3 +34,15 @@ long long int	ft_atoll(const char *str)
 	}
 	return (numbers * negative);
 }
+
+int	ft_strlen_doubletab(char **tab_of_tab)
+{
+	int		i;
+
+	i = 0;
+	while(tab_of_tab[i] != NULL)
+	{
+		i++;
+	}
+	return (i);
+}

@@ -18,9 +18,9 @@ static int	push_args_to_dlist(char *str, t_container *p_data)
 	int		i;
 
 	split_args = ft_split(str, ' ');
-	if (*split_args == NULL)
+	if (*split_args == NULL || ft_strlen_doubletab(split_args) < 11)
 	{
-		clear_char_tab(split_args, ft_strlen(*split_args));
+		clear_char_tab(split_args, ft_strlen_doubletab(split_args));
 		return (0);
 	}
 	i = 0;
@@ -29,7 +29,7 @@ static int	push_args_to_dlist(char *str, t_container *p_data)
 		if (str_isnumber(split_args[i]) == 0 \
 			|| nbr_isint(ft_atoll(split_args[i])) == 0)
 		{
-			clear_char_tab(split_args, ft_strlen(*split_args));
+			clear_char_tab(split_args, ft_strlen_doubletab(split_args));
 			return (0);
 		}
 		p_data->stack_a = stkadd_b(p_data->stack_a, \

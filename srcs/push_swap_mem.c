@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_mem.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchalifo <tchalifo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tchalifo <tchalifo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 16:41:12 by tchalifo          #+#    #+#             */
-/*   Updated: 2022/03/22 14:54:21 by tchalifo         ###   ########.fr       */
+/*   Updated: 2022/03/22 20:04:56 by tchalifo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	clear_int_tab(int **tab, int size)
 
 void	clear_char_tab(char **tab, int size)
 {
-	while (size >= 0)
+	while (size > 0)
 	{
 		free (tab[size - 1]);
 		size--;
