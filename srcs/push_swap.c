@@ -18,7 +18,7 @@ static int	push_args_to_dlist(char *str, t_container *p_data)
 	int		i;
 
 	split_args = ft_split(str, ' ');
-	if (*split_args == NULL || ft_strlen_doubletab(split_args) > 11)
+	if (*split_args == NULL) // || ft_strlen_doubletab(*split_args) > 11)
 	{
 		clear_char_tab(split_args, ft_strlen_doubletab(split_args));
 		return (0);
