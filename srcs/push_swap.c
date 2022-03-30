@@ -98,13 +98,9 @@ int	main(int argc, char **argv)
 		data = initmem();
 		if (initstack(data, argc, argv) == 0)
 			return (write(2, "Error\n", 6));
-		if (if_is_sort(data->stack_a) == true)
-		{
-			data = clearmem(data);
-			return (0);
-		}
 		data->stack_a = indexing_stack_to_stack(data->stack_a);
-		if (ft_stksize_dlink(data->stack_a) == 1)
+		if (ft_stksize_dlink(data->stack_a) == 1 || \
+			if_is_sort(data->stack_a) == true)
 		{
 			data = clearmem(data);
 			return (0);
